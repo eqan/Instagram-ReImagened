@@ -1,0 +1,15 @@
+E:\Instagram\Instagram\Instagram\bin\Debug\Instagram.exe.config
+E:\Instagram\Instagram\Instagram\bin\Debug\Instagram.exe
+E:\Instagram\Instagram\Instagram\bin\Debug\Instagram.pdb
+E:\Instagram\Instagram\Instagram\obj\Debug\Instagram.csprojAssemblyReference.cache
+E:\Instagram\Instagram\Instagram\obj\Debug\Instagram.Properties.Resources.resources
+E:\Instagram\Instagram\Instagram\obj\Debug\Instagram.csproj.GenerateResource.cache
+E:\Instagram\Instagram\Instagram\obj\Debug\Instagram.csproj.CoreCompileInputs.cache
+E:\Instagram\Instagram\Instagram\obj\Debug\Instagram.exe
+E:\Instagram\Instagram\Instagram\obj\Debug\Instagram.pdb
+E:\Instagram\Instagram\Instagram\bin\Debug\Interop.MOVIEPLAYERLib.dll
+E:\Instagram\Instagram\Instagram\bin\Debug\AxInterop.MOVIEPLAYERLib.dll
+E:\Instagram\Instagram\Instagram\obj\Debug\Interop.MOVIEPLAYERLib.dll
+E:\Instagram\Instagram\Instagram\obj\Debug\AxInterop.MOVIEPLAYERLib.dll
+E:\Instagram\Instagram\Instagram\obj\Debug\Instagram.csproj.ResolveComReference.cache
+E:\Instagram\Instagram\Instagram\obj\Debug\Instagram.Main.resources
