@@ -47,7 +47,6 @@ namespace Instagram
                 vidLocation = Environment.CurrentDirectory + @"\Assets\Light Mode\Intro.mp4";
                 this.BackColor = Color.White;
             }
-            //axMoviePlayer1.Width = this.Width;
             axMoviePlayer1.FileName = vidLocation;
             axMoviePlayer1.Play();
             timer1.Interval = 900;
