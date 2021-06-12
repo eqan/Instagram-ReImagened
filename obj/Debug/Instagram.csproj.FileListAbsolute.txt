@@ -16,3 +16,6 @@ E:\Instagram\Instagram\Instagram\obj\Debug\Instagram.Main.resources
 E:\Instagram\Instagram\Instagram\obj\Debug\Instagram.Home.resources
 E:\Instagram\Instagram\Instagram\bin\Debug\InstagramDB.mdf
 E:\Instagram\Instagram\Instagram\bin\Debug\InstagramDB_log.ldf
+E:\Instagram\Instagram\Instagram\obj\Debug\Instagram.Activity.resources
+E:\Instagram\Instagram\Instagram\obj\Debug\Instagram.Profile.resources
+E:\Instagram\Instagram\Instagram\obj\Debug\Instagram.Search.resources

@@ -2,7 +2,6 @@
 using System.Data.SqlClient;
 using System.Data;
 
-
 namespace Instagram
 {
     class DBHandlingUtilities
@@ -18,9 +17,10 @@ namespace Instagram
 
         public void Initialize_Information()
         {
-            dbConnection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB; AttachDbFilename= " + @"\InstagramDB.mdf; Integrated Security=True; Connect Timeout=30");
+            dbConnection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB; AttachDbFilename= "+ Environment.CurrentDirectory + @"\InstagramDB.mdf; Integrated Security=True; Connect Timeout=30");
         }
 
+        // Example reference code for an sqlcommand
         private void btn_AddData_Click(object sender, EventArgs e)
         {
             cmd = new SqlCommand("INSERT INTO Interviewee(ID, Name, Age, Gender, Skills) VALUES(@id, @name, @age, @gender, @skills)", dbConnection);
@@ -36,6 +36,7 @@ namespace Instagram
             //Clear_Data();
         }
 
+        // Example reference code for an sqlcommand
         private void Display_Record()
         {
             DataTable intervieweeTable = new DataTable();
