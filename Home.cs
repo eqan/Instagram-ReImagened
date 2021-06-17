@@ -12,9 +12,16 @@ namespace Instagram
 {
     public partial class Home : Form
     {
-        public Home()
+        bool isLightModeOn = true;
+        public Home(bool isLightModeOn)
         {
             InitializeComponent();
+            this.isLightModeOn = isLightModeOn;
+        }
+
+        private void Home_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

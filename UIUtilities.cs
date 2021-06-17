@@ -12,8 +12,8 @@ namespace Instagram
         public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         public static extern bool ReleaseCapture();
-        PictureBox btn_Close, btn_Minimize, btn_Maximize;
-        Panel panel;
+        public PictureBox btn_Close, btn_Minimize, btn_Maximize;
+        public Panel sidePanel, postPanel;
         bool lightModeOn, isMaximized;
         int formWidth, formHeight;
         private Main formRef;
@@ -90,13 +90,52 @@ namespace Instagram
             else
                 panelBackgroundColor = Color.FromArgb(242, 242, 242);
             // Initializing
-            panel = Create_Panel(new int[] { btn_Width, formHeight}, new int[] { 0, 0}, panelBackgroundColor);
-            panel.Controls.Add(Create_Button("home", new int[] {btn_Width, btn_Height - 5}, new int[] {0, y + (int)Math.Round(btn_Height * 0.5) }, panelBackgroundColor));
-            panel.Controls.Add(Create_Button("search", new int[] {btn_Width, (btn_Height-4)}, new int[] {0, (y + btn_Height *2 )}, panelBackgroundColor));
-            panel.Controls.Add(Create_Button("plus", new int[] {btn_Width, btn_Height + 10}, new int[] {0, (y + (int)Math.Round((btn_Height * 3.5), MidpointRounding.AwayFromZero))}, panelBackgroundColor));
-            panel.Controls.Add(Create_Button("heart", new int[] {btn_Width, btn_Height - 5}, new int[] {0, (y + (int)Math.Round((btn_Height * 5.5), MidpointRounding.AwayFromZero))}, panelBackgroundColor));
-            panel.Controls.Add(Create_Button("account", new int[] {btn_Width, btn_Height - 4}, new int[] {0, (y + (int)Math.Round((btn_Height * 7.0), MidpointRounding.AwayFromZero))}, panelBackgroundColor));
+            PictureBox homeBtn, searchBtn, chatBtn, addBtn, activityBtn, accountBtn;
+            sidePanel = Create_Panel(new int[] { btn_Width, formHeight}, new int[] { 0, 0}, panelBackgroundColor);
+            homeBtn = Create_Button("home", new int[] {btn_Width, btn_Height - 5}, new int[] {0, y + (int)Math.Round(btn_Height * 0.1) }, panelBackgroundColor);
+            chatBtn = Create_Button("chat", new int[] {btn_Width, (btn_Height-4)}, new int[] {-1, (int)Math.Round(y + btn_Height * 1.4)}, panelBackgroundColor);
+            searchBtn = Create_Button("search", new int[] {btn_Width, (btn_Height-4)}, new int[] {0, (int)Math.Round(y + btn_Height * 2.7 )}, panelBackgroundColor);
+            addBtn = Create_Button("plus", new int[] {btn_Width, btn_Height + 10}, new int[] {0, (y + (int)Math.Round((btn_Height * 3.9), MidpointRounding.AwayFromZero))}, panelBackgroundColor);
+            activityBtn = Create_Button("heart", new int[] {btn_Width, btn_Height - 5}, new int[] {0, (y + (int)Math.Round((btn_Height * 5.7), MidpointRounding.AwayFromZero))}, panelBackgroundColor);
+            accountBtn  = Create_Button("account", new int[] {btn_Width, btn_Height - 4}, new int[] {0, (y + (int)Math.Round((btn_Height * 8.5), MidpointRounding.AwayFromZero))}, panelBackgroundColor);
+            homeBtn.MouseClick += new MouseEventHandler((o, a) =>
+            {
+                formRef.Initialize_Form(0);
+            }
+            );
+            chatBtn.MouseClick += new MouseEventHandler((o, a) =>
+            {
+                formRef.Initialize_Form(1);
+            }
+            );
+            searchBtn.MouseClick += new MouseEventHandler((o, a) =>
+            {
+                formRef.Initialize_Form(2);
+            }
+            );
+            addBtn.MouseClick += new MouseEventHandler((o, a) =>
+            {
+                formRef.Initialize_Form(3);
+            }
+            );
+            activityBtn.MouseClick += new MouseEventHandler((o, a) =>
+            {
+                formRef.Initialize_Form(4);
+            }
+            );
+            accountBtn.MouseClick += new MouseEventHandler((o, a) =>
+            {
+                formRef.Initialize_Form(5);
+            }
+            );
+            sidePanel.Controls.Add(homeBtn);
+            sidePanel.Controls.Add(chatBtn);
+            sidePanel.Controls.Add(searchBtn);
+            sidePanel.Controls.Add(addBtn);
+            sidePanel.Controls.Add(activityBtn);
+            sidePanel.Controls.Add(accountBtn);
         }
+
 
         public Panel Create_Panel(int[] size, int[] location, Color backColor)
         {
@@ -167,7 +206,7 @@ namespace Instagram
         }
         public Panel Get_Panel()
         {
-            return panel;
+            return sidePanel;
         }
     }
 }

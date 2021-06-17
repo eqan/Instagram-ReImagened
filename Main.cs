@@ -9,6 +9,7 @@ namespace Instagram
     {
         UIUtilities UI;
         bool lightModeOn = true;
+        Form form;
         int time = 0;
         public Main()
         {
@@ -17,8 +18,9 @@ namespace Instagram
             {
                 this.Icon = new Icon(stream);
             }
+            formVirtualizer.Visible = false;
+            form = new Home(true){ TopLevel = false, TopMost = true };
         }
-
         private void Initialize_GUI_Components()
         {
             // Top Left Buttons
@@ -27,6 +29,21 @@ namespace Instagram
             this.Controls.Add(UI.Get_MinimizeBtn());
             // Side Panel
             this.Controls.Add(UI.Get_Panel());
+            // Form virtualizer
+            Initialize_Form_Virtualizer_Settings();
+        }
+        public void Initialize_Form_Virtualizer_Settings()
+        {
+            formVirtualizer.Visible = true;
+            Color backColor;
+            if (lightModeOn)
+                backColor = Color.FromArgb(0, 0, 0);
+            else
+                backColor = Color.FromArgb(255, 255, 255);
+            formVirtualizer.Width = this.Width - UI.sidePanel.Width;
+            formVirtualizer.Height = this.Height - UI.btn_Close.Height;
+            formVirtualizer.Location = new System.Drawing.Point(UI.sidePanel.Width, UI.btn_Close.Height);
+            formVirtualizer.BackColor = backColor;
         }
 
         private void Intro_Load(object sender, EventArgs e)
@@ -85,6 +102,44 @@ namespace Instagram
         {
             IntPtr handle = this.Handle;
             UI.MouseDown(handle, sender, e);
+        }
+
+
+        public void Initialize_Form(int option)
+        {
+            bool executes = true;
+            form.Dispose();
+            switch(option)
+            {
+                case 0:
+                    form = new Home(true){ TopLevel = false, TopMost = true };
+                    break;
+                case 1:
+                    form = new Chat(){ TopLevel = false, TopMost = true };
+                    break;
+                case 2:
+                    form = new Search(){ TopLevel = false, TopMost = true };
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    form = new Activity(){ TopLevel = false, TopMost = true };
+                    break;
+                case 5:
+                    form = new Profile() { TopLevel = false, TopMost = true };
+                    break;
+                default:
+                    executes = false;
+                    break;
+            }
+            if(executes)
+                this.formVirtualizer.Paint += new System.Windows.Forms.PaintEventHandler(this.formVirtualizer_Paint);
+        }
+
+        private void formVirtualizer_Paint(object sender, PaintEventArgs e)
+        {
+            formVirtualizer.Controls.Add(form);
+            form.Show();
         }
     }
 }

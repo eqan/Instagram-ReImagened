@@ -67,7 +67,19 @@
     <Compile Include="Activity.Designer.cs">
       <DependentUpon>Activity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Chat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Chat.Designer.cs">
+      <DependentUpon>Chat.cs</DependentUpon>
+    </Compile>
     <Compile Include="DBHandlingUtilities.cs" />
+    <Compile Include="Post.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Post.Designer.cs">
+      <DependentUpon>Post.cs</DependentUpon>
+    </Compile>
     <Compile Include="Home.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,6 +109,12 @@
     <Compile Include="UIUtilities.cs" />
     <EmbeddedResource Include="Activity.resx">
       <DependentUpon>Activity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Chat.resx">
+      <DependentUpon>Chat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Post.resx">
+      <DependentUpon>Post.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Home.resx">
       <DependentUpon>Home.cs</DependentUpon>

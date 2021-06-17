@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.axMoviePlayer1 = new AxMOVIEPLAYERLib.AxMoviePlayer();
+            this.formVirtualizer = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.axMoviePlayer1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -42,17 +43,27 @@
             // axMoviePlayer1
             // 
             this.axMoviePlayer1.Enabled = true;
-            this.axMoviePlayer1.Location = new System.Drawing.Point(36, -11);
+            this.axMoviePlayer1.Location = new System.Drawing.Point(42, -35);
             this.axMoviePlayer1.Name = "axMoviePlayer1";
             this.axMoviePlayer1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axMoviePlayer1.OcxState")));
-            this.axMoviePlayer1.Size = new System.Drawing.Size(499, 389);
+            this.axMoviePlayer1.Size = new System.Drawing.Size(499, 437);
             this.axMoviePlayer1.TabIndex = 0;
+            // 
+            // formVirtualizer
+            // 
+            this.formVirtualizer.Location = new System.Drawing.Point(12, -2);
+            this.formVirtualizer.Name = "formVirtualizer";
+            this.formVirtualizer.Size = new System.Drawing.Size(541, 368);
+            this.formVirtualizer.TabIndex = 1;
+            this.formVirtualizer.Visible = false;
+            this.formVirtualizer.Paint += new System.Windows.Forms.PaintEventHandler(this.formVirtualizer_Paint);
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(565, 366);
+            this.Controls.Add(this.formVirtualizer);
             this.Controls.Add(this.axMoviePlayer1);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -68,6 +79,7 @@
         #endregion
         private System.Windows.Forms.Timer timer1;
         private AxMOVIEPLAYERLib.AxMoviePlayer axMoviePlayer1;
+        private System.Windows.Forms.Panel formVirtualizer;
     }
 }
 
