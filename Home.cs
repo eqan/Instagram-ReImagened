@@ -31,9 +31,10 @@ namespace Instagram
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //dbHandler.Create_Post_Table(textBox1.Text, textBox2.Text);
-            //dbHandler.Get_Picture();
-            //dbHandler.Create_Post("1", "Eqan", "Hello", "Something"); }
+            //dbHandler.Create_Story_Table(textBox1.Text, textBox2.Text);
+            dbHandler.Get_Picture();
+            //dbHandler.Create_Post("1", "Eqan", "Hello", "Something"); 
+            dbHandler.Create_Story("1", "Eqan");
         }
     }
 }

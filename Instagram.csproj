@@ -122,6 +122,12 @@
       <DependentUpon>Search.cs</DependentUpon>
     </Compile>
     <Compile Include="UIUtilities.cs" />
+    <Compile Include="UploadPost.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UploadPost.Designer.cs">
+      <DependentUpon>UploadPost.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Activity.resx">
       <DependentUpon>Activity.cs</DependentUpon>
     </EmbeddedResource>
@@ -157,6 +163,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SignUp.resx">
       <DependentUpon>SignUp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UploadPost.resx">
+      <DependentUpon>UploadPost.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

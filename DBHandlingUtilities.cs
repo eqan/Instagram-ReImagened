@@ -99,7 +99,7 @@ namespace Instagram
                 if (dbConnection.State == ConnectionState.Closed)
                 {
                     dbConnection.Open();
-                    cmd = new SqlCommand("INSERT INTO " + userName + "_" + userID + "_Table(BookMarked, PostDesc, Location, Image) VALUES(@BookMarked ,@PostDesc, @Location, @Image)", dbConnection);
+                    cmd = new SqlCommand("INSERT INTO " + userName + "_" + userID + "_PostTable(BookMarked, PostDesc, Location, Image) VALUES(@BookMarked ,@PostDesc, @Location, @Image)", dbConnection);
                     cmd.Parameters.AddWithValue("@BookMarked", 0);
                     cmd.Parameters.AddWithValue("@PostDesc", postDescription);
                     cmd.Parameters.AddWithValue("@Location", location);
@@ -119,6 +119,58 @@ namespace Instagram
                     dbConnection.Close();
             }
 
+        }
+        public void Create_Story(string userID, string userName)
+        {
+            try
+            {
+                if (dbConnection.State == ConnectionState.Closed)
+                {
+                    dbConnection.Open();
+                    cmd = new SqlCommand("INSERT INTO " + userName + "_" + userID + "_StoryTable(Image, DueDate) VALUES(@Image, @DueDate)", dbConnection);
+                    cmd.Parameters.AddWithValue("@DueDate", DateTime.Now.AddDays(1));
+                    cmd.Parameters.AddWithValue("@Image", Get_Binary_Of_File());
+                    cmd.ExecuteNonQuery();
+                    dbConnection.Close();
+                    Console.WriteLine("Story Created for {0}", userName);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                if (dbConnection.State == ConnectionState.Open)
+                    dbConnection.Close();
+            }
+        }
+
+        public void Create_Story_Table(string userID, string userName)
+        {
+            try
+            {
+                if (dbConnection.State == ConnectionState.Closed)
+                {
+                    dbConnection.Open();
+                    cmd = new SqlCommand("Build_User_Stories_Table", dbConnection);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@UserID", userID);
+                    cmd.Parameters.AddWithValue("@UserName", userName);
+                    cmd.ExecuteNonQuery();
+                    dbConnection.Close();
+                    Console.WriteLine("Table Created for {0}", userName);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                if (dbConnection.State == ConnectionState.Open)
+                    dbConnection.Close();
+            }
         }
 
         public void Create_Post_Table(string userID, string userName)
