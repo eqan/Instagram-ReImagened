@@ -30,13 +30,13 @@
         {
             this.SuspendLayout();
             // 
-            // Form1
+            // Post
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(326, 286);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "Form1";
+            this.Name = "Post";
             this.Text = "Form1";
             this.ResumeLayout(false);
 

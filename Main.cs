@@ -19,7 +19,7 @@ namespace Instagram
                 this.Icon = new Icon(stream);
             }
             formVirtualizer.Visible = false;
-            form = new Home(true) { TopLevel = false, TopMost = true };
+            form = new Home() { TopLevel = false, TopMost = true };
         }
         private void Initialize_GUI_Components()
         {
@@ -112,7 +112,7 @@ namespace Instagram
             switch (option)
             {
                 case 0:
-                    form = new Home(true) { TopLevel = false, TopMost = true };
+                    form = new Home() { TopLevel = false, TopMost = true };
                     break;
                 case 1:
                     form = new Chat() { TopLevel = false, TopMost = true };

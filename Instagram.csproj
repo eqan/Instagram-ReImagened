@@ -73,6 +73,9 @@
     <Compile Include="Chat.Designer.cs">
       <DependentUpon>Chat.cs</DependentUpon>
     </Compile>
+    <Compile Include="CircularPictureBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="DBHandlingUtilities.cs" />
     <Compile Include="Login.cs">
       <SubType>Form</SubType>

@@ -90,13 +90,79 @@ namespace Instagram
                     dbConnection.Close();
             }
             return results;
-            //return results;
+        }
+
+        public void Create_Post(string userID, string userName, string postDescription, string location)
+        {
+            try
+            {
+                if (dbConnection.State == ConnectionState.Closed)
+                {
+                    dbConnection.Open();
+                    cmd = new SqlCommand("INSERT INTO " + userName + "_" + userID + "_Table(BookMarked, PostDesc, Location, Image) VALUES(@BookMarked ,@PostDesc, @Location, @Image)", dbConnection);
+                    cmd.Parameters.AddWithValue("@BookMarked", 0);
+                    cmd.Parameters.AddWithValue("@PostDesc", postDescription);
+                    cmd.Parameters.AddWithValue("@Location", location);
+                    cmd.Parameters.AddWithValue("@Image", Get_Binary_Of_File());
+                    cmd.ExecuteNonQuery();
+                    dbConnection.Close();
+                    Console.WriteLine("Post Created for {0}", userName);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                if (dbConnection.State == ConnectionState.Open)
+                    dbConnection.Close();
+            }
+
+        }
+
+        public void Create_Post_Table(string userID, string userName)
+        {
+            try
+            {
+                if (dbConnection.State == ConnectionState.Closed)
+                {
+                    dbConnection.Open();
+                    cmd = new SqlCommand("Build_User_Posts_Table", dbConnection);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@UserID", userID);
+                    cmd.Parameters.AddWithValue("@UserName", userName);
+                    cmd.ExecuteNonQuery();
+                    dbConnection.Close();
+                    Console.WriteLine("Table Created for {0}", userName);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                if (dbConnection.State == ConnectionState.Open)
+                    dbConnection.Close();
+            }
+        }
+
+        public byte[] Get_Binary_Of_File()
+        {
+            FileStream fs;
+            BinaryReader br;
+            byte[] ImageData;
+            fs = new FileStream(fileDirectory, FileMode.Open, FileAccess.Read);
+            br = new BinaryReader(fs);
+            ImageData = br.ReadBytes((int)fs.Length);
+            br.Close();
+            fs.Close();
+            return ImageData;
         }
 
         public bool Add_User(string userName, string realUserName, string userPassword, string tagLine = null)
         {
-            FileStream fs;
-            BinaryReader br;
             try
             {
                 if (dbConnection.State == ConnectionState.Closed)
@@ -106,13 +172,7 @@ namespace Instagram
                     cmd.CommandType = CommandType.StoredProcedure;
                     if(fileDirectory != null)
                     {
-                        byte[] ImageData;
-                        fs = new FileStream(fileDirectory, FileMode.Open, FileAccess.Read);
-                        br = new BinaryReader(fs);
-                        ImageData = br.ReadBytes((int)fs.Length);
-                        br.Close();
-                        fs.Close();
-                        cmd.Parameters.AddWithValue("@Picture", ImageData);
+                        cmd.Parameters.AddWithValue("@Picture", Get_Binary_Of_File());
                     }
                     else
                         cmd.Parameters.AddWithValue("@Picture", null);
