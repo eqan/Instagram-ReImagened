@@ -14,12 +14,12 @@ namespace Instagram
         public Main()
         {
             InitializeComponent();
-            using (var stream = File.OpenRead(Environment.CurrentDirectory  + @"\Assets\Logo.ico"))
+            using (var stream = File.OpenRead(Environment.CurrentDirectory + @"\Assets\Logo.ico"))
             {
                 this.Icon = new Icon(stream);
             }
             formVirtualizer.Visible = false;
-            form = new Home(true){ TopLevel = false, TopMost = true };
+            form = new Home(true) { TopLevel = false, TopMost = true };
         }
         private void Initialize_GUI_Components()
         {
@@ -54,7 +54,7 @@ namespace Instagram
         void Start_Intro()
         {
             string vidLocation;
-            if(!lightModeOn)
+            if (!lightModeOn)
             {
                 vidLocation = Environment.CurrentDirectory + @"\Assets\Dark Mode\Intro.mp4";
                 this.BackColor = Color.Black;
@@ -109,21 +109,21 @@ namespace Instagram
         {
             bool executes = true;
             form.Dispose();
-            switch(option)
+            switch (option)
             {
                 case 0:
-                    form = new Home(true){ TopLevel = false, TopMost = true };
+                    form = new Home(true) { TopLevel = false, TopMost = true };
                     break;
                 case 1:
-                    form = new Chat(){ TopLevel = false, TopMost = true };
+                    form = new Chat() { TopLevel = false, TopMost = true };
                     break;
                 case 2:
-                    form = new Search(){ TopLevel = false, TopMost = true };
+                    form = new Search() { TopLevel = false, TopMost = true };
                     break;
                 case 3:
                     break;
                 case 4:
-                    form = new Activity(){ TopLevel = false, TopMost = true };
+                    form = new Activity() { TopLevel = false, TopMost = true };
                     break;
                 case 5:
                     form = new Profile() { TopLevel = false, TopMost = true };
@@ -132,7 +132,7 @@ namespace Instagram
                     executes = false;
                     break;
             }
-            if(executes)
+            if (executes)
                 this.formVirtualizer.Paint += new System.Windows.Forms.PaintEventHandler(this.formVirtualizer_Paint);
         }
 

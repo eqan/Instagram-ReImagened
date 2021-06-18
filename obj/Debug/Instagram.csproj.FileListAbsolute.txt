@@ -21,3 +21,5 @@ E:\Instagram\Instagram\Instagram\obj\Debug\Instagram.Profile.resources
 E:\Instagram\Instagram\Instagram\obj\Debug\Instagram.Search.resources
 E:\Instagram\Instagram\Instagram\obj\Debug\Instagram.Chat.resources
 E:\Instagram\Instagram\Instagram\obj\Debug\Instagram.Post.resources
+E:\Instagram\Instagram\Instagram\obj\Debug\Instagram.SignUp.resources
+E:\Instagram\Instagram\Instagram\obj\Debug\Instagram.Login.resources

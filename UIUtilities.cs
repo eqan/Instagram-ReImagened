@@ -16,14 +16,27 @@ namespace Instagram
         public Panel sidePanel, postPanel;
         bool lightModeOn, isMaximized;
         int formWidth, formHeight;
-        private Main formRef;
-
-        public UIUtilities(Main f,bool formLightModeOn)
+        private Main mainForm;
+        private Form formRef;
+        public UIUtilities(Form f,bool formLightModeOn)
         {
             formWidth = f.Width;
             formHeight = f.Height;
             lightModeOn = formLightModeOn;
             formRef = f;
+            if (f.WindowState == FormWindowState.Normal)
+                isMaximized = false;
+            else
+                isMaximized = true;
+            Initialize_Top_Left_Buttons();
+        }
+
+        public UIUtilities(Main f, bool formLightModeOn)
+        {
+            formWidth = f.Width;
+            formHeight = f.Height;
+            lightModeOn = formLightModeOn;
+            mainForm = f;
             if (f.WindowState == FormWindowState.Normal)
                 isMaximized = false;
             else
@@ -49,9 +62,9 @@ namespace Instagram
                 hoverColor = Color.FromArgb(57, 57, 57);
             }
             // Initializing
-            btn_Close = Create_Button("close", new int[] {btn_Width, btn_Height}, new int[] { x - btn_Width, 0 }, backColor, false);
-            btn_Maximize = Create_Button("maximize", new int[] {btn_Width, btn_Height}, new int[] { x - (btn_Width*2), 0 }, backColor, false);
-            btn_Minimize = Create_Button("minimize", new int[] {btn_Width, btn_Height}, new int[] { x - (btn_Width*3), 0 }, backColor, false);
+            btn_Close = Create_Button("close", new int[] { btn_Width, btn_Height }, new int[] { x - btn_Width, 0 }, backColor, false);
+            btn_Maximize = Create_Button("maximize", new int[] { btn_Width, btn_Height }, new int[] { x - (btn_Width * 2), 0 }, backColor, false);
+            btn_Minimize = Create_Button("minimize", new int[] { btn_Width, btn_Height }, new int[] { x - (btn_Width * 3), 0 }, backColor, false);
             // Setting up special settings
             btn_Close.MouseClick += new MouseEventHandler((o, a) => Application.Exit());
             btn_Close.MouseHover += new EventHandler((o, a) => btn_Close.BackColor = Color.Red);
@@ -85,47 +98,47 @@ namespace Instagram
         {
             int y = formHeight / 2 - 110, btn_Width = 65, btn_Height = 30;
             Color panelBackgroundColor;
-            if(!lightModeOn)
+            if (!lightModeOn)
                 panelBackgroundColor = Color.FromArgb(43, 43, 43);
             else
                 panelBackgroundColor = Color.FromArgb(242, 242, 242);
             // Initializing
             PictureBox homeBtn, searchBtn, chatBtn, addBtn, activityBtn, accountBtn;
-            sidePanel = Create_Panel(new int[] { btn_Width, formHeight}, new int[] { 0, 0}, panelBackgroundColor);
-            homeBtn = Create_Button("home", new int[] {btn_Width, btn_Height - 5}, new int[] {0, y + (int)Math.Round(btn_Height * 0.1) }, panelBackgroundColor);
-            chatBtn = Create_Button("chat", new int[] {btn_Width, (btn_Height-4)}, new int[] {-1, (int)Math.Round(y + btn_Height * 1.4)}, panelBackgroundColor);
-            searchBtn = Create_Button("search", new int[] {btn_Width, (btn_Height-4)}, new int[] {0, (int)Math.Round(y + btn_Height * 2.7 )}, panelBackgroundColor);
-            addBtn = Create_Button("plus", new int[] {btn_Width, btn_Height + 10}, new int[] {0, (y + (int)Math.Round((btn_Height * 3.9), MidpointRounding.AwayFromZero))}, panelBackgroundColor);
-            activityBtn = Create_Button("heart", new int[] {btn_Width, btn_Height - 5}, new int[] {0, (y + (int)Math.Round((btn_Height * 5.7), MidpointRounding.AwayFromZero))}, panelBackgroundColor);
-            accountBtn  = Create_Button("account", new int[] {btn_Width, btn_Height - 4}, new int[] {0, (y + (int)Math.Round((btn_Height * 8.5), MidpointRounding.AwayFromZero))}, panelBackgroundColor);
+            sidePanel = Create_Panel(new int[] { btn_Width, formHeight }, new int[] { 0, 0 }, panelBackgroundColor);
+            homeBtn = Create_Button("home", new int[] { btn_Width, btn_Height - 5 }, new int[] { 0, y + (int)Math.Round(btn_Height * 0.1) }, panelBackgroundColor);
+            chatBtn = Create_Button("chat", new int[] { btn_Width, (btn_Height - 4) }, new int[] { -1, (int)Math.Round(y + btn_Height * 1.4) }, panelBackgroundColor);
+            searchBtn = Create_Button("search", new int[] { btn_Width, (btn_Height - 4) }, new int[] { 0, (int)Math.Round(y + btn_Height * 2.7) }, panelBackgroundColor);
+            addBtn = Create_Button("plus", new int[] { btn_Width, btn_Height + 10 }, new int[] { 0, (y + (int)Math.Round((btn_Height * 3.9), MidpointRounding.AwayFromZero)) }, panelBackgroundColor);
+            activityBtn = Create_Button("heart", new int[] { btn_Width, btn_Height - 5 }, new int[] { 0, (y + (int)Math.Round((btn_Height * 5.7), MidpointRounding.AwayFromZero)) }, panelBackgroundColor);
+            accountBtn = Create_Button("account", new int[] { btn_Width, btn_Height - 4 }, new int[] { 0, (y + (int)Math.Round((btn_Height * 8.5), MidpointRounding.AwayFromZero)) }, panelBackgroundColor);
             homeBtn.MouseClick += new MouseEventHandler((o, a) =>
             {
-                formRef.Initialize_Form(0);
+                mainForm.Initialize_Form(0);
             }
             );
             chatBtn.MouseClick += new MouseEventHandler((o, a) =>
             {
-                formRef.Initialize_Form(1);
+                mainForm.Initialize_Form(1);
             }
             );
             searchBtn.MouseClick += new MouseEventHandler((o, a) =>
             {
-                formRef.Initialize_Form(2);
+                mainForm.Initialize_Form(2);
             }
             );
             addBtn.MouseClick += new MouseEventHandler((o, a) =>
             {
-                formRef.Initialize_Form(3);
+                mainForm.Initialize_Form(3);
             }
             );
             activityBtn.MouseClick += new MouseEventHandler((o, a) =>
             {
-                formRef.Initialize_Form(4);
+                mainForm.Initialize_Form(4);
             }
             );
             accountBtn.MouseClick += new MouseEventHandler((o, a) =>
             {
-                formRef.Initialize_Form(5);
+                mainForm.Initialize_Form(5);
             }
             );
             sidePanel.Controls.Add(homeBtn);
@@ -147,6 +160,26 @@ namespace Instagram
             return panel;
         }
 
+        public TextBox Create_TextBox(int[] location, int[] size)
+        {
+            TextBox textBox = new TextBox();
+            if (!lightModeOn)
+            {
+                textBox.BackColor = Color.FromArgb(43, 43, 43);
+                textBox.ForeColor = Color.FromArgb(255, 255, 255);
+            }
+            else
+            {
+                textBox.BackColor = Color.FromArgb(242, 242, 242);
+                textBox.ForeColor = Color.FromArgb(0, 0, 0);
+            }
+            textBox.Font = new Font("Roboto", 12);
+            textBox.Location = new System.Drawing.Point(location[0], location[1]);
+            textBox.Width = size[0];
+            textBox.Height = size[1];
+            return textBox;
+        }
+
         private string return_ui_location()
         {
             if (lightModeOn)
@@ -155,7 +188,7 @@ namespace Instagram
                 return Environment.CurrentDirectory + @"\Assets\Dark Mode\UI Icons\";
         }
 
-        public PictureBox Create_Button(string name, int[] size, int[] location, Color backColor,bool add_effects = true)
+        public PictureBox Create_Button(string name, int[] size, int[] location, Color backColor, bool add_effects = true)
         {
             PictureBox btn = new PictureBox();
             btn.Width = size[0];
@@ -164,7 +197,7 @@ namespace Instagram
             btn.Location = new System.Drawing.Point(location[0], location[1]);
             btn.SizeMode = PictureBoxSizeMode.Zoom;
             btn.BringToFront();
-            if(add_effects)
+            if (add_effects)
             {
                 btn.MouseHover += new EventHandler((o, a) =>
                 {
