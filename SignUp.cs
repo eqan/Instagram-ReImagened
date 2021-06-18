@@ -44,9 +44,16 @@ namespace Instagram
             if (pass == confirmPass)
             {
                 setStatus(2, true, "");
-                DBHandler.Add_User(userName, realUserName, pass, tagLine);
-                this.Dispose();
-                loginForm.Show();
+                if (DBHandler.Add_User(userName, realUserName, pass, tagLine))
+                {
+
+                    Console.WriteLine("User added Successfully!");
+                    setStatus(0, true, "");
+                    this.Dispose();
+                    loginForm.Show();
+                }
+                else
+                    setStatus(0, false, "Account Already Present!");
             }
             else
                 setStatus(2, false, "Password Doesnt Match!");
@@ -58,8 +65,8 @@ namespace Instagram
             realUserName_Box.Text = "";
             password_Box.Text = "";
             confirmPassword_Box.Text = "";
-            tagLineLabel.Text = "";
-            pictureBox1.Dispose();
+            tagLine_Box.Text = "";
+            profileBox.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Avatar.png");
         }
         private void resetBtn_Click(object sender, EventArgs e)
         {

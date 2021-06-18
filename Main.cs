@@ -8,7 +8,7 @@ namespace Instagram
     public partial class Main : Form
     {
         UIUtilities UI;
-        bool lightModeOn = true;
+        bool lightModeOn = false;
         Form form;
         int time = 0;
         public Main()

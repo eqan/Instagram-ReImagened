@@ -40,7 +40,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.instagramLogo = new System.Windows.Forms.PictureBox();
             this.confirmPassword_Box = new System.Windows.Forms.TextBox();
             this.confirmPasswordLabel = new System.Windows.Forms.Label();
             this.resetBtn = new System.Windows.Forms.Button();
@@ -63,7 +63,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.statusSymbolPassword)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusSymbolID)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.instagramLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // profileBox
@@ -179,17 +179,17 @@
             this.label1.Size = new System.Drawing.Size(289, 3);
             this.label1.TabIndex = 45;
             // 
-            // pictureBox1
+            // instagramLogo
             // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.instagramLogo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(293, 55);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(265, 66);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 44;
-            this.pictureBox1.TabStop = false;
+            this.instagramLogo.Image = ((System.Drawing.Image)(resources.GetObject("instagramLogo.Image")));
+            this.instagramLogo.Location = new System.Drawing.Point(308, 55);
+            this.instagramLogo.Name = "instagramLogo";
+            this.instagramLogo.Size = new System.Drawing.Size(265, 66);
+            this.instagramLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.instagramLogo.TabIndex = 44;
+            this.instagramLogo.TabStop = false;
             // 
             // confirmPassword_Box
             // 
@@ -446,7 +446,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.instagramLogo);
             this.Controls.Add(this.confirmPassword_Box);
             this.Controls.Add(this.confirmPasswordLabel);
             this.Controls.Add(this.resetBtn);
@@ -465,7 +465,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.statusSymbolPassword)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusSymbolID)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.instagramLogo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -483,7 +483,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox instagramLogo;
         private System.Windows.Forms.TextBox confirmPassword_Box;
         private System.Windows.Forms.Label confirmPasswordLabel;
         private System.Windows.Forms.Button resetBtn;

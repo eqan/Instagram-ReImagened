@@ -44,7 +44,56 @@ namespace Instagram
             }
         }
 
-        public void Add_User(string userName, string realUserName, string userPassword, string tagLine = null)
+        public int[] Check_UserName_And_Password(string userName, string password)
+        {
+            int[] results = { 0, 0 };
+            try
+            {
+                if (dbConnection.State == ConnectionState.Closed)
+                {
+                    // Check User
+                    cmd = new SqlCommand(@"SELECT [dbo].[Check_UserName](@UserName);", dbConnection);
+                    SqlParameter param1 = new SqlParameter();
+                    param1 = new SqlParameter("@UserName", SqlDbType.VarChar);
+                    param1.Value = userName;
+                    cmd.Parameters.Add(param1);
+                    dbConnection.Open();
+                    results[0] = (Int32)cmd.ExecuteScalar();
+                    Console.WriteLine("Result User: {0}",results[0].ToString());
+                    dbConnection.Close();
+                    if(results[0] == 1)
+                    {
+                        // Check Password
+                        cmd = new SqlCommand(@"SELECT [dbo].[Check_Password](@UserName, @Password);", dbConnection);
+                        SqlParameter param2 = new SqlParameter();
+                        param2 = new SqlParameter("@UserName", SqlDbType.VarChar);
+                        param2.Value = userName;
+                        cmd.Parameters.Add(param2);
+                        SqlParameter param3 = new SqlParameter();
+                        param3 = new SqlParameter("@Password", SqlDbType.VarChar);
+                        param3.Value = password;
+                        cmd.Parameters.Add(param3);
+                        dbConnection.Open();
+                        results[1] = (Int32)cmd.ExecuteScalar();
+                        Console.WriteLine("Result Password: {0}", results[1].ToString());
+                        dbConnection.Close();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                if (dbConnection.State == ConnectionState.Open)
+                    dbConnection.Close();
+            }
+            return results;
+            //return results;
+        }
+
+        public bool Add_User(string userName, string realUserName, string userPassword, string tagLine = null)
         {
             FileStream fs;
             BinaryReader br;
@@ -71,23 +120,21 @@ namespace Instagram
                     cmd.Parameters.AddWithValue("@RealUserName", realUserName);
                     cmd.Parameters.AddWithValue("@UserPassword", userPassword);
                     cmd.Parameters.AddWithValue("@Tagline", tagLine);
-                    int RowsAffected = cmd.ExecuteNonQuery();
-                    if (RowsAffected > 0)
-                    {
-                        Console.WriteLine("User has been added!\n");
-                    }
+                    cmd.ExecuteNonQuery();
                     dbConnection.Close();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                Console.WriteLine(ex.Message);
+                return false;
             }
             finally
             {
                 if (dbConnection.State == ConnectionState.Open)
                     dbConnection.Close();
             }
+            return true; 
         }
 
         public DataTable Display_Record()
