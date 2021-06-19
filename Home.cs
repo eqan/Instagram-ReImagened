@@ -12,6 +12,7 @@ namespace Instagram
         bool isLightModeOn = true;
         DBHandlingUtilities dbHandler;
         UIUtilities UI;
+        List<string[]> dataTable;
         string ImageNewName = "";
         int listViewItemsCount = 0;
 
@@ -34,16 +35,36 @@ namespace Instagram
 
         private void button1_Click(object sender, EventArgs e)
         {
-            List<string[]> dataTable = dbHandler.Import_Data_Using_SQL("3", "Eqan", "FollowingTable");
+            dataTable = dbHandler.Import_Data_Using_SQL("5", "Ahmad", "FollowingTable");
             Generate_Valid_Stories(dataTable);
         }
 
         public void Generate_Valid_Stories(List<string[]> usersList)
         {
+            ImageList imgs = new ImageList();
+            imgs.ImageSize = new Size(110, 75);
             for (int i = 0; i < usersList.Count; i++)
             {
-                dbHandler.Create_Valid_Story_View(usersList[i][1], usersList[i][2]);
+                //dbHandler.Create_Valid_Story_View(usersList[i][1], usersList[i][2]);
+                if(!dbHandler.Check_If_Story_Exists(usersList[i][1], usersList[i][2]))
+                    usersList.RemoveAt(i);
+                try
+                {
+                    imgs.Images.Add(dbHandler.Retrieve_Profile_Picture_Using_SQL(Int32.Parse(usersList[i][1])));
+                    listView1.Items.Add(new ListViewItem
+                    {
+                        ImageIndex = listViewItemsCount,
+                        Text = usersList[i][2],
+                        Tag = usersList[i][2]
+                    }); ; ; ; ; ;
+                    listViewItemsCount++;
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
             }
+            listView1.LargeImageList = imgs; // Setting Size Of Images
         }
 
         private void listView1_AfterLabelEdit(object sender, LabelEditEventArgs e)
@@ -55,36 +76,6 @@ namespace Instagram
             FileInfo fileInfo = new FileInfo(item1.Tag.ToString());
             fileInfo.MoveTo(fileInfo.Directory.FullName + "\\" + ImageNewName + fileInfo.Extension);
             listView1.Items[listViewItemsCount].Text = ImageNewName;
-        }
-
-
-        private void populate()
-        {
-            ImageList imgs = new ImageList();
-            imgs.ImageSize = new Size(110, 75);
-            string[] paths = { };
-            //for (int i = 0; i < circularLinkedList.str_name.Length; i++)
-            //{
-            //    try
-            //    {
-            //        if (circularLinkedList.str_name[i] == " " || circularLinkedList.str_name[i] == "\n")
-            //            continue;
-            //        imageLocation = Environment.CurrentDirectory + @"\Data\Movie Titles\Movie Icons\" + circularLinkedList.str_name[i] + ".png";
-            //        imgs.Images.Add(Image.FromFile(imageLocation));
-            //        listView1.Items.Add(new ListViewItem
-            //        {
-            //            ImageIndex = count,
-            //            Text = circularLinkedList.str_name[i],
-            //            Tag = circularLinkedList.str_name[i],
-            //        }); ; ; ;
-            //        count++;
-            //    }
-            //    catch
-            //    {
-            //        Console.WriteLine(circularLinkedList.str_name[i] + " is not found");
-            //    }
-            //}
-            listView1.LargeImageList = imgs; // Setting Size Of Images
         }
 
 

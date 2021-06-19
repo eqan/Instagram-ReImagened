@@ -50,7 +50,7 @@ namespace Instagram
             int x = formWidth, btn_Width = 45, btn_Height = 20;
             string location;
             Color backColor, hoverColor;
-            location = return_ui_location();
+            location = Return_UI_Location();
             if (lightModeOn)
             {
                 backColor = Color.FromArgb(255, 255, 255);
@@ -180,7 +180,7 @@ namespace Instagram
             return textBox;
         }
 
-        private string return_ui_location()
+        private string Return_UI_Location()
         {
             if (lightModeOn)
                 return Environment.CurrentDirectory + @"\Assets\Light Mode\UI Icons\";
@@ -193,7 +193,7 @@ namespace Instagram
             PictureBox btn = new PictureBox();
             btn.Width = size[0];
             btn.Height = size[1];
-            btn.ImageLocation = return_ui_location() + name + ".png";
+            btn.ImageLocation = Return_UI_Location() + name + ".png";
             btn.Location = new System.Drawing.Point(location[0], location[1]);
             btn.SizeMode = PictureBoxSizeMode.Zoom;
             btn.BringToFront();
@@ -207,7 +207,7 @@ namespace Instagram
                 btn.MouseLeave += new EventHandler((o, a) =>
                 {
                     btn.Image.Dispose();
-                    btn.Image = Image.FromFile(return_ui_location() + name + ".png");
+                    btn.Image = Image.FromFile(Return_UI_Location() + name + ".png");
                 });
             }
             btn.BackColor = backColor;

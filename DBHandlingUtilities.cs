@@ -55,12 +55,12 @@ namespace Instagram
                 if (dbConnection.State == ConnectionState.Closed)
                 {
                     // Check User
+                    dbConnection.Open();
                     cmd = new SqlCommand(@"SELECT [dbo].[Check_UserName](@UserName);", dbConnection);
                     SqlParameter param1 = new SqlParameter();
                     param1 = new SqlParameter("@UserName", SqlDbType.VarChar);
                     param1.Value = userName;
                     cmd.Parameters.Add(param1);
-                    dbConnection.Open();
                     results[0] = (Int32)cmd.ExecuteScalar();
                     Console.WriteLine("Result User: {0}",results[0].ToString());
                     dbConnection.Close();
@@ -157,7 +157,7 @@ namespace Instagram
                 {
                     string tableName = userName + "_" + userID + "_StoryTable";
                     string viewName = userName + "_" + userID + "_StoryViewTable";
-                    string dropCmd = "IF EXISTS ( SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'dbo.Eqan_3_StoryViewTable') ) BEGIN DROP VIEW " + viewName + " END";
+                    string dropCmd = "IF EXISTS ( SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'dbo."+ viewName + "') ) BEGIN DROP VIEW " + viewName + " END";
                     string addCmd = "CREATE VIEW " +  viewName + " AS SELECT * FROM "+ tableName +" WHERE DueDate >= CURRENT_TIMESTAMP ";
                     dbConnection.Open();
                     cmd = new SqlCommand(dropCmd, dbConnection);
@@ -282,6 +282,34 @@ namespace Instagram
             return data;
         }
 
+        public bool Check_If_Story_Exists(string userID, string userName)
+        {
+            bool decision = false;
+            try
+            {
+                if (dbConnection.State == ConnectionState.Closed)
+                {
+                    dbConnection.Open();
+                    cmd = new SqlCommand("SELECT ( CASE WHEN NOT EXISTS(SELECT NULL FROM "+ userName + "_" + userID + "_StoryViewTable" + " )THEN 1 ELSE 0 END ) AS isEmpty", dbConnection);
+                    int result = (Int32)cmd.ExecuteScalar();
+                    Console.WriteLine(result);
+                    if (result == 0)
+                        decision = true;
+                    dbConnection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                if (dbConnection.State == ConnectionState.Open)
+                    dbConnection.Close();
+            }
+            return decision;
+        }
+
 
         public Image Convert_Bytes_To_Image(byte[] imgBytes)
         {
@@ -304,6 +332,35 @@ namespace Instagram
             br.Close();
             fs.Close();
             return ImageData;
+        }
+
+        public Image Retrieve_Profile_Picture_Using_SQL(int userID)
+        {
+            Image image = null;
+            try
+            {
+                if (dbConnection.State == ConnectionState.Closed)
+                {
+                    dbConnection.Open();
+                    string sqlCmd = "SELECT ProfilePicture FROM USERS WHERE UserID = @UserID";
+                    cmd = new SqlCommand(sqlCmd, dbConnection);
+                    cmd.Parameters.AddWithValue("@UserID", userID);
+                    byte[] bytes = (byte[])cmd.ExecuteScalar();
+                    image = Image.FromStream(new MemoryStream(bytes));
+                    Console.WriteLine(bytes.ToString());
+                    dbConnection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                if (dbConnection.State == ConnectionState.Open)
+                    dbConnection.Close();
+            }
+            return image;
         }
 
         public bool Add_User(string userName, string realUserName, string userPassword, string tagLine = null)
