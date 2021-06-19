@@ -3,6 +3,9 @@ using System.Data.SqlClient;
 using System.Data;
 using System.IO;
 using System.Windows.Forms;
+using System.Drawing;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Instagram
 {
@@ -92,7 +95,7 @@ namespace Instagram
             return results;
         }
 
-        public void Create_Post(string userID, string userName, string postDescription, string location)
+        public void Add_Post(string userID, string userName, string postDescription, string location)
         {
             try
             {
@@ -120,7 +123,7 @@ namespace Instagram
             }
 
         }
-        public void Create_Story(string userID, string userName)
+        public void Add_Story(string userID, string userName)
         {
             try
             {
@@ -132,7 +135,7 @@ namespace Instagram
                     cmd.Parameters.AddWithValue("@Image", Get_Binary_Of_File());
                     cmd.ExecuteNonQuery();
                     dbConnection.Close();
-                    Console.WriteLine("Story Created for {0}", userName);
+                    Console.WriteLine("Story Added for {0}", userName);
                 }
             }
             catch (Exception ex)
@@ -146,20 +149,23 @@ namespace Instagram
             }
         }
 
-        public void Create_Story_Table(string userID, string userName)
+        public void Create_Valid_Story_View(string userID, string userName)
         {
             try
             {
                 if (dbConnection.State == ConnectionState.Closed)
                 {
+                    string tableName = userName + "_" + userID + "_StoryTable";
+                    string viewName = userName + "_" + userID + "_StoryViewTable";
+                    string dropCmd = "IF EXISTS ( SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'dbo.Eqan_3_StoryViewTable') ) BEGIN DROP VIEW " + viewName + " END";
+                    string addCmd = "CREATE VIEW " +  viewName + " AS SELECT * FROM "+ tableName +" WHERE DueDate >= CURRENT_TIMESTAMP ";
                     dbConnection.Open();
-                    cmd = new SqlCommand("Build_User_Stories_Table", dbConnection);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@UserID", userID);
-                    cmd.Parameters.AddWithValue("@UserName", userName);
+                    cmd = new SqlCommand(dropCmd, dbConnection);
+                    cmd.ExecuteNonQuery();
+                    cmd = new SqlCommand(addCmd, dbConnection);
                     cmd.ExecuteNonQuery();
                     dbConnection.Close();
-                    Console.WriteLine("Table Created for {0}", userName);
+                    Console.WriteLine("Story View Created for {0}", userName);
                 }
             }
             catch (Exception ex)
@@ -173,20 +179,57 @@ namespace Instagram
             }
         }
 
-        public void Create_Post_Table(string userID, string userName)
+
+        public void Create_User_Entities(string userID, string userName)
+        {
+            string tableName = "";
+            tableName = "Build_User_Followers_Table";
+            Create_Entity(userID, userName, tableName);
+            tableName = "Build_User_Stories_Table";
+            Create_Entity(userID, userName, tableName);
+            tableName = "Build_User_Followers_Table";
+            Create_Entity(userID, userName, tableName);
+            tableName = "Build_User_Posts_Table";
+            Create_Entity(userID, userName, tableName);
+        }
+
+        public void Create_Entity(string userID, string userName, string procedureName)
         {
             try
             {
                 if (dbConnection.State == ConnectionState.Closed)
                 {
                     dbConnection.Open();
-                    cmd = new SqlCommand("Build_User_Posts_Table", dbConnection);
+                    cmd = new SqlCommand(procedureName, dbConnection);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@UserID", userID);
                     cmd.Parameters.AddWithValue("@UserName", userName);
                     cmd.ExecuteNonQuery();
+                    Console.WriteLine(procedureName + " Table Created for {0}", userName);
                     dbConnection.Close();
-                    Console.WriteLine("Table Created for {0}", userName);
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            if (dbConnection.State == ConnectionState.Open)
+                dbConnection.Close();
+        }
+
+        public void Add_Follower(string userID, string userName, string followerID, string followerName)
+        {
+            try
+            {
+                if (dbConnection.State == ConnectionState.Closed)
+                {
+                    dbConnection.Open();
+                    cmd = new SqlCommand("INSERT INTO " + userName + "_" + userID + "_FollowersTable (UserID, UserName) VALUES(@FollowerID, @FollowerName)", dbConnection);
+                    cmd.Parameters.AddWithValue("@FollowerID", Int32.Parse(followerID));
+                    cmd.Parameters.AddWithValue("@FollowerName", followerName);
+                    cmd.ExecuteNonQuery();
+                    dbConnection.Close();
+                    Console.WriteLine("{0} As Following Added!", userName);
                 }
             }
             catch (Exception ex)
@@ -198,6 +241,56 @@ namespace Instagram
                 if (dbConnection.State == ConnectionState.Open)
                     dbConnection.Close();
             }
+        }
+
+        public void Add_Following(string userID, string userName, string followingID, string followingName)
+        {
+            try
+            {
+                if (dbConnection.State == ConnectionState.Closed)
+                {
+                    dbConnection.Open();
+                    cmd = new SqlCommand("INSERT INTO " + userName + "_" + userID + "_FollowingTable (UserID, UserName) VALUES(@FollowingID, @FollowingName)", dbConnection);
+                    cmd.Parameters.AddWithValue("@FollowingID", Int32.Parse(followingID));
+                    cmd.Parameters.AddWithValue("@FollowingName", followingName);
+                    cmd.ExecuteNonQuery();
+                    dbConnection.Close();
+                    Console.WriteLine("{0} As Follower Added!", userName);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                if (dbConnection.State == ConnectionState.Open)
+                    dbConnection.Close();
+            }
+        }
+
+        public List<string[]> Import_Data_Using_SQL(string userID, string userName, string tableName)
+        {
+            List<string[]> data = new List<string[]>();
+            string sqlCommand = "SELECT * FROM " + userName + "_" + userID + "_" + tableName;
+            DataTable dataTable = Fetch_Records_In_DataTable(sqlCommand);
+            foreach (DataRow row in dataTable.AsEnumerable().ToArray())
+            {
+                object[] dr1 = row.ItemArray;
+                data.Add(Array.ConvertAll(dr1, (p => (p).ToString())));
+            }
+            return data;
+        }
+
+
+        public Image Convert_Bytes_To_Image(byte[] imgBytes)
+        {
+            Image img;
+            using (MemoryStream ms = new MemoryStream(imgBytes))
+            {
+                img = Image.FromStream(ms);
+            }
+            return img;
         }
 
         public byte[] Get_Binary_Of_File()
@@ -234,6 +327,7 @@ namespace Instagram
                     cmd.Parameters.AddWithValue("@Tagline", tagLine);
                     cmd.ExecuteNonQuery();
                     dbConnection.Close();
+                    Console.WriteLine("{0} Added!", userName);
                 }
             }
             catch (Exception ex)
@@ -249,15 +343,30 @@ namespace Instagram
             return true; 
         }
 
-        public DataTable Display_Record()
+        public DataTable Fetch_Records_In_DataTable(string command)
         {
-            DataTable intervieweeTable = new DataTable();
-            dbConnection.Open();
-            cmd = new SqlCommand("SELECT * FROM USERS", dbConnection);
-            adapt = new SqlDataAdapter(cmd);
-            adapt.Fill(intervieweeTable);
-            dbConnection.Close();
-            return intervieweeTable;
+            DataTable table = new DataTable();
+            try
+            {
+                if (dbConnection.State == ConnectionState.Closed)
+                {
+                    dbConnection.Open();
+                    cmd = new SqlCommand(command, dbConnection);
+                    adapt = new SqlDataAdapter(cmd);
+                    adapt.Fill(table);
+                    dbConnection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                if (dbConnection.State == ConnectionState.Open)
+                    dbConnection.Close();
+            }
+            return table;
         }
     }
 }
