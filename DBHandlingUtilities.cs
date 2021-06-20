@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.Collections.Generic;
 using System.Linq;
+using System.Drawing.Drawing2D;
 
 namespace Instagram
 {
@@ -62,9 +63,9 @@ namespace Instagram
                     param1.Value = userName;
                     cmd.Parameters.Add(param1);
                     results[0] = (Int32)cmd.ExecuteScalar();
-                    Console.WriteLine("Result User: {0}",results[0].ToString());
+                    Console.WriteLine("Result User: {0}", results[0].ToString());
                     dbConnection.Close();
-                    if(results[0] == 1)
+                    if (results[0] == 1)
                     {
                         // Check Password
                         cmd = new SqlCommand(@"SELECT [dbo].[Check_Password](@UserName, @Password);", dbConnection);
@@ -157,8 +158,8 @@ namespace Instagram
                 {
                     string tableName = userName + "_" + userID + "_StoryTable";
                     string viewName = userName + "_" + userID + "_StoryViewTable";
-                    string dropCmd = "IF EXISTS ( SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'dbo."+ viewName + "') ) BEGIN DROP VIEW " + viewName + " END";
-                    string addCmd = "CREATE VIEW " +  viewName + " AS SELECT * FROM "+ tableName +" WHERE DueDate >= CURRENT_TIMESTAMP ";
+                    string dropCmd = "IF EXISTS ( SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'dbo." + viewName + "') ) BEGIN DROP VIEW " + viewName + " END";
+                    string addCmd = "CREATE VIEW " + viewName + " AS SELECT * FROM " + tableName + " WHERE DueDate >= CURRENT_TIMESTAMP ";
                     dbConnection.Open();
                     cmd = new SqlCommand(dropCmd, dbConnection);
                     cmd.ExecuteNonQuery();
@@ -209,7 +210,7 @@ namespace Instagram
                     dbConnection.Close();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -290,7 +291,7 @@ namespace Instagram
                 if (dbConnection.State == ConnectionState.Closed)
                 {
                     dbConnection.Open();
-                    cmd = new SqlCommand("SELECT ( CASE WHEN NOT EXISTS(SELECT NULL FROM "+ userName + "_" + userID + "_StoryViewTable" + " )THEN 1 ELSE 0 END ) AS isEmpty", dbConnection);
+                    cmd = new SqlCommand("SELECT ( CASE WHEN NOT EXISTS(SELECT NULL FROM " + userName + "_" + userID + "_StoryViewTable" + " )THEN 1 ELSE 0 END ) AS isEmpty", dbConnection);
                     int result = (Int32)cmd.ExecuteScalar();
                     Console.WriteLine(result);
                     if (result == 0)
@@ -340,25 +341,24 @@ namespace Instagram
             try
             {
                 if (dbConnection.State == ConnectionState.Closed)
-                {
                     dbConnection.Open();
-                    string sqlCmd = "SELECT ProfilePicture FROM USERS WHERE UserID = @UserID";
-                    cmd = new SqlCommand(sqlCmd, dbConnection);
-                    cmd.Parameters.AddWithValue("@UserID", userID);
-                    byte[] bytes = (byte[])cmd.ExecuteScalar();
-                    image = Image.FromStream(new MemoryStream(bytes));
-                    Console.WriteLine(bytes.ToString());
-                    dbConnection.Close();
+                string sqlCmd = "SELECT ProfilePicture FROM USERS WHERE UserID = @UserID";
+                cmd = new SqlCommand(sqlCmd, dbConnection);
+                cmd.Parameters.AddWithValue("@UserID", userID);
+                adapt = new SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                adapt.Fill(ds);
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    image = Convert_Bytes_To_Image((byte[])ds.Tables[0].Rows[0]["ProfilePicture"]);
                 }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            finally
-            {
                 if (dbConnection.State == ConnectionState.Open)
                     dbConnection.Close();
+
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
             }
             return image;
         }
@@ -372,7 +372,7 @@ namespace Instagram
                     dbConnection.Open();
                     cmd = new SqlCommand("Add_User", dbConnection);
                     cmd.CommandType = CommandType.StoredProcedure;
-                    if(fileDirectory != null)
+                    if (fileDirectory != null)
                     {
                         cmd.Parameters.AddWithValue("@Picture", Get_Binary_Of_File());
                     }
@@ -397,7 +397,7 @@ namespace Instagram
                 if (dbConnection.State == ConnectionState.Open)
                     dbConnection.Close();
             }
-            return true; 
+            return true;
         }
 
         public DataTable Fetch_Records_In_DataTable(string command)

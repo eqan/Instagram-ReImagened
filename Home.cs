@@ -25,7 +25,7 @@ namespace Instagram
 
         private void Add_All_Stories()
         {
-            
+
         }
 
         private void Add_Post()
@@ -42,29 +42,30 @@ namespace Instagram
         public void Generate_Valid_Stories(List<string[]> usersList)
         {
             ImageList imgs = new ImageList();
-            imgs.ImageSize = new Size(110, 75);
+            imgs.ImageSize = new Size(50, 50);
             for (int i = 0; i < usersList.Count; i++)
             {
                 //dbHandler.Create_Valid_Story_View(usersList[i][1], usersList[i][2]);
-                if(!dbHandler.Check_If_Story_Exists(usersList[i][1], usersList[i][2]))
-                    usersList.RemoveAt(i);
-                try
+                if (dbHandler.Check_If_Story_Exists(usersList[i][1], usersList[i][2]))
                 {
-                    imgs.Images.Add(dbHandler.Retrieve_Profile_Picture_Using_SQL(Int32.Parse(usersList[i][1])));
-                    listView1.Items.Add(new ListViewItem
+                    try
                     {
-                        ImageIndex = listViewItemsCount,
-                        Text = usersList[i][2],
-                        Tag = usersList[i][2]
-                    }); ; ; ; ; ;
-                    listViewItemsCount++;
+                        imgs.Images.Add(dbHandler.Retrieve_Profile_Picture_Using_SQL(Int32.Parse(usersList[i][1])));
+                        listView1.Items.Add(new ListViewItem
+                        {
+                            ImageIndex = listViewItemsCount,
+                            Text = usersList[i][2],
+                            Tag = usersList[i][2]
+                        }); ; ; ; ; ;
+                        listViewItemsCount++;
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
                 }
-                catch(Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
+                listView1.LargeImageList = imgs; 
             }
-            listView1.LargeImageList = imgs; // Setting Size Of Images
         }
 
         private void listView1_AfterLabelEdit(object sender, LabelEditEventArgs e)
