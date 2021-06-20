@@ -48,12 +48,13 @@
             this.axMoviePlayer1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axMoviePlayer1.OcxState")));
             this.axMoviePlayer1.Size = new System.Drawing.Size(499, 437);
             this.axMoviePlayer1.TabIndex = 0;
+            this.axMoviePlayer1.MouseDownEvent += new AxMOVIEPLAYERLib._DMoviePlayerEvents_MouseDownEventHandler(this.axMoviePlayer1_MouseDownEvent);
             // 
             // formVirtualizer
             // 
-            this.formVirtualizer.Location = new System.Drawing.Point(12, -2);
+            this.formVirtualizer.Location = new System.Drawing.Point(42, -2);
             this.formVirtualizer.Name = "formVirtualizer";
-            this.formVirtualizer.Size = new System.Drawing.Size(541, 368);
+            this.formVirtualizer.Size = new System.Drawing.Size(499, 368);
             this.formVirtualizer.TabIndex = 1;
             this.formVirtualizer.Visible = false;
             this.formVirtualizer.Paint += new System.Windows.Forms.PaintEventHandler(this.formVirtualizer_Paint);

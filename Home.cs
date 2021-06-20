@@ -15,6 +15,7 @@ namespace Instagram
         List<string[]> dataTable;
         string ImageNewName = "";
         int listViewItemsCount = 0;
+        ImageList listViewImageList = new ImageList();
 
         public Home()
         {
@@ -41,8 +42,7 @@ namespace Instagram
 
         public void Generate_Valid_Stories(List<string[]> usersList)
         {
-            ImageList imgs = new ImageList();
-            imgs.ImageSize = new Size(50, 50);
+            listViewImageList.ImageSize = new Size(50, 50);
             for (int i = 0; i < usersList.Count; i++)
             {
                 //dbHandler.Create_Valid_Story_View(usersList[i][1], usersList[i][2]);
@@ -50,13 +50,13 @@ namespace Instagram
                 {
                     try
                     {
-                        imgs.Images.Add(dbHandler.Retrieve_Profile_Picture_Using_SQL(Int32.Parse(usersList[i][1])));
+                        listViewImageList.Images.Add(dbHandler.Retrieve_Profile_Picture_Using_SQL(Int32.Parse(usersList[i][1])));
                         listView1.Items.Add(new ListViewItem
                         {
                             ImageIndex = listViewItemsCount,
                             Text = usersList[i][2],
-                            Tag = usersList[i][2]
-                        }); ; ; ; ; ;
+                            Tag = usersList[i][2] + '_' + usersList[i][1]
+                        }); ; ; ; ; ; ;
                         listViewItemsCount++;
                     }
                     catch (Exception ex)
@@ -64,8 +64,8 @@ namespace Instagram
                         Console.WriteLine(ex.Message);
                     }
                 }
-                listView1.LargeImageList = imgs; 
             }
+            listView1.LargeImageList = listViewImageList; 
         }
 
         private void listView1_AfterLabelEdit(object sender, LabelEditEventArgs e)
@@ -87,16 +87,14 @@ namespace Instagram
                 Console.WriteLine(listView1.SelectedItems.Count);
                 return;
             }
-            int intselectedindex = listView1.SelectedIndices[0];
-            if (intselectedindex >= 0)
+            if (listView1.SelectedIndices[0] >= 0)
             {
-                //axMoviePlayer1.Stop();
-                //currentMovie = listView1.SelectedItems[0].Text;
-                //string fileDirectory = Environment.CurrentDirectory + @"\Data\Profiles\" + accountName + @"\" + userName + @"\Log.txt";
-                //fileHandling.WriteData(fileDirectory, currentMovie);
-                //startMovie();
+                var item = listView1.SelectedItems[0];
+                Image img = listViewImageList.Images[item.ImageIndex];
+                this.Hide();
+                Story story = new Story(listView1.SelectedItems[0].Tag.ToString(), img);
+                story.Show();
             }
         }
-
     }
 }

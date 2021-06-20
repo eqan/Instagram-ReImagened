@@ -356,12 +356,40 @@ namespace Instagram
                     dbConnection.Close();
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
             return image;
         }
+
+        public Image[] Retrieve_All_Pictures(string tableName)
+        {
+            Image[] image = null;
+            try
+            {
+                if (dbConnection.State == ConnectionState.Closed)
+                    dbConnection.Open();
+                string sqlCmd = "SELECT Image FROM " + tableName;
+                cmd = new SqlCommand(sqlCmd, dbConnection);
+                adapt = new SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                adapt.Fill(ds);
+                image = new Image[ds.Tables[0].Rows.Count];
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+                    image[i] = Convert_Bytes_To_Image((byte[])ds.Tables[0].Rows[i]["Image"]);
+                }
+                if (dbConnection.State == ConnectionState.Open)
+                    dbConnection.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return image;
+        }
+
 
         public bool Add_User(string userName, string realUserName, string userPassword, string tagLine = null)
         {

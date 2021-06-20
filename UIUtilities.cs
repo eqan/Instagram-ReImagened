@@ -18,6 +18,12 @@ namespace Instagram
         int formWidth, formHeight;
         private Main mainForm;
         private Form formRef;
+
+        public UIUtilities(bool formLightModeOn)
+        {
+            lightModeOn = formLightModeOn;
+        }
+
         public UIUtilities(Form f,bool formLightModeOn)
         {
             formWidth = f.Width;

@@ -19,6 +19,8 @@ namespace Instagram
                 this.Icon = new Icon(stream);
             }
             formVirtualizer.Visible = false;
+            formVirtualizer.SendToBack();
+            axMoviePlayer1.BringToFront();
             form = new Home() { TopLevel = false, TopMost = true };
         }
         private void Initialize_GUI_Components()
@@ -96,6 +98,7 @@ namespace Instagram
             timer1.Stop();
             time = 0;
             axMoviePlayer1.Dispose();
+            formVirtualizer.BringToFront();
         }
 
         private void Main_MouseDown(object sender, MouseEventArgs e)
@@ -140,6 +143,11 @@ namespace Instagram
         {
             formVirtualizer.Controls.Add(form);
             form.Show();
+        }
+
+        private void axMoviePlayer1_MouseDownEvent(object sender, AxMOVIEPLAYERLib._DMoviePlayerEvents_MouseDownEvent e)
+        {
+            this.axMoviePlayer1.MouseDownEvent += new AxMOVIEPLAYERLib._DMoviePlayerEvents_MouseDownEventHandler(this.axMoviePlayer1_MouseDownEvent);
         }
     }
 }
