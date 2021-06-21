@@ -218,6 +218,54 @@ namespace Instagram
                 dbConnection.Close();
         }
 
+        public void Truncate_Temporary_Post_Table ()
+        {
+            try
+            {
+                if (dbConnection.State == ConnectionState.Closed)
+                {
+                    dbConnection.Open();
+                    cmd = new SqlCommand("TRUNCATE TABLE TemporaryTable_For_All_Posts", dbConnection);
+                    cmd.ExecuteNonQuery();
+                    dbConnection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            if (dbConnection.State == ConnectionState.Open)
+                dbConnection.Close();
+        }
+
+
+        public void Create_View_For_Following_Posts(string userID, string userName)
+        {
+            try
+            {
+                if (dbConnection.State == ConnectionState.Closed)
+                {
+                    dbConnection.Open();
+                    string tableName = "TemporaryTable_For_All_Posts";
+                    cmd = new SqlCommand("SELECT ( CASE WHEN EXISTS(SELECT NULL FROM " + tableName + " )THEN 1 ELSE 0 END ) AS isEmpty", dbConnection);
+                    int result = (Int32)cmd.ExecuteScalar();
+                    if (result == 1)
+                        cmd = new SqlCommand("SELECT " + userID + "AS UserID, '" + userName + "' AS UserName,PostDesc, BookMarked, Likes, Location, Image, Video, TimeLine  INTO " + tableName +"  FROM " + userName + "_" + userID + "_PostTable", dbConnection);
+                    else
+                        cmd = new SqlCommand("INSERT INTO " + tableName +" SELECT " + userID + "AS UserID, '" + userName + "' AS UserName,PostDesc, BookMarked, Likes, Location, Image, Video, TimeLine FROM " + userName + "_" + userID + "_PostTable", dbConnection);
+                    Console.WriteLine(result);
+                    cmd.ExecuteNonQuery();
+                    dbConnection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            if (dbConnection.State == ConnectionState.Open)
+                dbConnection.Close();
+        }
+
         public void Add_Follower(string userID, string userName, string followerID, string followerName)
         {
             try
@@ -426,6 +474,61 @@ namespace Instagram
                     dbConnection.Close();
             }
             return true;
+        }
+
+        public Post[] Generate_Posts(bool lightModeOn, Home home)
+        {
+            Post[] postList = null;
+            try
+            {
+                if (dbConnection.State == ConnectionState.Closed)
+                    dbConnection.Open();
+                string sqlCmd = "SELECT * FROM TemporaryTable_For_All_Posts";
+                cmd = new SqlCommand(sqlCmd, dbConnection);
+                adapt = new SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                adapt.Fill(ds);
+                postList = new Post[ds.Tables[0].Rows.Count];
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+                    postList[i] = new Post(lightModeOn); 
+                    postList[i].userNameLabel.Text = ((string)ds.Tables[0].Rows[i]["UserName"]);
+                    postList[i].postPictureBox.Image = Convert_Bytes_To_Image((byte[])ds.Tables[0].Rows[i]["Image"]);
+                    postList[i].postDescriptionBox.Text = ((string)ds.Tables[0].Rows[i]["PostDesc"]);
+                    postList[i].likeLabel.Text = ((string)ds.Tables[0].Rows[i]["Likes"]);
+                    postList[i].locationLabel.Text = ((string)ds.Tables[0].Rows[i]["Location"]);
+                    postList[i].timeLabel.Text = ((DateTime)ds.Tables[0].Rows[i]["TimeLine"]).ToString("HH");
+                    if(((bool)ds.Tables[0].Rows[i]["BookMarked"]))
+                    {
+                        postList[i].bookMarkedBtn.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Selected Mode\bookmark.png");
+                    }
+                    else
+                    {
+                        if (lightModeOn)
+                            postList[i].bookMarkedBtn.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Light Mode\UI Icons\bookmark.png");
+                        else
+                            postList[i].bookMarkedBtn.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Dark Mode\UI Icons\bookmark.png");
+                    }
+                    if(((bool)ds.Tables[0].Rows[i][""]))
+                    {
+                        postList[i].bookMarkedBtn.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Selected Mode\bookmark.png");
+                    }
+                    else
+                    {
+                        if (lightModeOn)
+                            postList[i].bookMarkedBtn.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Light Mode\UI Icons\bookmark.png");
+                        else
+                            postList[i].bookMarkedBtn.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Dark Mode\UI Icons\bookmark.png");
+                    }
+                }
+                if (dbConnection.State == ConnectionState.Open)
+                    dbConnection.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return postList;
         }
 
         public DataTable Fetch_Records_In_DataTable(string command)

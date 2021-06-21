@@ -186,7 +186,7 @@ namespace Instagram
             return textBox;
         }
 
-        private string Return_UI_Location()
+        public string Return_UI_Location()
         {
             if (lightModeOn)
                 return Environment.CurrentDirectory + @"\Assets\Light Mode\UI Icons\";

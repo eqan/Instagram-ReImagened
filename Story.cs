@@ -12,39 +12,47 @@ namespace Instagram
         Image[] storyList;
         int storyCount = 0;
         string tableName;
-        public Story(string tableName, Image profilePicture)
+        public Story(string tableName, Image profilePicture, bool lightModeOn)
         {
             InitializeComponent();
+            this.lightModeOn = lightModeOn;
             Initial_Setting_Initialzier(tableName, profilePicture);
         }
 
         private void Initial_Setting_Initialzier(string tableName, Image profilePicture)
         {
+            UI = new UIUtilities(lightModeOn);
+            Configure_Theme();
             profileBox.Bitmap = (Bitmap)profilePicture;
             this.tableName = tableName;
             this.tableName += "_StoryViewTable";
-            UI = new UIUtilities(lightModeOn);
             dbHandler = new DBHandlingUtilities();
             timer1.Start();
-            Initialize_Buttons();
             Load_Images();
         }
 
-        private void Initialize_Buttons()
+        private void Configure_Theme()
         {
-            int[] btnSize = { 50, 50};
             Color backColor;
             if (lightModeOn)
                 backColor = Color.FromArgb(255, 255, 255);
             else
                 backColor = Color.FromArgb(0, 0, 0);
-            PictureBox nextStory = UI.Create_Button("next", btnSize, new int[] { this.Width - btnSize[0] - 10, this.Height / 2 - 10 }, backColor, true);
+            this.BackColor = backColor;
+            storyBox.BackColor = backColor;
+            Initialize_Buttons(backColor);
+        }
+
+        private void Initialize_Buttons(Color backColor)
+        {
+            int[] btnSize = { 50, 50};
+            PictureBox nextStory = UI.Create_Button("next", btnSize, new int[] { this.Width - btnSize[0] - 10, this.Height / 2 - 10 }, backColor, lightModeOn);
             nextStory.MouseClick += new MouseEventHandler((o, a) =>
             {
                 incrementStories();
             }
             );
-            PictureBox backStory = UI.Create_Button("back", btnSize, new int[] { 0 + 10, this.Height / 2 - 10 }, backColor, true);
+            PictureBox backStory = UI.Create_Button("back", btnSize, new int[] { 0 + 10, this.Height / 2 - 10 }, backColor, lightModeOn);
             backStory.MouseClick += new MouseEventHandler((o, a) =>
             {
                 decrementStories();

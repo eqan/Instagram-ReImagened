@@ -37,10 +37,11 @@
             // 
             // feedPanel
             // 
-            this.feedPanel.Location = new System.Drawing.Point(0, 161);
+            this.feedPanel.Location = new System.Drawing.Point(206, 161);
             this.feedPanel.Name = "feedPanel";
-            this.feedPanel.Size = new System.Drawing.Size(800, 290);
+            this.feedPanel.Size = new System.Drawing.Size(471, 290);
             this.feedPanel.TabIndex = 0;
+            this.feedPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.feedPanel_Paint);
             // 
             // listView1
             // 
@@ -103,11 +104,10 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.FlowLayoutPanel feedPanel;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
+        public System.Windows.Forms.FlowLayoutPanel feedPanel;
     }
 }
