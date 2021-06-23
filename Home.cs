@@ -9,7 +9,7 @@ namespace Instagram
 {
     public partial class Home : Form
     {
-        bool isLightModeOn = true;
+        bool lightModeOn = false;
         DBHandlingUtilities dbHandler;
         UIUtilities UI;
         List<string[]> dataTable;
@@ -23,14 +23,40 @@ namespace Instagram
             InitializeComponent();
             dbHandler = new DBHandlingUtilities();
             UI = new UIUtilities(this, true);
+            Configure_Theme();
+            Import_All_Following();
         }
+        private void Configure_Theme()
+        {
+            Color backColor, foreColor;
+            if (lightModeOn)
+            {
+                backColor = Color.FromArgb(255, 255, 255);
+                foreColor = Color.FromArgb(242, 242, 242);
+            }
+            else
+            {
+                backColor = Color.FromArgb(43, 43, 43);
+                foreColor = Color.FromArgb(0, 0, 0);
+            }
+            this.BackColor = foreColor;
+            storyListView.BackColor = backColor;
+            feedPanel.BackColor = foreColor;
+            
+        }
+
 
         private void Import_All_Following()
         {
             dataTable = dbHandler.Import_Data_Using_SQL("5", "Ahmad", "FollowingTable");
             dbHandler.Truncate_Temporary_Post_Table();
             Generate_Posts_And_Stories(dataTable);
-            postList = dbHandler.Generate_Posts(true, this);
+            postList = dbHandler.Generate_Posts(lightModeOn);
+            Display_Posts();
+        }
+
+        private void Display_Posts()
+        {
             feedPanel.AutoScroll = true;
             for(int i=0; i< postList.Length;i++)
             {
@@ -48,7 +74,7 @@ namespace Instagram
                 try
                 {
                     listViewImageList.Images.Add(dbHandler.Retrieve_Profile_Picture_Using_SQL(Int32.Parse(userID)));
-                    listView1.Items.Add(new ListViewItem
+                    storyListView.Items.Add(new ListViewItem
                     {
                         ImageIndex = listViewItemsCount,
                         Text = userName,
@@ -70,7 +96,8 @@ namespace Instagram
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Import_All_Following();
+            dbHandler.Add_Post("3", "Eqan", "Hello", "Hyderabad");
+            feedPanel.Refresh();
         }
 
         public void Generate_Posts_And_Stories(List<string[]> usersList)
@@ -78,10 +105,10 @@ namespace Instagram
             listViewImageList.ImageSize = new Size(50, 50);
             for (int i = 0; i < usersList.Count; i++)
             {
-                //Add_All_Stories(usersList[i][1], usersList[i][2]);
+                Add_All_Stories(usersList[i][1], usersList[i][2]);
                 Add_All_Post(usersList[i][1], usersList[i][2]);
             }
-            listView1.LargeImageList = listViewImageList; 
+            storyListView.LargeImageList = listViewImageList; 
         }
 
         private void listView1_AfterLabelEdit(object sender, LabelEditEventArgs e)
@@ -89,26 +116,26 @@ namespace Instagram
             if (e.Label == null)
                 return;
             ImageNewName = Convert.ToString(e.Label);
-            ListViewItem item1 = listView1.SelectedItems[0];
+            ListViewItem item1 = storyListView.SelectedItems[0];
             FileInfo fileInfo = new FileInfo(item1.Tag.ToString());
             fileInfo.MoveTo(fileInfo.Directory.FullName + "\\" + ImageNewName + fileInfo.Extension);
-            listView1.Items[listViewItemsCount].Text = ImageNewName;
+            storyListView.Items[listViewItemsCount].Text = ImageNewName;
         }
 
 
         private void listView1_MouseClick(object sender, MouseEventArgs e)
         {
-            if (listView1.SelectedIndices.Count <= 0)
+            if (storyListView.SelectedIndices.Count <= 0)
             {
-                Console.WriteLine(listView1.SelectedItems.Count);
+                Console.WriteLine(storyListView.SelectedItems.Count);
                 return;
             }
-            if (listView1.SelectedIndices[0] >= 0)
+            if (storyListView.SelectedIndices[0] >= 0)
             {
-                var item = listView1.SelectedItems[0];
+                var item = storyListView.SelectedItems[0];
                 Image img = listViewImageList.Images[item.ImageIndex];
                 this.Hide();
-                Story story = new Story(listView1.SelectedItems[0].Tag.ToString(), img, false);
+                Story story = new Story(storyListView.SelectedItems[0].Tag.ToString(), img, false);
                 story.Show();
             }
         }

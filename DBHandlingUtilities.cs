@@ -6,7 +6,6 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.Collections.Generic;
 using System.Linq;
-using System.Drawing.Drawing2D;
 
 namespace Instagram
 {
@@ -100,10 +99,11 @@ namespace Instagram
         {
             try
             {
+                Get_Picture();
                 if (dbConnection.State == ConnectionState.Closed)
                 {
                     dbConnection.Open();
-                    cmd = new SqlCommand("INSERT INTO " + userName + "_" + userID + "_PostTable(BookMarked, PostDesc, Location, Image) VALUES(@BookMarked ,@PostDesc, @Location, @Image)", dbConnection);
+                    cmd = new SqlCommand("INSERT INTO " + userName + "_" + userID + "_PostTable (BookMarked, PostDesc, Location, Image) VALUES (@BookMarked ,@PostDesc, @Location, @Image)", dbConnection);
                     cmd.Parameters.AddWithValue("@BookMarked", 0);
                     cmd.Parameters.AddWithValue("@PostDesc", postDescription);
                     cmd.Parameters.AddWithValue("@Location", location);
@@ -111,6 +111,7 @@ namespace Instagram
                     cmd.ExecuteNonQuery();
                     dbConnection.Close();
                     Console.WriteLine("Post Created for {0}", userName);
+                    Create_Post_Likes_Log("3", "Eqan");
                 }
             }
             catch (Exception ex)
@@ -181,6 +182,7 @@ namespace Instagram
         }
 
 
+
         public void Create_User_Entities(string userID, string userName)
         {
             string tableName = "";
@@ -192,6 +194,33 @@ namespace Instagram
             Create_Entity(userID, userName, tableName);
             tableName = "Build_User_Posts_Table";
             Create_Entity(userID, userName, tableName);
+        }
+
+        public void Create_Post_Likes_Log(string userID, string userName)
+        {
+            try
+            {
+                if (dbConnection.State == ConnectionState.Closed)
+                {
+                    dbConnection.Open();
+                    string sqlCmd = "SELECT PostID FROM " + userName + "_" + userID + "_PostTable";
+                    cmd = new SqlCommand(sqlCmd, dbConnection);
+                    adapt = new SqlDataAdapter(cmd);
+                    DataSet ds = new DataSet();
+                    adapt.Fill(ds);
+                    int postID = (Int32)ds.Tables[0].Rows[ds.Tables[0].Rows.Count - 1]["PostID"];
+                    cmd = new SqlCommand("CREATE TABLE " + userName +"_"+ userID + "_" + postID.ToString() +"_LikesRecord ( ID INT IDENTITY(1,1) PRIMARY KEY,UserID INT, UserName VARCHAR(MAX))", dbConnection);
+                    cmd.ExecuteNonQuery();
+                    Console.WriteLine("Like Record created for post {0} User {1}",postID, userName);
+                    dbConnection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            if (dbConnection.State == ConnectionState.Open)
+                dbConnection.Close();
         }
 
         public void Create_Entity(string userID, string userName, string procedureName)
@@ -250,9 +279,9 @@ namespace Instagram
                     cmd = new SqlCommand("SELECT ( CASE WHEN EXISTS(SELECT NULL FROM " + tableName + " )THEN 1 ELSE 0 END ) AS isEmpty", dbConnection);
                     int result = (Int32)cmd.ExecuteScalar();
                     if (result == 1)
-                        cmd = new SqlCommand("SELECT " + userID + "AS UserID, '" + userName + "' AS UserName,PostDesc, BookMarked, Likes, Location, Image, Video, TimeLine  INTO " + tableName +"  FROM " + userName + "_" + userID + "_PostTable", dbConnection);
+                        cmd = new SqlCommand("SELECT " + userID + "AS UserID, '" + userName + "' AS UserName, PostID, PostDesc, BookMarked, Likes, Location, Image, Video, TimeLine  INTO " + tableName +"  FROM " + userName + "_" + userID + "_PostTable", dbConnection);
                     else
-                        cmd = new SqlCommand("INSERT INTO " + tableName +" SELECT " + userID + "AS UserID, '" + userName + "' AS UserName,PostDesc, BookMarked, Likes, Location, Image, Video, TimeLine FROM " + userName + "_" + userID + "_PostTable", dbConnection);
+                        cmd = new SqlCommand("INSERT INTO " + tableName +" SELECT " + userID + "AS UserID, '" + userName + "' AS UserName, PostID, PostDesc, BookMarked, Likes, Location, Image, Video, TimeLine FROM " + userName + "_" + userID + "_PostTable", dbConnection);
                     Console.WriteLine(result);
                     cmd.ExecuteNonQuery();
                     dbConnection.Close();
@@ -476,7 +505,7 @@ namespace Instagram
             return true;
         }
 
-        public Post[] Generate_Posts(bool lightModeOn, Home home)
+        public Post[] Generate_Posts(bool lightModeOn)
         {
             Post[] postList = null;
             try
@@ -491,25 +520,19 @@ namespace Instagram
                 postList = new Post[ds.Tables[0].Rows.Count];
                 for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                 {
-                    postList[i] = new Post(lightModeOn); 
+                    postList[i] = new Post(lightModeOn);
+                    Bitmap profilePicture = new Bitmap(Retrieve_Profile_Picture_Using_SQL((((Int32)ds.Tables[0].Rows[i]["UserID"]))));
+                    postList[i].profilePictureBox.Bitmap = profilePicture;
                     postList[i].userNameLabel.Text = ((string)ds.Tables[0].Rows[i]["UserName"]);
                     postList[i].postPictureBox.Image = Convert_Bytes_To_Image((byte[])ds.Tables[0].Rows[i]["Image"]);
                     postList[i].postDescriptionBox.Text = ((string)ds.Tables[0].Rows[i]["PostDesc"]);
-                    postList[i].likeLabel.Text = ((string)ds.Tables[0].Rows[i]["Likes"]);
+                    postList[i].likeLabel.Text = ((Int32)ds.Tables[0].Rows[i]["Likes"]).ToString();
                     postList[i].locationLabel.Text = ((string)ds.Tables[0].Rows[i]["Location"]);
-                    postList[i].timeLabel.Text = ((DateTime)ds.Tables[0].Rows[i]["TimeLine"]).ToString("HH");
-                    if(((bool)ds.Tables[0].Rows[i]["BookMarked"]))
-                    {
-                        postList[i].bookMarkedBtn.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Selected Mode\bookmark.png");
-                    }
+                    if(((DateTime)ds.Tables[0].Rows[i]["TimeLine"]).ToString("HH") != "00")
+                        postList[i].timeLabel.Text = ((DateTime)ds.Tables[0].Rows[i]["TimeLine"]).ToString("HH") + " Hours Ago";
                     else
-                    {
-                        if (lightModeOn)
-                            postList[i].bookMarkedBtn.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Light Mode\UI Icons\bookmark.png");
-                        else
-                            postList[i].bookMarkedBtn.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Dark Mode\UI Icons\bookmark.png");
-                    }
-                    if(((bool)ds.Tables[0].Rows[i][""]))
+                        postList[i].timeLabel.Text = ((DateTime)ds.Tables[0].Rows[i]["TimeLine"]).ToString("MM") + " Minutes Ago";
+                    if(((bool)ds.Tables[0].Rows[i]["BookMarked"]))
                     {
                         postList[i].bookMarkedBtn.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Selected Mode\bookmark.png");
                     }
