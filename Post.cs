@@ -11,11 +11,16 @@ namespace Instagram
         static extern bool HideCaret(IntPtr hWnd);
         bool lightModeOn = true;
         UIUtilities UI;
-        public Post(bool lightModeOn)
+        DBHandlingUtilities dbHandler;
+        public string postID, followingID, userID, userName;
+        public Post(string userID, string userName, bool lightModeOn)
         {
             InitializeComponent();
+            this.userID = userID;
+            this.userName = userName;
             this.lightModeOn = lightModeOn;
             UI = new UIUtilities(this.lightModeOn);
+            dbHandler = new DBHandlingUtilities();
             Configure_Theme();
         }
 
@@ -43,6 +48,7 @@ namespace Instagram
             likeLabel.ForeColor = textColor;
             postDescriptionBox.Cursor = Cursors.Arrow;
             likeBtn.Image = Image.FromFile(UI.Return_UI_Location() + "heart.png");
+            bookMarkedBtn.Image = Image.FromFile(UI.Return_UI_Location() + "bookmark.png");
             topBar.BackColor = barColor;
             bottomBar.BackColor = barColor;
         }
@@ -62,12 +68,24 @@ namespace Instagram
 
         private void likeBtn_Click(object sender, EventArgs e)
         {
+            dbHandler.Add_Like(userID, userName, followingID, userNameLabel.Text, postID);
+        }
 
+        private void bookMarkedBtn_MouseHover(object sender, EventArgs e)
+        {
+            bookMarkedBtn.Image.Dispose();
+            bookMarkedBtn.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Selected Mode\bookmark.png");
+        }
+
+        private void bookMarkedBtn_MouseLeave(object sender, EventArgs e)
+        {
+            bookMarkedBtn.Image.Dispose();
+            bookMarkedBtn.Image = Image.FromFile(UI.Return_UI_Location() + "bookmark.png");
         }
 
         private void bookMarkedBtn_Click(object sender, EventArgs e)
         {
-
+            dbHandler.Add_BookMark(userID, userName, followingID, userNameLabel.Text, postID);
         }
 
         private void userNameLabel_Click(object sender, EventArgs e)

@@ -36,9 +36,9 @@
             // feedPanel
             // 
             this.feedPanel.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.feedPanel.Location = new System.Drawing.Point(223, 75);
+            this.feedPanel.Location = new System.Drawing.Point(37, 75);
             this.feedPanel.Name = "feedPanel";
-            this.feedPanel.Size = new System.Drawing.Size(358, 376);
+            this.feedPanel.Size = new System.Drawing.Size(698, 376);
             this.feedPanel.TabIndex = 0;
             this.feedPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.feedPanel_Paint);
             // 
@@ -61,7 +61,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(663, 177);
+            this.button1.Location = new System.Drawing.Point(660, 209);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 3;

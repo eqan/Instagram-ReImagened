@@ -12,17 +12,18 @@ namespace Instagram
         bool lightModeOn = false;
         DBHandlingUtilities dbHandler;
         UIUtilities UI;
-        List<string[]> dataTable;
+        List<string[]> usersList;
         string ImageNewName = "";
         int listViewItemsCount = 0;
         ImageList listViewImageList = new ImageList();
         Post[] postList;
+        string userName, userID;
 
         public Home()
         {
             InitializeComponent();
             dbHandler = new DBHandlingUtilities();
-            UI = new UIUtilities(this, true);
+            UI = new UIUtilities(this, lightModeOn);
             Configure_Theme();
             Import_All_Following();
         }
@@ -48,10 +49,10 @@ namespace Instagram
 
         private void Import_All_Following()
         {
-            dataTable = dbHandler.Import_Data_Using_SQL("5", "Ahmad", "FollowingTable");
+            usersList = dbHandler.Import_Data_Using_SQL("5", "Ahmad", "FollowingTable");
             dbHandler.Truncate_Temporary_Post_Table();
-            Generate_Posts_And_Stories(dataTable);
-            postList = dbHandler.Generate_Posts(lightModeOn);
+            Generate_Posts_And_Stories(usersList);
+            postList = dbHandler.Generate_Posts("5", "Ahmad", lightModeOn);
             Display_Posts();
         }
 
@@ -97,6 +98,7 @@ namespace Instagram
         private void button1_Click(object sender, EventArgs e)
         {
             dbHandler.Add_Post("3", "Eqan", "Hello", "Hyderabad");
+            Display_Posts();
             feedPanel.Refresh();
         }
 

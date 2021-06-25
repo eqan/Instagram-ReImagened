@@ -49,9 +49,9 @@
             // postPictureBox
             // 
             this.postPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.postPictureBox.Location = new System.Drawing.Point(0, 57);
+            this.postPictureBox.Location = new System.Drawing.Point(50, 57);
             this.postPictureBox.Name = "postPictureBox";
-            this.postPictureBox.Size = new System.Drawing.Size(328, 197);
+            this.postPictureBox.Size = new System.Drawing.Size(597, 275);
             this.postPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.postPictureBox.TabIndex = 0;
             this.postPictureBox.TabStop = false;
@@ -60,7 +60,7 @@
             // 
             this.userNameLabel.AutoSize = true;
             this.userNameLabel.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userNameLabel.Location = new System.Drawing.Point(47, 19);
+            this.userNameLabel.Location = new System.Drawing.Point(96, 18);
             this.userNameLabel.Name = "userNameLabel";
             this.userNameLabel.Size = new System.Drawing.Size(96, 15);
             this.userNameLabel.TabIndex = 2;
@@ -71,7 +71,7 @@
             // 
             this.locationLabel.AutoSize = true;
             this.locationLabel.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.locationLabel.Location = new System.Drawing.Point(47, 40);
+            this.locationLabel.Location = new System.Drawing.Point(96, 39);
             this.locationLabel.Name = "locationLabel";
             this.locationLabel.Size = new System.Drawing.Size(54, 14);
             this.locationLabel.TabIndex = 3;
@@ -81,7 +81,7 @@
             // 
             this.likeBtn.AccessibleName = "Public";
             this.likeBtn.Image = ((System.Drawing.Image)(resources.GetObject("likeBtn.Image")));
-            this.likeBtn.Location = new System.Drawing.Point(0, 260);
+            this.likeBtn.Location = new System.Drawing.Point(44, 338);
             this.likeBtn.Name = "likeBtn";
             this.likeBtn.Size = new System.Drawing.Size(43, 30);
             this.likeBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -96,7 +96,7 @@
             this.likeLabel.AccessibleName = "";
             this.likeLabel.AutoSize = true;
             this.likeLabel.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.likeLabel.Location = new System.Drawing.Point(13, 296);
+            this.likeLabel.Location = new System.Drawing.Point(57, 374);
             this.likeLabel.Name = "likeLabel";
             this.likeLabel.Size = new System.Drawing.Size(48, 15);
             this.likeLabel.TabIndex = 5;
@@ -108,10 +108,10 @@
             this.postDescriptionBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.postDescriptionBox.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.postDescriptionBox.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.postDescriptionBox.Location = new System.Drawing.Point(6, 323);
+            this.postDescriptionBox.Location = new System.Drawing.Point(44, 401);
             this.postDescriptionBox.Name = "postDescriptionBox";
             this.postDescriptionBox.ReadOnly = true;
-            this.postDescriptionBox.Size = new System.Drawing.Size(318, 35);
+            this.postDescriptionBox.Size = new System.Drawing.Size(597, 35);
             this.postDescriptionBox.TabIndex = 6;
             this.postDescriptionBox.Text = "";
             this.postDescriptionBox.TextChanged += new System.EventHandler(this.postDescriptionBox_TextChanged);
@@ -120,7 +120,7 @@
             // 
             this.timeLabel.AutoSize = true;
             this.timeLabel.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.timeLabel.Location = new System.Drawing.Point(251, 19);
+            this.timeLabel.Location = new System.Drawing.Point(574, 19);
             this.timeLabel.Name = "timeLabel";
             this.timeLabel.Size = new System.Drawing.Size(73, 14);
             this.timeLabel.TabIndex = 7;
@@ -129,13 +129,15 @@
             // bookMarkedBtn
             // 
             this.bookMarkedBtn.Image = ((System.Drawing.Image)(resources.GetObject("bookMarkedBtn.Image")));
-            this.bookMarkedBtn.Location = new System.Drawing.Point(285, 260);
+            this.bookMarkedBtn.Location = new System.Drawing.Point(598, 338);
             this.bookMarkedBtn.Name = "bookMarkedBtn";
             this.bookMarkedBtn.Size = new System.Drawing.Size(43, 30);
             this.bookMarkedBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.bookMarkedBtn.TabIndex = 8;
             this.bookMarkedBtn.TabStop = false;
             this.bookMarkedBtn.Click += new System.EventHandler(this.bookMarkedBtn_Click);
+            this.bookMarkedBtn.MouseLeave += new System.EventHandler(this.bookMarkedBtn_MouseLeave);
+            this.bookMarkedBtn.MouseHover += new System.EventHandler(this.bookMarkedBtn_MouseHover);
             // 
             // topBar
             // 
@@ -145,7 +147,7 @@
             this.topBar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.topBar.Location = new System.Drawing.Point(-3, -7);
             this.topBar.Name = "topBar";
-            this.topBar.Size = new System.Drawing.Size(337, 15);
+            this.topBar.Size = new System.Drawing.Size(703, 15);
             this.topBar.TabIndex = 46;
             // 
             // bottomBar
@@ -154,9 +156,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.bottomBar.BackColor = System.Drawing.Color.White;
             this.bottomBar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bottomBar.Location = new System.Drawing.Point(-9, 362);
+            this.bottomBar.Location = new System.Drawing.Point(-3, 442);
             this.bottomBar.Name = "bottomBar";
-            this.bottomBar.Size = new System.Drawing.Size(353, 18);
+            this.bottomBar.Size = new System.Drawing.Size(719, 18);
             this.bottomBar.TabIndex = 47;
             // 
             // profilePictureBox
@@ -169,7 +171,7 @@
             this.profilePictureBox.ErrorImage = null;
             this.profilePictureBox.Image = null;
             this.profilePictureBox.InitialImage = null;
-            this.profilePictureBox.Location = new System.Drawing.Point(0, 11);
+            this.profilePictureBox.Location = new System.Drawing.Point(49, 10);
             this.profilePictureBox.Name = "profilePictureBox";
             this.profilePictureBox.Size = new System.Drawing.Size(38, 36);
             this.profilePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -180,7 +182,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(332, 374);
+            this.ClientSize = new System.Drawing.Size(698, 453);
             this.Controls.Add(this.bottomBar);
             this.Controls.Add(this.topBar);
             this.Controls.Add(this.bookMarkedBtn);
