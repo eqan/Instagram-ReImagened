@@ -90,6 +90,12 @@
     <Compile Include="Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
+    <Compile Include="ProfilePreview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProfilePreview.Designer.cs">
+      <DependentUpon>ProfilePreview.cs</DependentUpon>
+    </Compile>
     <Compile Include="SignUp.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -135,11 +141,11 @@
       <DependentUpon>Story.cs</DependentUpon>
     </Compile>
     <Compile Include="UIUtilities.cs" />
-    <Compile Include="UploadPost.cs">
+    <Compile Include="AddButton.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UploadPost.Designer.cs">
-      <DependentUpon>UploadPost.cs</DependentUpon>
+    <Compile Include="AddButton.Designer.cs">
+      <DependentUpon>AddButton.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Activity.resx">
       <DependentUpon>Activity.cs</DependentUpon>
@@ -174,14 +180,17 @@
     <EmbeddedResource Include="Search.resx">
       <DependentUpon>Search.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ProfilePreview.resx">
+      <DependentUpon>ProfilePreview.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SignUp.resx">
       <DependentUpon>SignUp.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Story.resx">
       <DependentUpon>Story.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UploadPost.resx">
-      <DependentUpon>UploadPost.cs</DependentUpon>
+    <EmbeddedResource Include="AddButton.resx">
+      <DependentUpon>AddButton.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

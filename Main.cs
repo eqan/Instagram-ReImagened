@@ -21,30 +21,34 @@ namespace Instagram
             formVirtualizer.Visible = false;
             formVirtualizer.SendToBack();
             axMoviePlayer1.BringToFront();
-            form = new Home() { TopLevel = false, TopMost = true };
+            form = new Home(this) { TopLevel = false, TopMost = true };
         }
         private void Initialize_GUI_Components()
         {
+            // Form virtualizer
+            Initialize_Form_Virtualizer_Settings();
             // Top Left Buttons
             this.Controls.Add(UI.Get_CloseBtn());
             this.Controls.Add(UI.Get_MaximizeBtn());
             this.Controls.Add(UI.Get_MinimizeBtn());
             // Side Panel
             this.Controls.Add(UI.Get_Panel());
-            // Form virtualizer
-            Initialize_Form_Virtualizer_Settings();
         }
         public void Initialize_Form_Virtualizer_Settings()
         {
             formVirtualizer.Visible = true;
-            Color backColor;
+            Color backColor, formColor;
             if (lightModeOn)
-                backColor = Color.FromArgb(0, 0, 0);
+            {
+                backColor = Color.FromArgb(242, 242, 242);
+            }
             else
-                backColor = Color.FromArgb(255, 255, 255);
+            {
+                backColor = Color.FromArgb(43, 43, 43);
+            }
             formVirtualizer.Width = this.Width - UI.sidePanel.Width;
-            formVirtualizer.Height = this.Height - UI.btn_Close.Height;
-            formVirtualizer.Location = new System.Drawing.Point(UI.sidePanel.Width, UI.btn_Close.Height);
+            formVirtualizer.Height = this.Height;
+            formVirtualizer.Location = new System.Drawing.Point(UI.sidePanel.Width, 20);
             formVirtualizer.BackColor = backColor;
         }
 
@@ -91,6 +95,10 @@ namespace Instagram
             this.CenterToScreen();
             UI = new UIUtilities(this, lightModeOn);
             Initialize_GUI_Components();
+            if (lightModeOn)
+                this.BackColor = Color.FromArgb(242, 242, 242);
+            else
+                this.BackColor = Color.FromArgb(43, 43, 43);
         }
 
         private void Dispose_Intro_Screen()
@@ -115,7 +123,7 @@ namespace Instagram
             switch (option)
             {
                 case 0:
-                    form = new Home() { TopLevel = false, TopMost = true };
+                    form = new Home(this) { TopLevel = false, TopMost = true };
                     break;
                 case 1:
                     form = new Chat() { TopLevel = false, TopMost = true };

@@ -80,7 +80,7 @@
         #endregion
         private System.Windows.Forms.Timer timer1;
         private AxMOVIEPLAYERLib.AxMoviePlayer axMoviePlayer1;
-        private System.Windows.Forms.Panel formVirtualizer;
+        public System.Windows.Forms.Panel formVirtualizer;
     }
 }
 

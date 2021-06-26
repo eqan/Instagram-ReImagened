@@ -41,9 +41,9 @@
             // storyBox
             // 
             this.storyBox.BackColor = System.Drawing.Color.Black;
-            this.storyBox.Location = new System.Drawing.Point(92, 12);
+            this.storyBox.Location = new System.Drawing.Point(66, 86);
             this.storyBox.Name = "storyBox";
-            this.storyBox.Size = new System.Drawing.Size(618, 426);
+            this.storyBox.Size = new System.Drawing.Size(623, 285);
             this.storyBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.storyBox.TabIndex = 0;
             this.storyBox.TabStop = false;
@@ -54,9 +54,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.loadingIndicator.BackColor = System.Drawing.Color.DodgerBlue;
             this.loadingIndicator.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.loadingIndicator.Location = new System.Drawing.Point(-2, 447);
+            this.loadingIndicator.Location = new System.Drawing.Point(1, 422);
             this.loadingIndicator.Name = "loadingIndicator";
-            this.loadingIndicator.Size = new System.Drawing.Size(10, 3);
+            this.loadingIndicator.Size = new System.Drawing.Size(0, 3);
             this.loadingIndicator.TabIndex = 75;
             // 
             // timer1
@@ -73,7 +73,7 @@
             this.profileBox.ErrorImage = null;
             this.profileBox.Image = null;
             this.profileBox.InitialImage = null;
-            this.profileBox.Location = new System.Drawing.Point(12, 24);
+            this.profileBox.Location = new System.Drawing.Point(12, 12);
             this.profileBox.Name = "profileBox";
             this.profileBox.Size = new System.Drawing.Size(56, 54);
             this.profileBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -85,7 +85,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(742, 426);
             this.Controls.Add(this.profileBox);
             this.Controls.Add(this.loadingIndicator);
             this.Controls.Add(this.storyBox);

@@ -40,7 +40,6 @@
             this.feedPanel.Name = "feedPanel";
             this.feedPanel.Size = new System.Drawing.Size(698, 376);
             this.feedPanel.TabIndex = 0;
-            this.feedPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.feedPanel_Paint);
             // 
             // storyListView
             // 

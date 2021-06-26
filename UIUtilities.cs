@@ -59,12 +59,12 @@ namespace Instagram
             location = Return_UI_Location();
             if (lightModeOn)
             {
-                backColor = Color.FromArgb(255, 255, 255);
+                backColor = Color.FromArgb(242, 242, 242);
                 hoverColor = Color.FromArgb(217, 217, 217);
             }
             else
             {
-                backColor = Color.FromArgb(0, 0, 0);
+                backColor = Color.FromArgb(43, 43, 43);
                 hoverColor = Color.FromArgb(57, 57, 57);
             }
             // Initializing
@@ -115,7 +115,7 @@ namespace Instagram
             chatBtn = Create_Button("chat", new int[] { btn_Width, (btn_Height - 4) }, new int[] { -1, (int)Math.Round(y + btn_Height * 1.4) }, panelBackgroundColor);
             searchBtn = Create_Button("search", new int[] { btn_Width, (btn_Height - 4) }, new int[] { 0, (int)Math.Round(y + btn_Height * 2.7) }, panelBackgroundColor);
             addBtn = Create_Button("plus", new int[] { btn_Width, btn_Height + 10 }, new int[] { 0, (y + (int)Math.Round((btn_Height * 3.9), MidpointRounding.AwayFromZero)) }, panelBackgroundColor);
-            activityBtn = Create_Button("heart", new int[] { btn_Width, btn_Height - 5 }, new int[] { 0, (y + (int)Math.Round((btn_Height * 5.7), MidpointRounding.AwayFromZero)) }, panelBackgroundColor);
+            activityBtn = Create_Button("history", new int[] { btn_Width, btn_Height - 5 }, new int[] { 0, (y + (int)Math.Round((btn_Height * 5.7), MidpointRounding.AwayFromZero)) }, panelBackgroundColor);
             accountBtn = Create_Button("account", new int[] { btn_Width, btn_Height - 4 }, new int[] { 0, (y + (int)Math.Round((btn_Height * 8.5), MidpointRounding.AwayFromZero)) }, panelBackgroundColor);
             homeBtn.MouseClick += new MouseEventHandler((o, a) =>
             {

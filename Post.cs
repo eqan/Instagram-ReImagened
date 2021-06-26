@@ -31,13 +31,13 @@ namespace Instagram
             {
                 backColor = Color.FromArgb(242, 242, 242);
                 textColor = Color.FromArgb(0, 0, 0);
-                barColor = Color.FromArgb(255, 255, 255);
+                barColor = Color.FromArgb(209, 209, 209);
             }
             else
             {
                 backColor = Color.FromArgb(43, 43, 43);
                 textColor = Color.FromArgb(255, 255, 255);
-                barColor = Color.FromArgb(0, 0, 0);
+                barColor = Color.FromArgb(31, 31, 31);
             }    
             this.BackColor = backColor;
             postDescriptionBox.BackColor = backColor;

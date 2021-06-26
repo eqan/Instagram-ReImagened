@@ -213,7 +213,7 @@
             this.confirmPasswordLabel.AutoSize = true;
             this.confirmPasswordLabel.Font = new System.Drawing.Font("XXII DONT-MESS-WITH-VIKINGS", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.confirmPasswordLabel.ForeColor = System.Drawing.Color.White;
-            this.confirmPasswordLabel.Location = new System.Drawing.Point(138, 292);
+            this.confirmPasswordLabel.Location = new System.Drawing.Point(151, 292);
             this.confirmPasswordLabel.Name = "confirmPasswordLabel";
             this.confirmPasswordLabel.Size = new System.Drawing.Size(142, 21);
             this.confirmPasswordLabel.TabIndex = 42;
@@ -273,7 +273,7 @@
             this.password.AutoSize = true;
             this.password.Font = new System.Drawing.Font("XXII DONT-MESS-WITH-VIKINGS", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.password.ForeColor = System.Drawing.Color.White;
-            this.password.Location = new System.Drawing.Point(198, 250);
+            this.password.Location = new System.Drawing.Point(211, 250);
             this.password.Name = "password";
             this.password.Size = new System.Drawing.Size(82, 21);
             this.password.TabIndex = 38;
@@ -301,7 +301,7 @@
             this.userNameLabel.BackColor = System.Drawing.Color.Black;
             this.userNameLabel.Font = new System.Drawing.Font("XXII DONT-MESS-WITH-VIKINGS", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userNameLabel.ForeColor = System.Drawing.Color.White;
-            this.userNameLabel.Location = new System.Drawing.Point(196, 150);
+            this.userNameLabel.Location = new System.Drawing.Point(209, 150);
             this.userNameLabel.Name = "userNameLabel";
             this.userNameLabel.Size = new System.Drawing.Size(84, 21);
             this.userNameLabel.TabIndex = 36;
@@ -350,7 +350,7 @@
             this.label6.BackColor = System.Drawing.Color.Black;
             this.label6.Font = new System.Drawing.Font("XXII DONT-MESS-WITH-VIKINGS", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(161, 201);
+            this.label6.Location = new System.Drawing.Point(174, 201);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(119, 21);
             this.label6.TabIndex = 55;
@@ -399,7 +399,7 @@
             this.tagLineLabel.BackColor = System.Drawing.Color.Black;
             this.tagLineLabel.Font = new System.Drawing.Font("XXII DONT-MESS-WITH-VIKINGS", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tagLineLabel.ForeColor = System.Drawing.Color.White;
-            this.tagLineLabel.Location = new System.Drawing.Point(211, 341);
+            this.tagLineLabel.Location = new System.Drawing.Point(224, 341);
             this.tagLineLabel.Name = "tagLineLabel";
             this.tagLineLabel.Size = new System.Drawing.Size(69, 21);
             this.tagLineLabel.TabIndex = 60;

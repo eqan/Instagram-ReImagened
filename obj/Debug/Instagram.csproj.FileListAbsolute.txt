@@ -19,9 +19,10 @@ E:\Instagram\Instagram\Instagram\obj\Debug\Instagram.Properties.Resources.resour
 E:\Instagram\Instagram\Instagram\obj\Debug\Instagram.Search.resources
 E:\Instagram\Instagram\Instagram\obj\Debug\Instagram.SignUp.resources
 E:\Instagram\Instagram\Instagram\obj\Debug\Instagram.Story.resources
-E:\Instagram\Instagram\Instagram\obj\Debug\Instagram.UploadPost.resources
 E:\Instagram\Instagram\Instagram\obj\Debug\Instagram.csproj.GenerateResource.cache
 E:\Instagram\Instagram\Instagram\obj\Debug\Instagram.csproj.CoreCompileInputs.cache
 E:\Instagram\Instagram\Instagram\obj\Debug\Instagram.exe
 E:\Instagram\Instagram\Instagram\obj\Debug\Instagram.pdb
 E:\Instagram\Instagram\Instagram\obj\Debug\Instagram.csprojAssemblyReference.cache
+E:\Instagram\Instagram\Instagram\obj\Debug\Instagram.ProfilePreview.resources
+E:\Instagram\Instagram\Instagram\obj\Debug\Instagram.AddButton.resources

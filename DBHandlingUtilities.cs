@@ -532,6 +532,7 @@ namespace Instagram
             return true;
         }
 
+
         public void Add_Like(string userID, string userName, string followingID, string followingName, string postID)
         {
             try
@@ -707,6 +708,52 @@ namespace Instagram
                     dbConnection.Close();
             }
             return decision;
+        }
+
+        public ProfilePreview[] Return_Search_Results(string input, bool lightModeOn)
+        {
+            ProfilePreview[] searchList = null;
+            try
+            {
+                if (dbConnection.State == ConnectionState.Closed)
+                {
+                    dbConnection.Open();
+                    string sqlCommand = "SELECT * FROM USERS WHERE UserName LIKE '" + input + "%' OR UserName = '" + input + "' OR RealUserName LIKE '" + input + "%' OR RealUserName = '" + input + "'" ;
+                    cmd = new SqlCommand(sqlCommand, dbConnection);
+                    adapt = new SqlDataAdapter(cmd);
+                    DataSet ds = new DataSet();
+                    adapt.Fill(ds);
+                    searchList = new ProfilePreview[ds.Tables[0].Rows.Count];
+                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                    {
+                        searchList[i] = new ProfilePreview(lightModeOn);
+                        Bitmap profilePicture;
+                        try
+                        {
+                            profilePicture = new Bitmap(Retrieve_Profile_Picture_Using_SQL((Int32)ds.Tables[0].Rows[i]["UserID"]));
+                        }
+                        catch(Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                            return searchList;
+                        }
+                        searchList[i].profilePictureBox.Bitmap = profilePicture;
+                        searchList[i].userNameLabel.Text = ((string)ds.Tables[0].Rows[i]["UserName"]);
+                        searchList[i].realUserNameLabel.Text = ((string)ds.Tables[0].Rows[i]["RealUserName"]);
+                    }
+                    dbConnection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                if (dbConnection.State == ConnectionState.Open)
+                    dbConnection.Close();
+            }
+            return searchList;
         }
 
         public int Return_Total_Likes(string followingID, string followingName, string postID)

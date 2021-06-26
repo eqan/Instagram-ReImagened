@@ -12,10 +12,12 @@ namespace Instagram
         Image[] storyList;
         int storyCount = 0;
         string tableName;
-        public Story(string tableName, Image profilePicture, bool lightModeOn)
+        Form form;
+        public Story(string tableName, Image profilePicture, bool lightModeOn, Form form)
         {
             InitializeComponent();
             this.lightModeOn = lightModeOn;
+            this.form = form;
             Initial_Setting_Initialzier(tableName, profilePicture);
         }
 
@@ -85,25 +87,21 @@ namespace Instagram
             }
             else
             {
-                // Should be disposed later
-                this.Hide();
-                Home home = new Home();
-                home.Show();
+                form.Show();
+                this.Dispose();
             }
         }
         private void decrementStories()
         {
-            if (storyCount >= 0)
+            if (storyCount > 0)
             {
                 storyCount--;
                 storyBox.Image = storyList[storyCount];
             }
             else
             {
-                // Should be disposed later
-                this.Hide();
-                Home home = new Home();
-                home.Show();
+                form.Show();
+                this.Dispose();
             }
         }
 

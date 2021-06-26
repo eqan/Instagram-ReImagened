@@ -17,11 +17,15 @@ namespace Instagram
         int listViewItemsCount = 0;
         ImageList listViewImageList = new ImageList();
         Post[] postList;
-        string userName, userID;
+        string userName = "", userID = "";
+        Main main;
 
-        public Home()
+        public Home(Main main)
         {
             InitializeComponent();
+            this.main = main;
+            this.userID = "5";
+            this.userName = "Ahmad";
             dbHandler = new DBHandlingUtilities();
             UI = new UIUtilities(this, lightModeOn);
             Configure_Theme();
@@ -33,12 +37,12 @@ namespace Instagram
             if (lightModeOn)
             {
                 backColor = Color.FromArgb(255, 255, 255);
-                foreColor = Color.FromArgb(242, 242, 242);
+                foreColor = Color.FromArgb(209, 209, 209);
             }
             else
             {
                 backColor = Color.FromArgb(43, 43, 43);
-                foreColor = Color.FromArgb(0, 0, 0);
+                foreColor = Color.FromArgb(31, 31, 31);
             }
             this.BackColor = foreColor;
             storyListView.BackColor = backColor;
@@ -49,10 +53,10 @@ namespace Instagram
 
         private void Import_All_Following()
         {
-            usersList = dbHandler.Import_Data_Using_SQL("5", "Ahmad", "FollowingTable");
+            usersList = dbHandler.Import_Data_Using_SQL(userID, userName, "FollowingTable");
             dbHandler.Truncate_Temporary_Post_Table();
             Generate_Posts_And_Stories(usersList);
-            postList = dbHandler.Generate_Posts("5", "Ahmad", lightModeOn);
+            postList = dbHandler.Generate_Posts(userID, userName, lightModeOn);
             Display_Posts();
         }
 
@@ -137,13 +141,10 @@ namespace Instagram
                 var item = storyListView.SelectedItems[0];
                 Image img = listViewImageList.Images[item.ImageIndex];
                 this.Hide();
-                Story story = new Story(storyListView.SelectedItems[0].Tag.ToString(), img, false);
+                Story story = new Story(storyListView.SelectedItems[0].Tag.ToString(), img, false, main){ TopLevel = false, TopMost = true };;
+                main.formVirtualizer.Controls.Add(story);
                 story.Show();
             }
-        }
-
-        private void feedPanel_Paint(object sender, PaintEventArgs e)
-        {
         }
     }
 }
