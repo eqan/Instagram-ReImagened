@@ -6,23 +6,16 @@ namespace Instagram
 {
     public partial class Login : Form
     {
-        UIUtilities UI;
         DBHandlingUtilities dbHandler;
-        public Login()
+        bool lightModeOn;
+        Main main;
+        public Login(bool lightModeOn, Main main)
         {
             InitializeComponent();
-            UI = new UIUtilities(this, false);
-            Initialize_GUI_Components();
+            this.main = main;
+            this.lightModeOn = lightModeOn;
             dbHandler = new DBHandlingUtilities();
         }
-        private void Initialize_GUI_Components()
-        {
-            // Top Left Buttons
-            this.Controls.Add(UI.Get_CloseBtn());
-            this.Controls.Add(UI.Get_MaximizeBtn());
-            this.Controls.Add(UI.Get_MinimizeBtn());
-        }
-
         private void passwordBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
@@ -86,8 +79,7 @@ namespace Instagram
 
         private void Login_MouseDown(object sender, MouseEventArgs e)
         {
-            IntPtr handle = this.Handle;
-            UI.MouseDown(handle, sender, e);
+
         }
 
         private void signUpBtn_Click(object sender, EventArgs e)
@@ -95,9 +87,12 @@ namespace Instagram
             login();
         }
 
-        private void resetBtn_Click(object sender, EventArgs e)
+        private void signUp_Btn(object sender, EventArgs e)
         {
-            resetEntries();
+            this.Dispose();
+            SignUp signUp = new SignUp(lightModeOn, main);
+            main.formVirtualizer.Controls.Add(signUp);
+            signUp.Show();
         }
     }
 }

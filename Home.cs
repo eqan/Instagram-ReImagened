@@ -24,6 +24,7 @@ namespace Instagram
         {
             InitializeComponent();
             this.main = main;
+            this.lightModeOn = main.lightModeOn;
             this.userID = "5";
             this.userName = "Ahmad";
             dbHandler = new DBHandlingUtilities();
@@ -97,13 +98,6 @@ namespace Instagram
         private void Add_All_Post(string userID, string userName)
         {
             dbHandler.Create_View_For_Following_Posts(userID,userName);
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            dbHandler.Add_Post("3", "Eqan", "Hello", "Hyderabad");
-            Display_Posts();
-            feedPanel.Refresh();
         }
 
         public void Generate_Posts_And_Stories(List<string[]> usersList)

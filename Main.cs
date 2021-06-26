@@ -8,9 +8,10 @@ namespace Instagram
     public partial class Main : Form
     {
         UIUtilities UI;
-        bool lightModeOn = false;
+        public bool lightModeOn = false;
         Form form;
         int time = 0;
+        public string userName = "Ahmad", userID = "5";
         public Main()
         {
             InitializeComponent();
@@ -37,15 +38,11 @@ namespace Instagram
         public void Initialize_Form_Virtualizer_Settings()
         {
             formVirtualizer.Visible = true;
-            Color backColor, formColor;
+            Color backColor;
             if (lightModeOn)
-            {
                 backColor = Color.FromArgb(242, 242, 242);
-            }
             else
-            {
                 backColor = Color.FromArgb(43, 43, 43);
-            }
             formVirtualizer.Width = this.Width - UI.sidePanel.Width;
             formVirtualizer.Height = this.Height;
             formVirtualizer.Location = new System.Drawing.Point(UI.sidePanel.Width, 20);
@@ -118,8 +115,13 @@ namespace Instagram
 
         public void Initialize_Form(int option)
         {
-            bool executes = true;
+            Color backColor;
+            if (lightModeOn)
+                backColor = Color.FromArgb(242, 242, 242);
+            else
+                backColor = Color.FromArgb(43, 43, 43);
             form.Dispose();
+            bool executes = true;
             switch (option)
             {
                 case 0:
@@ -132,7 +134,17 @@ namespace Instagram
                     form = new Search() { TopLevel = false, TopMost = true };
                     break;
                 case 3:
-                    break;
+                    {
+                        AddButton addBtn = new AddButton(this) { TopLevel = false, TopMost = true };
+                        Panel panel = UI.Create_Panel(new int[] { addBtn.Width, addBtn.Height }, new int[] { this.Height / 2 - 160, (int)Math.Round(45 * 4.5, MidpointRounding.AwayFromZero) }, Color.Transparent );
+                        this.Controls.Add(panel);
+                        panel.Controls.Add(addBtn);
+                        addBtn.Show();
+                        panel.BringToFront();
+                        panel.Dispose();
+                        form = new Home(this) { TopLevel = false, TopMost = true };
+                        break;
+                    }
                 case 4:
                     form = new Activity() { TopLevel = false, TopMost = true };
                     break;

@@ -136,9 +136,9 @@
             this.resetBtn.Name = "resetBtn";
             this.resetBtn.Size = new System.Drawing.Size(122, 48);
             this.resetBtn.TabIndex = 70;
-            this.resetBtn.Text = "RESET";
+            this.resetBtn.Text = "SignUP";
             this.resetBtn.UseVisualStyleBackColor = false;
-            this.resetBtn.Click += new System.EventHandler(this.resetBtn_Click);
+            this.resetBtn.Click += new System.EventHandler(this.signUp_Btn);
             // 
             // signUpBtn
             // 
@@ -163,7 +163,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.password_Box.BackColor = System.Drawing.Color.Black;
             this.password_Box.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.password_Box.Font = new System.Drawing.Font("CarnacW03-ExtraBold", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.password_Box.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.password_Box.ForeColor = System.Drawing.Color.White;
             this.password_Box.Location = new System.Drawing.Point(314, 315);
             this.password_Box.Name = "password_Box";
@@ -177,11 +177,11 @@
             this.password.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.password.AutoSize = true;
-            this.password.Font = new System.Drawing.Font("XXII DONT-MESS-WITH-VIKINGS", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.password.Font = new System.Drawing.Font("Segoe UI Semibold", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.password.ForeColor = System.Drawing.Color.White;
-            this.password.Location = new System.Drawing.Point(213, 315);
+            this.password.Location = new System.Drawing.Point(206, 315);
             this.password.Name = "password";
-            this.password.Size = new System.Drawing.Size(82, 21);
+            this.password.Size = new System.Drawing.Size(102, 28);
             this.password.TabIndex = 67;
             this.password.Text = "Password:";
             // 
@@ -192,7 +192,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.userName_Box.BackColor = System.Drawing.Color.Black;
             this.userName_Box.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.userName_Box.Font = new System.Drawing.Font("CarnacW03-ExtraBold", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userName_Box.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userName_Box.ForeColor = System.Drawing.Color.White;
             this.userName_Box.Location = new System.Drawing.Point(314, 255);
             this.userName_Box.Name = "userName_Box";
@@ -205,11 +205,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.userNameLabel.AutoSize = true;
             this.userNameLabel.BackColor = System.Drawing.Color.Black;
-            this.userNameLabel.Font = new System.Drawing.Font("XXII DONT-MESS-WITH-VIKINGS", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userNameLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userNameLabel.ForeColor = System.Drawing.Color.White;
-            this.userNameLabel.Location = new System.Drawing.Point(211, 255);
+            this.userNameLabel.Location = new System.Drawing.Point(190, 255);
             this.userNameLabel.Name = "userNameLabel";
-            this.userNameLabel.Size = new System.Drawing.Size(84, 21);
+            this.userNameLabel.Size = new System.Drawing.Size(118, 28);
             this.userNameLabel.TabIndex = 65;
             this.userNameLabel.Text = "User Name:";
             // 
@@ -257,7 +257,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Login";
             this.Text = "Login";
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Login_MouseDown);
             ((System.ComponentModel.ISupportInitialize)(this.statusSymbolPassword)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusSymbolID)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();

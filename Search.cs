@@ -17,7 +17,7 @@ namespace Instagram
 
         private void Configure_Theme()
         {
-            Color backColor, textColor, barColor;
+            Color backColor, textColor;
             if (lightModeOn)
             {
                 backColor = Color.FromArgb(209, 209, 209);

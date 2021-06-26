@@ -13,7 +13,7 @@ namespace Instagram
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         public static extern bool ReleaseCapture();
         public PictureBox btn_Close, btn_Minimize, btn_Maximize;
-        public Panel sidePanel, postPanel;
+        public Panel sidePanel;
         bool lightModeOn, isMaximized;
         int formWidth, formHeight;
         private Main mainForm;
@@ -115,7 +115,7 @@ namespace Instagram
             chatBtn = Create_Button("chat", new int[] { btn_Width, (btn_Height - 4) }, new int[] { -1, (int)Math.Round(y + btn_Height * 1.4) }, panelBackgroundColor);
             searchBtn = Create_Button("search", new int[] { btn_Width, (btn_Height - 4) }, new int[] { 0, (int)Math.Round(y + btn_Height * 2.7) }, panelBackgroundColor);
             addBtn = Create_Button("plus", new int[] { btn_Width, btn_Height + 10 }, new int[] { 0, (y + (int)Math.Round((btn_Height * 3.9), MidpointRounding.AwayFromZero)) }, panelBackgroundColor);
-            activityBtn = Create_Button("history", new int[] { btn_Width, btn_Height - 5 }, new int[] { 0, (y + (int)Math.Round((btn_Height * 5.7), MidpointRounding.AwayFromZero)) }, panelBackgroundColor);
+            activityBtn = Create_Button("history", new int[] { btn_Width, btn_Height + 5 }, new int[] { 0, (y + (int)Math.Round((btn_Height * 5.7), MidpointRounding.AwayFromZero)) }, panelBackgroundColor);
             accountBtn = Create_Button("account", new int[] { btn_Width, btn_Height - 4 }, new int[] { 0, (y + (int)Math.Round((btn_Height * 8.5), MidpointRounding.AwayFromZero)) }, panelBackgroundColor);
             homeBtn.MouseClick += new MouseEventHandler((o, a) =>
             {
@@ -219,6 +219,7 @@ namespace Instagram
             btn.BackColor = backColor;
             return btn;
         }
+
 
         public void MouseDown(IntPtr obj, object sender, MouseEventArgs e)
         {

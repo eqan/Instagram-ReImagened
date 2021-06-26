@@ -9,23 +9,17 @@ namespace Instagram
         DBHandlingUtilities DBHandler;
         UIUtilities UI;
         Login loginForm;
-        public SignUp()
+        bool lightModeOn;
+        Main main;
+        public SignUp(bool lightModeOn, Main main)
         {
             InitializeComponent();
             DBHandler = new DBHandlingUtilities();
             UI = new UIUtilities(this, false);
-            Initialize_GUI_Components();
-            loginForm = new Login();
-            loginForm.Hide();
+            this.main = main;
+            this.lightModeOn = lightModeOn;
         }
 
-        private void Initialize_GUI_Components()
-        {
-            // Top Left Buttons
-            this.Controls.Add(UI.Get_CloseBtn());
-            this.Controls.Add(UI.Get_MaximizeBtn());
-            this.Controls.Add(UI.Get_MinimizeBtn());
-        }
         private void signUp()
         {
             string userName = userName_Box.Text;
@@ -68,9 +62,12 @@ namespace Instagram
             tagLine_Box.Text = "";
             profileBox.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Avatar.png");
         }
-        private void resetBtn_Click(object sender, EventArgs e)
+        private void logIn_Click(object sender, EventArgs e)
         {
-            resetEntries();
+            this.Dispose();
+            Login login = new Login(lightModeOn, main);
+            main.formVirtualizer.Controls.Add(login);
+            login.Show();
         }
         private void setStatus(int statusNumber, bool setStatus, string message)
         {
@@ -199,21 +196,32 @@ namespace Instagram
         }
 
 
-        private void getProfilePicture_Click(object sender, EventArgs e)
-        {
-            DBHandler.Get_Picture();
-            profileBox.ImageLocation = DBHandler.fileDirectory;
-        }
-
         private void signUp_Click(object sender, EventArgs e)
         {
             signUp();
         }
 
-        private void SignUp_MouseDown(object sender, MouseEventArgs e)
+        private void circularButton1_Click(object sender, EventArgs e)
         {
-            IntPtr handle = this.Handle;
-            UI.MouseDown(handle, sender, e);
+            DBHandler.Get_Picture();
+            profileBox.ImageLocation = DBHandler.fileDirectory;
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox2_MouseHover(object sender, EventArgs e)
+        {
+            pictureBox2.Image.Dispose();
+            pictureBox2.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Selected Mode\back.png");
+        }
+
+        private void pictureBox2_MouseLeave(object sender, EventArgs e)
+        {
+            pictureBox2.Image.Dispose();
+            pictureBox2.Image = Image.FromFile(UI.Return_UI_Location() + "back.png");
         }
     }
 }

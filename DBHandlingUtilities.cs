@@ -99,7 +99,6 @@ namespace Instagram
         {
             try
             {
-                Get_Picture();
                 if (dbConnection.State == ConnectionState.Closed)
                 {
                     dbConnection.Open();
@@ -110,8 +109,8 @@ namespace Instagram
                     cmd.ExecuteNonQuery();
                     dbConnection.Close();
                     Console.WriteLine("Post Created for {0}", userName);
-                    Create_Post_Likes_Log("3", "Eqan");
-                    Create_Post_BookMarks_Log("3", "Eqan");
+                    Create_Post_Likes_Log(userID, userName);
+                    Create_Post_BookMarks_Log(userID, userName);
                 }
             }
             catch (Exception ex)

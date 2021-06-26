@@ -57,7 +57,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.tagLine_Box = new System.Windows.Forms.TextBox();
             this.tagLineLabel = new System.Windows.Forms.Label();
-            this.setProfilePicture_Btn = new System.Windows.Forms.Button();
+            this.circularButton1 = new Instagram.CircularButton();
             ((System.ComponentModel.ISupportInitialize)(this.profileBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusSymbolConfirmPassword)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusSymbolPassword)).BeginInit();
@@ -68,6 +68,7 @@
             // 
             // profileBox
             // 
+            this.profileBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.profileBox.Image = ((System.Drawing.Image)(resources.GetObject("profileBox.Image")));
             this.profileBox.Location = new System.Drawing.Point(668, 166);
             this.profileBox.Name = "profileBox";
@@ -145,6 +146,9 @@
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 48;
             this.pictureBox2.TabStop = false;
+            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
+            this.pictureBox2.MouseLeave += new System.EventHandler(this.pictureBox2_MouseLeave);
+            this.pictureBox2.MouseHover += new System.EventHandler(this.pictureBox2_MouseHover);
             // 
             // label3
             // 
@@ -198,7 +202,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.confirmPassword_Box.BackColor = System.Drawing.Color.Black;
             this.confirmPassword_Box.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.confirmPassword_Box.Font = new System.Drawing.Font("CarnacW03-ExtraBold", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.confirmPassword_Box.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.confirmPassword_Box.ForeColor = System.Drawing.Color.White;
             this.confirmPassword_Box.Location = new System.Drawing.Point(299, 292);
             this.confirmPassword_Box.Name = "confirmPassword_Box";
@@ -211,11 +215,11 @@
             this.confirmPasswordLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.confirmPasswordLabel.AutoSize = true;
-            this.confirmPasswordLabel.Font = new System.Drawing.Font("XXII DONT-MESS-WITH-VIKINGS", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.confirmPasswordLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.confirmPasswordLabel.ForeColor = System.Drawing.Color.White;
-            this.confirmPasswordLabel.Location = new System.Drawing.Point(151, 292);
+            this.confirmPasswordLabel.Location = new System.Drawing.Point(106, 290);
             this.confirmPasswordLabel.Name = "confirmPasswordLabel";
-            this.confirmPasswordLabel.Size = new System.Drawing.Size(142, 21);
+            this.confirmPasswordLabel.Size = new System.Drawing.Size(181, 28);
             this.confirmPasswordLabel.TabIndex = 42;
             this.confirmPasswordLabel.Text = "Confirm Password:";
             // 
@@ -227,13 +231,13 @@
             this.resetBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.resetBtn.Font = new System.Drawing.Font("XXII DONT-MESS-WITH-VIKINGS", 17.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.resetBtn.ForeColor = System.Drawing.Color.White;
-            this.resetBtn.Location = new System.Drawing.Point(460, 390);
+            this.resetBtn.Location = new System.Drawing.Point(436, 390);
             this.resetBtn.Name = "resetBtn";
             this.resetBtn.Size = new System.Drawing.Size(122, 48);
             this.resetBtn.TabIndex = 41;
             this.resetBtn.Text = "RESET";
             this.resetBtn.UseVisualStyleBackColor = false;
-            this.resetBtn.Click += new System.EventHandler(this.resetBtn_Click);
+            this.resetBtn.Click += new System.EventHandler(this.logIn_Click);
             // 
             // signUpBtn
             // 
@@ -243,7 +247,7 @@
             this.signUpBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.signUpBtn.Font = new System.Drawing.Font("XXII DONT-MESS-WITH-VIKINGS", 17.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.signUpBtn.ForeColor = System.Drawing.Color.White;
-            this.signUpBtn.Location = new System.Drawing.Point(293, 390);
+            this.signUpBtn.Location = new System.Drawing.Point(308, 390);
             this.signUpBtn.Name = "signUpBtn";
             this.signUpBtn.Size = new System.Drawing.Size(122, 48);
             this.signUpBtn.TabIndex = 40;
@@ -258,7 +262,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.password_Box.BackColor = System.Drawing.Color.Black;
             this.password_Box.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.password_Box.Font = new System.Drawing.Font("CarnacW03-ExtraBold", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.password_Box.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.password_Box.ForeColor = System.Drawing.Color.White;
             this.password_Box.Location = new System.Drawing.Point(299, 250);
             this.password_Box.Name = "password_Box";
@@ -271,11 +275,11 @@
             this.password.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.password.AutoSize = true;
-            this.password.Font = new System.Drawing.Font("XXII DONT-MESS-WITH-VIKINGS", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.password.Font = new System.Drawing.Font("Segoe UI Semibold", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.password.ForeColor = System.Drawing.Color.White;
-            this.password.Location = new System.Drawing.Point(211, 250);
+            this.password.Location = new System.Drawing.Point(185, 246);
             this.password.Name = "password";
-            this.password.Size = new System.Drawing.Size(82, 21);
+            this.password.Size = new System.Drawing.Size(102, 28);
             this.password.TabIndex = 38;
             this.password.Text = "Password:";
             // 
@@ -286,7 +290,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.userName_Box.BackColor = System.Drawing.Color.Black;
             this.userName_Box.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.userName_Box.Font = new System.Drawing.Font("CarnacW03-ExtraBold", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userName_Box.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userName_Box.ForeColor = System.Drawing.Color.White;
             this.userName_Box.Location = new System.Drawing.Point(299, 150);
             this.userName_Box.Name = "userName_Box";
@@ -299,11 +303,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.userNameLabel.AutoSize = true;
             this.userNameLabel.BackColor = System.Drawing.Color.Black;
-            this.userNameLabel.Font = new System.Drawing.Font("XXII DONT-MESS-WITH-VIKINGS", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userNameLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userNameLabel.ForeColor = System.Drawing.Color.White;
-            this.userNameLabel.Location = new System.Drawing.Point(209, 150);
+            this.userNameLabel.Location = new System.Drawing.Point(170, 148);
             this.userNameLabel.Name = "userNameLabel";
-            this.userNameLabel.Size = new System.Drawing.Size(84, 21);
+            this.userNameLabel.Size = new System.Drawing.Size(118, 28);
             this.userNameLabel.TabIndex = 36;
             this.userNameLabel.Text = "User Name:";
             // 
@@ -335,7 +339,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.realUserName_Box.BackColor = System.Drawing.Color.Black;
             this.realUserName_Box.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.realUserName_Box.Font = new System.Drawing.Font("CarnacW03-ExtraBold", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.realUserName_Box.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.realUserName_Box.ForeColor = System.Drawing.Color.White;
             this.realUserName_Box.Location = new System.Drawing.Point(299, 197);
             this.realUserName_Box.Name = "realUserName_Box";
@@ -348,11 +352,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.Color.Black;
-            this.label6.Font = new System.Drawing.Font("XXII DONT-MESS-WITH-VIKINGS", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Font = new System.Drawing.Font("Segoe UI Semibold", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(174, 201);
+            this.label6.Location = new System.Drawing.Point(127, 197);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(119, 21);
+            this.label6.Size = new System.Drawing.Size(161, 28);
             this.label6.TabIndex = 55;
             this.label6.Text = "Real User Name:";
             // 
@@ -384,7 +388,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tagLine_Box.BackColor = System.Drawing.Color.Black;
             this.tagLine_Box.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tagLine_Box.Font = new System.Drawing.Font("CarnacW03-ExtraBold", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tagLine_Box.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tagLine_Box.ForeColor = System.Drawing.Color.White;
             this.tagLine_Box.Location = new System.Drawing.Point(299, 341);
             this.tagLine_Box.Name = "tagLine_Box";
@@ -397,29 +401,30 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tagLineLabel.AutoSize = true;
             this.tagLineLabel.BackColor = System.Drawing.Color.Black;
-            this.tagLineLabel.Font = new System.Drawing.Font("XXII DONT-MESS-WITH-VIKINGS", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tagLineLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tagLineLabel.ForeColor = System.Drawing.Color.White;
-            this.tagLineLabel.Location = new System.Drawing.Point(224, 341);
+            this.tagLineLabel.Location = new System.Drawing.Point(195, 341);
             this.tagLineLabel.Name = "tagLineLabel";
-            this.tagLineLabel.Size = new System.Drawing.Size(69, 21);
+            this.tagLineLabel.Size = new System.Drawing.Size(92, 28);
             this.tagLineLabel.TabIndex = 60;
             this.tagLineLabel.Text = "Tag Line:";
             // 
-            // setProfilePicture_Btn
+            // circularButton1
             // 
-            this.setProfilePicture_Btn.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.setProfilePicture_Btn.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.setProfilePicture_Btn.FlatAppearance.BorderSize = 0;
-            this.setProfilePicture_Btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.setProfilePicture_Btn.Font = new System.Drawing.Font("XXII DONT-MESS-WITH-VIKINGS", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.setProfilePicture_Btn.ForeColor = System.Drawing.Color.White;
-            this.setProfilePicture_Btn.Location = new System.Drawing.Point(668, 335);
-            this.setProfilePicture_Btn.Name = "setProfilePicture_Btn";
-            this.setProfilePicture_Btn.Size = new System.Drawing.Size(120, 32);
-            this.setProfilePicture_Btn.TabIndex = 65;
-            this.setProfilePicture_Btn.Text = "Set Profile Picture";
-            this.setProfilePicture_Btn.UseVisualStyleBackColor = false;
-            this.setProfilePicture_Btn.Click += new System.EventHandler(this.getProfilePicture_Click);
+            this.circularButton1.BackColor = System.Drawing.Color.DodgerBlue;
+            this.circularButton1.FlatAppearance.BorderColor = System.Drawing.Color.DodgerBlue;
+            this.circularButton1.FlatAppearance.BorderSize = 2;
+            this.circularButton1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
+            this.circularButton1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue;
+            this.circularButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.circularButton1.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.circularButton1.Image = ((System.Drawing.Image)(resources.GetObject("circularButton1.Image")));
+            this.circularButton1.Location = new System.Drawing.Point(704, 329);
+            this.circularButton1.Name = "circularButton1";
+            this.circularButton1.Size = new System.Drawing.Size(54, 49);
+            this.circularButton1.TabIndex = 66;
+            this.circularButton1.UseVisualStyleBackColor = false;
+            this.circularButton1.Click += new System.EventHandler(this.circularButton1_Click);
             // 
             // SignUp
             // 
@@ -427,7 +432,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.setProfilePicture_Btn);
+            this.Controls.Add(this.circularButton1);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.tagLine_Box);
@@ -459,7 +464,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "SignUp";
             this.Text = "Form1";
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SignUp_MouseDown);
             ((System.ComponentModel.ISupportInitialize)(this.profileBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusSymbolConfirmPassword)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusSymbolPassword)).EndInit();
@@ -500,6 +504,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox tagLine_Box;
         private System.Windows.Forms.Label tagLineLabel;
-        private System.Windows.Forms.Button setProfilePicture_Btn;
+        private CircularButton circularButton1;
     }
 }

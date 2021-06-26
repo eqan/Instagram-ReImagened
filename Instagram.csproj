@@ -67,12 +67,21 @@
     <Compile Include="Activity.Designer.cs">
       <DependentUpon>Activity.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddPost.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddPost.Designer.cs">
+      <DependentUpon>AddPost.cs</DependentUpon>
+    </Compile>
     <Compile Include="BasicUtilities.cs" />
     <Compile Include="Chat.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Chat.Designer.cs">
       <DependentUpon>Chat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CircularButton.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="CircularPanel.cs">
       <SubType>Component</SubType>
@@ -149,6 +158,9 @@
     </Compile>
     <EmbeddedResource Include="Activity.resx">
       <DependentUpon>Activity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddPost.resx">
+      <DependentUpon>AddPost.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Chat.resx">
       <DependentUpon>Chat.cs</DependentUpon>
