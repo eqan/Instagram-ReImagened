@@ -32,22 +32,20 @@
             this.label4 = new System.Windows.Forms.Label();
             this.statusSymbolPassword = new System.Windows.Forms.PictureBox();
             this.statusSymbolID = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.resetBtn = new System.Windows.Forms.Button();
+            this.instagramLogo = new System.Windows.Forms.PictureBox();
             this.signUpBtn = new System.Windows.Forms.Button();
+            this.loginBtn = new System.Windows.Forms.Button();
             this.password_Box = new System.Windows.Forms.TextBox();
-            this.password = new System.Windows.Forms.Label();
+            this.passwordLabel = new System.Windows.Forms.Label();
             this.userName_Box = new System.Windows.Forms.TextBox();
             this.userNameLabel = new System.Windows.Forms.Label();
             this.statusPassword = new System.Windows.Forms.Label();
             this.statusID = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.statusSymbolPassword)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusSymbolID)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.instagramLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // label4
@@ -80,16 +78,6 @@
             this.statusSymbolID.TabIndex = 78;
             this.statusSymbolID.TabStop = false;
             // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(12, 33);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(46, 38);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 77;
-            this.pictureBox2.TabStop = false;
-            // 
             // label2
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -112,49 +100,49 @@
             this.label1.Size = new System.Drawing.Size(289, 3);
             this.label1.TabIndex = 74;
             // 
-            // pictureBox1
+            // instagramLogo
             // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.instagramLogo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(314, 83);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(289, 55);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 73;
-            this.pictureBox1.TabStop = false;
-            // 
-            // resetBtn
-            // 
-            this.resetBtn.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.resetBtn.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.resetBtn.FlatAppearance.BorderSize = 0;
-            this.resetBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.resetBtn.Font = new System.Drawing.Font("XXII DONT-MESS-WITH-VIKINGS", 17.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.resetBtn.ForeColor = System.Drawing.Color.White;
-            this.resetBtn.Location = new System.Drawing.Point(462, 361);
-            this.resetBtn.Name = "resetBtn";
-            this.resetBtn.Size = new System.Drawing.Size(122, 48);
-            this.resetBtn.TabIndex = 70;
-            this.resetBtn.Text = "SignUP";
-            this.resetBtn.UseVisualStyleBackColor = false;
-            this.resetBtn.Click += new System.EventHandler(this.signUp_Btn);
+            this.instagramLogo.Image = ((System.Drawing.Image)(resources.GetObject("instagramLogo.Image")));
+            this.instagramLogo.Location = new System.Drawing.Point(314, 83);
+            this.instagramLogo.Name = "instagramLogo";
+            this.instagramLogo.Size = new System.Drawing.Size(289, 55);
+            this.instagramLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.instagramLogo.TabIndex = 73;
+            this.instagramLogo.TabStop = false;
             // 
             // signUpBtn
             // 
             this.signUpBtn.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.signUpBtn.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.signUpBtn.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.signUpBtn.FlatAppearance.BorderSize = 0;
             this.signUpBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.signUpBtn.Font = new System.Drawing.Font("XXII DONT-MESS-WITH-VIKINGS", 17.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.signUpBtn.ForeColor = System.Drawing.Color.White;
-            this.signUpBtn.Location = new System.Drawing.Point(334, 361);
+            this.signUpBtn.Location = new System.Drawing.Point(462, 361);
             this.signUpBtn.Name = "signUpBtn";
             this.signUpBtn.Size = new System.Drawing.Size(122, 48);
-            this.signUpBtn.TabIndex = 69;
-            this.signUpBtn.Text = "Login";
+            this.signUpBtn.TabIndex = 70;
+            this.signUpBtn.Text = "SignUP";
             this.signUpBtn.UseVisualStyleBackColor = false;
-            this.signUpBtn.Click += new System.EventHandler(this.signUpBtn_Click);
+            this.signUpBtn.Click += new System.EventHandler(this.signUp_Btn);
+            // 
+            // loginBtn
+            // 
+            this.loginBtn.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.loginBtn.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.loginBtn.FlatAppearance.BorderSize = 0;
+            this.loginBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.loginBtn.Font = new System.Drawing.Font("XXII DONT-MESS-WITH-VIKINGS", 17.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.loginBtn.ForeColor = System.Drawing.Color.White;
+            this.loginBtn.Location = new System.Drawing.Point(334, 361);
+            this.loginBtn.Name = "loginBtn";
+            this.loginBtn.Size = new System.Drawing.Size(122, 48);
+            this.loginBtn.TabIndex = 69;
+            this.loginBtn.Text = "Login";
+            this.loginBtn.UseVisualStyleBackColor = false;
+            this.loginBtn.Click += new System.EventHandler(this.signUpBtn_Click);
             // 
             // password_Box
             // 
@@ -172,18 +160,18 @@
             this.password_Box.UseSystemPasswordChar = true;
             this.password_Box.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.passwordBox_KeyPress);
             // 
-            // password
+            // passwordLabel
             // 
-            this.password.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.passwordLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.password.AutoSize = true;
-            this.password.Font = new System.Drawing.Font("Segoe UI Semibold", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.password.ForeColor = System.Drawing.Color.White;
-            this.password.Location = new System.Drawing.Point(206, 315);
-            this.password.Name = "password";
-            this.password.Size = new System.Drawing.Size(102, 28);
-            this.password.TabIndex = 67;
-            this.password.Text = "Password:";
+            this.passwordLabel.AutoSize = true;
+            this.passwordLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.passwordLabel.ForeColor = System.Drawing.Color.White;
+            this.passwordLabel.Location = new System.Drawing.Point(206, 315);
+            this.passwordLabel.Name = "passwordLabel";
+            this.passwordLabel.Size = new System.Drawing.Size(102, 28);
+            this.passwordLabel.TabIndex = 67;
+            this.passwordLabel.Text = "Password:";
             // 
             // userName_Box
             // 
@@ -228,7 +216,7 @@
             this.statusID.AutoSize = true;
             this.statusID.Font = new System.Drawing.Font("CarnacW03-ExtraBold", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statusID.ForeColor = System.Drawing.Color.White;
-            this.statusID.Location = new System.Drawing.Point(670, 275);
+            this.statusID.Location = new System.Drawing.Point(669, 275);
             this.statusID.Name = "statusID";
             this.statusID.Size = new System.Drawing.Size(0, 14);
             this.statusID.TabIndex = 85;
@@ -244,14 +232,13 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.statusSymbolPassword);
             this.Controls.Add(this.statusSymbolID);
-            this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.resetBtn);
+            this.Controls.Add(this.instagramLogo);
             this.Controls.Add(this.signUpBtn);
+            this.Controls.Add(this.loginBtn);
             this.Controls.Add(this.password_Box);
-            this.Controls.Add(this.password);
+            this.Controls.Add(this.passwordLabel);
             this.Controls.Add(this.userName_Box);
             this.Controls.Add(this.userNameLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -259,8 +246,7 @@
             this.Text = "Login";
             ((System.ComponentModel.ISupportInitialize)(this.statusSymbolPassword)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusSymbolID)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.instagramLogo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -270,14 +256,13 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.PictureBox statusSymbolPassword;
         private System.Windows.Forms.PictureBox statusSymbolID;
-        private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button resetBtn;
+        private System.Windows.Forms.PictureBox instagramLogo;
         private System.Windows.Forms.Button signUpBtn;
+        private System.Windows.Forms.Button loginBtn;
         private System.Windows.Forms.TextBox password_Box;
-        private System.Windows.Forms.Label password;
+        private System.Windows.Forms.Label passwordLabel;
         private System.Windows.Forms.TextBox userName_Box;
         private System.Windows.Forms.Label userNameLabel;
         private System.Windows.Forms.Label statusPassword;
