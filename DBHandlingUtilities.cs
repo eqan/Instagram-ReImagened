@@ -184,14 +184,15 @@ namespace Instagram
 
         public void Create_User_Entities(string userID, string userName)
         {
-            string tableName = "";
-            tableName = "Build_User_Followers_Table";
+            string tableName = "Build_User_Followers_Table";
             Create_Entity(userID, userName, tableName);
             tableName = "Build_User_Stories_Table";
             Create_Entity(userID, userName, tableName);
             tableName = "Build_User_Followers_Table";
             Create_Entity(userID, userName, tableName);
             tableName = "Build_User_Posts_Table";
+            Create_Entity(userID, userName, tableName);
+            tableName = "Build_User_Activity_Table";
             Create_Entity(userID, userName, tableName);
         }
 
@@ -208,7 +209,7 @@ namespace Instagram
                     DataSet ds = new DataSet();
                     adapt.Fill(ds);
                     int postID = (Int32)ds.Tables[0].Rows[ds.Tables[0].Rows.Count - 1]["PostID"];
-                    cmd = new SqlCommand("CREATE TABLE " + userName + "_" + userID + "_" + postID.ToString() + "_LikesRecord ( ID INT IDENTITY(1,1) PRIMARY KEY,UserID INT, UserName VARCHAR(MAX))", dbConnection);
+                    cmd = new SqlCommand("CREATE TABLE " + userName + "_" + userID + "_" + postID.ToString() + "_LikesRecord ( ID INT IDENTITY(1,1) PRIMARY KEY,UserID INT UNIQUE, UserName VARCHAR(MAX))", dbConnection);
                     cmd.ExecuteNonQuery();
                     Console.WriteLine("Like Record created for post {0} User {1}", postID, userName);
                     dbConnection.Close();
@@ -235,7 +236,7 @@ namespace Instagram
                     DataSet ds = new DataSet();
                     adapt.Fill(ds);
                     int postID = (Int32)ds.Tables[0].Rows[ds.Tables[0].Rows.Count - 1]["PostID"];
-                    cmd = new SqlCommand("CREATE TABLE " + userName + "_" + userID + "_" + postID.ToString() + "_BookMarksRecord ( ID INT IDENTITY(1,1) PRIMARY KEY,UserID INT, UserName VARCHAR(MAX))", dbConnection);
+                    cmd = new SqlCommand("CREATE TABLE " + userName + "_" + userID + "_" + postID.ToString() + "_BookMarksRecord ( ID INT IDENTITY(1,1) PRIMARY KEY,UserID INT UNIQUE, UserName VARCHAR(MAX))", dbConnection);
                     cmd.ExecuteNonQuery();
                     Console.WriteLine("BookMarks Record created for post {0} User {1}", postID, userName);
                     dbConnection.Close();

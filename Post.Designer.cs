@@ -40,10 +40,12 @@
             this.topBar = new System.Windows.Forms.Label();
             this.bottomBar = new System.Windows.Forms.Label();
             this.profilePictureBox = new Instagram.CircularPictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.postPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.likeBtn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bookMarkedBtn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.profilePictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // postPictureBox
@@ -120,7 +122,7 @@
             // 
             this.timeLabel.AutoSize = true;
             this.timeLabel.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.timeLabel.Location = new System.Drawing.Point(574, 19);
+            this.timeLabel.Location = new System.Drawing.Point(586, 8);
             this.timeLabel.Name = "timeLabel";
             this.timeLabel.Size = new System.Drawing.Size(73, 14);
             this.timeLabel.TabIndex = 7;
@@ -178,11 +180,22 @@
             this.profilePictureBox.TabIndex = 1;
             this.profilePictureBox.TabStop = false;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(624, 27);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(23, 26);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 48;
+            this.pictureBox1.TabStop = false;
+            // 
             // Post
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(698, 453);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.bottomBar);
             this.Controls.Add(this.topBar);
             this.Controls.Add(this.bookMarkedBtn);
@@ -202,6 +215,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.likeBtn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bookMarkedBtn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.profilePictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -219,5 +233,6 @@
         public System.Windows.Forms.PictureBox bookMarkedBtn;
         private System.Windows.Forms.Label topBar;
         private System.Windows.Forms.Label bottomBar;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

@@ -30,7 +30,6 @@ namespace Instagram
             }
             this.BackColor = backColor;
             userNameLabel.ForeColor = textColor;
-            realUserNameLabel.ForeColor = textColor;
             topBar.BackColor = barColor;
             bottomBar.BackColor = barColor;
         }

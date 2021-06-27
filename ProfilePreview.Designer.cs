@@ -40,6 +40,7 @@
             // 
             this.realUserNameLabel.AutoSize = true;
             this.realUserNameLabel.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.realUserNameLabel.ForeColor = System.Drawing.Color.DodgerBlue;
             this.realUserNameLabel.Location = new System.Drawing.Point(73, 14);
             this.realUserNameLabel.Name = "realUserNameLabel";
             this.realUserNameLabel.Size = new System.Drawing.Size(53, 19);
@@ -98,7 +99,7 @@
             this.profilePictureBox.TabStop = false;
             this.profilePictureBox.Click += new System.EventHandler(this.profilePictureBox_Click);
             // 
-            // SearchResult
+            // ProfilePreview
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -109,7 +110,7 @@
             this.Controls.Add(this.realUserNameLabel);
             this.Controls.Add(this.profilePictureBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "SearchResult";
+            this.Name = "ProfilePreview";
             this.Text = "SearchResult";
             this.Load += new System.EventHandler(this.SearchResult_Load);
             ((System.ComponentModel.ISupportInitialize)(this.profilePictureBox)).EndInit();

@@ -9,9 +9,9 @@ namespace Instagram
     {
         UIUtilities UI;
         public bool lightModeOn = false;
-        Form form;
+        public Form form;
         int time = 0;
-        public string userName = "Ahmad", userID = "5";
+        public string userName, userID ;
         public Main()
         {
             InitializeComponent();
@@ -22,22 +22,26 @@ namespace Instagram
             formVirtualizer.Visible = false;
             formVirtualizer.SendToBack();
             axMoviePlayer1.BringToFront();
-            form = new Home(this) { TopLevel = false, TopMost = true };
         }
         private void Initialize_GUI_Components()
         {
             // Form virtualizer
             Initialize_Form_Virtualizer_Settings();
+            // Side Panel
+            this.Controls.Add(UI.Get_Panel());
+        }
+
+        private void Initialize_Top_Left_Buttons()
+        {
             // Top Left Buttons
             this.Controls.Add(UI.Get_CloseBtn());
             this.Controls.Add(UI.Get_MaximizeBtn());
             this.Controls.Add(UI.Get_MinimizeBtn());
-            // Side Panel
-            this.Controls.Add(UI.Get_Panel());
         }
+
+
         public void Initialize_Form_Virtualizer_Settings()
         {
-            formVirtualizer.Visible = true;
             Color backColor;
             if (lightModeOn)
                 backColor = Color.FromArgb(242, 242, 242);
@@ -47,6 +51,22 @@ namespace Instagram
             formVirtualizer.Height = this.Height;
             formVirtualizer.Location = new System.Drawing.Point(UI.sidePanel.Width, 20);
             formVirtualizer.BackColor = backColor;
+        }
+
+        public void Initialize_Form_Virtualizer_For_SignUP()
+        {
+            Initialize_Top_Left_Buttons();
+            Color backColor;
+            if (lightModeOn)
+                backColor = Color.FromArgb(209, 209, 209);
+            else
+                backColor = Color.FromArgb(31, 31, 31);
+            this.CenterToScreen();
+            formVirtualizer.Width = this.Width;
+            formVirtualizer.Height = this.Height - 30;
+            formVirtualizer.Location = new System.Drawing.Point(0, 30);
+            formVirtualizer.BackColor = backColor;
+            this.BackColor = backColor;
         }
 
         private void Intro_Load(object sender, EventArgs e)
@@ -80,22 +100,30 @@ namespace Instagram
             if (time == (int)axMoviePlayer1.Duration)
             {
                 axMoviePlayer1.Stop();
-                Initiate_Main_Form_Window();
+                Initiate_Login();
             }
             time++;
         }
 
-        private void Initiate_Main_Form_Window()
+        public void Initiate_Main_Form_Window(string userID, string userName)
         {
-            Dispose_Intro_Screen();
-            this.Size = new Size(800, 450);
-            this.CenterToScreen();
-            UI = new UIUtilities(this, lightModeOn);
-            Initialize_GUI_Components();
+            this.userID = userID;
+            this.userName = userName;
             if (lightModeOn)
                 this.BackColor = Color.FromArgb(242, 242, 242);
             else
                 this.BackColor = Color.FromArgb(43, 43, 43);
+            form = new Home(this) { TopLevel = false, TopMost = true };
+            Initialize_GUI_Components();
+        }
+
+        private void Initiate_Login()
+        {
+            Dispose_Intro_Screen();
+            this.Size = new Size(800, 450);
+            UI = new UIUtilities(this, lightModeOn);
+            Initialize_Form_Virtualizer_For_SignUP();
+            form = new Login(this) { TopLevel = false, TopMost = true };
         }
 
         private void Dispose_Intro_Screen()
@@ -104,6 +132,7 @@ namespace Instagram
             time = 0;
             axMoviePlayer1.Dispose();
             formVirtualizer.BringToFront();
+            formVirtualizer.Visible = true;
         }
 
         private void Main_MouseDown(object sender, MouseEventArgs e)

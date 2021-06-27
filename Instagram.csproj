@@ -67,6 +67,12 @@
     <Compile Include="Activity.Designer.cs">
       <DependentUpon>Activity.cs</DependentUpon>
     </Compile>
+    <Compile Include="ActivityRow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ActivityRow.Designer.cs">
+      <DependentUpon>ActivityRow.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddPost.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -164,6 +170,9 @@
     </Compile>
     <EmbeddedResource Include="Activity.resx">
       <DependentUpon>Activity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ActivityRow.resx">
+      <DependentUpon>ActivityRow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AddPost.resx">
       <DependentUpon>AddPost.cs</DependentUpon>

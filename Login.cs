@@ -70,6 +70,11 @@ namespace Instagram
                 setStatus(1, true, "");
             else
                 setStatus(1, false, "Password Incorrect!");
+            if (results[0] == 1 && results[1] == 1)
+            {
+                main.form.Dispose();
+                main.Initiate_Main_Form_Window(userName_Box.Text, password_Box.Text);
+            }
         }
         private void resetEntries()
         {
@@ -112,17 +117,15 @@ namespace Instagram
             }
         }
 
-        private void signUpBtn_Click(object sender, EventArgs e)
+        private void login_Click(object sender, EventArgs e)
         {
             login();
         }
 
-        private void signUp_Btn(object sender, EventArgs e)
+        private void signUp_Click(object sender, EventArgs e)
         {
-            this.Dispose();
-            SignUp signUp = new SignUp(main);
-            main.formVirtualizer.Controls.Add(signUp);
-            signUp.Show();
+            main.form.Dispose();
+            main.form = new SignUp(main){ TopLevel = false, TopMost = true };
         }
     }
 }

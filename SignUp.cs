@@ -8,7 +8,6 @@ namespace Instagram
     {
         DBHandlingUtilities DBHandler;
         UIUtilities UI;
-        Login loginForm;
         bool lightModeOn;
         Main main;
         public SignUp(Main main)
@@ -18,7 +17,6 @@ namespace Instagram
             this.lightModeOn = main.lightModeOn;
             DBHandler = new DBHandlingUtilities();
             UI = new UIUtilities(lightModeOn);
-            loginForm = new Login(main);
             Configure_Theme();
         }
 
@@ -85,11 +83,10 @@ namespace Instagram
                 setStatus(2, true, "");
                 if (DBHandler.Add_User(userName, realUserName, pass, tagLine))
                 {
-
                     Console.WriteLine("User added Successfully!");
                     setStatus(0, true, "");
-                    this.Dispose();
-                    loginForm.Show();
+                    main.form.Dispose();
+                    main.form = new Login(main);
                 }
                 else
                     setStatus(0, false, "Account Already Present!");
@@ -109,10 +106,8 @@ namespace Instagram
         }
         private void logIn_Click(object sender, EventArgs e)
         {
-            this.Dispose();
-            Login login = new Login(main);
-            main.formVirtualizer.Controls.Add(login);
-            login.Show();
+            main.form.Dispose();
+            main.form  = new Login(main) { TopLevel = false, TopMost = true };
         }
         private void setStatus(int statusNumber, bool setStatus, string message)
         {
@@ -250,6 +245,11 @@ namespace Instagram
         {
             DBHandler.Get_Picture();
             profileBox.ImageLocation = DBHandler.fileDirectory;
+        }
+
+        private void SignUp_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
