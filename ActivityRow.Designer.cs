@@ -30,14 +30,12 @@
         {
             this.bottomBar = new System.Windows.Forms.Label();
             this.topBar = new System.Windows.Forms.Label();
-            this.realUserNameLabel = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.userNameLabel = new System.Windows.Forms.Label();
+            this.postPicture = new System.Windows.Forms.PictureBox();
+            this.activityLabel = new System.Windows.Forms.Label();
+            this.timeLabel = new System.Windows.Forms.Label();
             this.profilePictureBox = new Instagram.CircularPictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.postPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.profilePictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -63,52 +61,45 @@
             this.topBar.Size = new System.Drawing.Size(637, 10);
             this.topBar.TabIndex = 52;
             // 
-            // realUserNameLabel
+            // userNameLabel
             // 
-            this.realUserNameLabel.AutoSize = true;
-            this.realUserNameLabel.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.realUserNameLabel.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.realUserNameLabel.Location = new System.Drawing.Point(64, 36);
-            this.realUserNameLabel.Name = "realUserNameLabel";
-            this.realUserNameLabel.Size = new System.Drawing.Size(53, 19);
-            this.realUserNameLabel.TabIndex = 50;
-            this.realUserNameLabel.Text = "label1";
+            this.userNameLabel.AutoSize = true;
+            this.userNameLabel.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userNameLabel.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.userNameLabel.Location = new System.Drawing.Point(64, 36);
+            this.userNameLabel.Name = "userNameLabel";
+            this.userNameLabel.Size = new System.Drawing.Size(53, 19);
+            this.userNameLabel.TabIndex = 50;
+            this.userNameLabel.Text = "label1";
             // 
-            // pictureBox1
+            // postPicture
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(429, 11);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(72, 62);
-            this.pictureBox1.TabIndex = 54;
-            this.pictureBox1.TabStop = false;
+            this.postPicture.Location = new System.Drawing.Point(429, 11);
+            this.postPicture.Name = "postPicture";
+            this.postPicture.Size = new System.Drawing.Size(72, 62);
+            this.postPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.postPicture.TabIndex = 54;
+            this.postPicture.TabStop = false;
             // 
-            // pictureBox2
+            // activityLabel
             // 
-            this.pictureBox2.Location = new System.Drawing.Point(131, 31);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(48, 29);
-            this.pictureBox2.TabIndex = 55;
-            this.pictureBox2.TabStop = false;
+            this.activityLabel.AutoSize = true;
+            this.activityLabel.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.activityLabel.Location = new System.Drawing.Point(137, 36);
+            this.activityLabel.Name = "activityLabel";
+            this.activityLabel.Size = new System.Drawing.Size(124, 19);
+            this.activityLabel.TabIndex = 56;
+            this.activityLabel.Text = "Activity Mesage";
             // 
-            // label1
+            // timeLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(185, 36);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(101, 19);
-            this.label1.TabIndex = 56;
-            this.label1.Text = "\'ed your post";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(532, 12);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(73, 14);
-            this.label2.TabIndex = 57;
-            this.label2.Text = "0 Hours Ago";
+            this.timeLabel.AutoSize = true;
+            this.timeLabel.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.timeLabel.Location = new System.Drawing.Point(532, 12);
+            this.timeLabel.Name = "timeLabel";
+            this.timeLabel.Size = new System.Drawing.Size(73, 14);
+            this.timeLabel.TabIndex = 57;
+            this.timeLabel.Text = "0 Hours Ago";
             // 
             // profilePictureBox
             // 
@@ -132,19 +123,17 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(617, 86);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.timeLabel);
+            this.Controls.Add(this.activityLabel);
+            this.Controls.Add(this.postPicture);
             this.Controls.Add(this.bottomBar);
             this.Controls.Add(this.topBar);
-            this.Controls.Add(this.realUserNameLabel);
+            this.Controls.Add(this.userNameLabel);
             this.Controls.Add(this.profilePictureBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ActivityRow";
             this.Text = "ActivityRow";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.postPicture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.profilePictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -155,11 +144,10 @@
 
         private System.Windows.Forms.Label bottomBar;
         private System.Windows.Forms.Label topBar;
-        public System.Windows.Forms.Label realUserNameLabel;
+        public System.Windows.Forms.Label userNameLabel;
         public CircularPictureBox profilePictureBox;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        public System.Windows.Forms.Label label1;
-        public System.Windows.Forms.Label label2;
+        public System.Windows.Forms.Label activityLabel;
+        public System.Windows.Forms.Label timeLabel;
+        public System.Windows.Forms.PictureBox postPicture;
     }
 }

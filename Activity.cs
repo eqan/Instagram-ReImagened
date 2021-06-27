@@ -1,20 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace Instagram
 {
     public partial class Activity : Form
     {
-        public Activity()
+        DBHandlingUtilities dbHandler;
+        Main main;
+        public Activity(Main main)
         {
             InitializeComponent();
+            this.main = main;
+            dbHandler = new DBHandlingUtilities();
+            Display_Activity();
+        }
+
+        private void Display_Activity()
+        {
+            ActivityRow[] activityList = dbHandler.Generate_Activity(main.userID, main.userName, main.lightModeOn);
+            activityFeed.AutoScroll = true;
+            for (int i = 0; i < activityList.Length; i++)
+            {
+                activityList[i].TopLevel = false;
+                activityFeed.Controls.Add(activityList[i]);
+                activityList[i].Show();
+            }
         }
     }
 }

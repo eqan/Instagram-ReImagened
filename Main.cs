@@ -11,7 +11,7 @@ namespace Instagram
         public bool lightModeOn = false;
         public Form form;
         int time = 0;
-        public string userName, userID ;
+        public string userName = "Eqan", userID = "3" ;
         public Main()
         {
             InitializeComponent();
@@ -175,7 +175,7 @@ namespace Instagram
                         break;
                     }
                 case 4:
-                    form = new Activity() { TopLevel = false, TopMost = true };
+                    form = new Activity(this) { TopLevel = false, TopMost = true };
                     break;
                 case 5:
                     form = new Profile() { TopLevel = false, TopMost = true };

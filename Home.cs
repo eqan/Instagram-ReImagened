@@ -25,8 +25,8 @@ namespace Instagram
             InitializeComponent();
             this.main = main;
             this.lightModeOn = main.lightModeOn;
-            this.userID = "5";
-            this.userName = "Ahmad";
+            this.userID = main.userID;
+            this.userName = main.userName;
             dbHandler = new DBHandlingUtilities();
             UI = new UIUtilities(this, lightModeOn);
             Configure_Theme();

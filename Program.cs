@@ -15,7 +15,8 @@ namespace Instagram
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Main());
+            Main main = new Main();
+            Application.Run(new Activity(main));
         }
     }
 }
