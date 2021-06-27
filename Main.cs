@@ -137,11 +137,11 @@ namespace Instagram
                     {
                         AddButton addBtn = new AddButton(this) { TopLevel = false, TopMost = true };
                         Panel panel = UI.Create_Panel(new int[] { addBtn.Width, addBtn.Height }, new int[] { this.Height / 2 - 160, (int)Math.Round(45 * 4.5, MidpointRounding.AwayFromZero) }, Color.Transparent );
+                        addBtn.Add_Panel_Reference(panel);
                         this.Controls.Add(panel);
                         panel.Controls.Add(addBtn);
                         addBtn.Show();
                         panel.BringToFront();
-                        panel.Dispose();
                         form = new Home(this) { TopLevel = false, TopMost = true };
                         break;
                     }

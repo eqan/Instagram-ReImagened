@@ -9,6 +9,7 @@ namespace Instagram
         bool lightModeOn = false;
         UIUtilities UI;
         Main main;
+        Panel panelRef;
         public AddButton(Main main)
         {
             InitializeComponent();
@@ -17,6 +18,12 @@ namespace Instagram
             this.main = main;
             Configure_Theme();
         }
+
+        public void Add_Panel_Reference(Panel panel)
+        {
+            this.panelRef = panel;
+        }
+
         private void Configure_Theme()
         {
             Color backColor;
@@ -25,46 +32,59 @@ namespace Instagram
             else
                 backColor = Color.FromArgb(31, 31, 31);
             this.BackColor = backColor;
-            pictureBox3.Image = Image.FromFile(UI.Return_UI_Location() + @"\left-half-triangle.png");
-            pictureBox2.Image = Image.FromFile(UI.Return_UI_Location() + @"\right-half-triangle.png");
+            addPostBtn.Image = Image.FromFile(UI.Return_UI_Location() + @"\left-half-triangle.png");
+            addStoryBtn.Image = Image.FromFile(UI.Return_UI_Location() + @"\right-half-triangle.png");
+        }
+
+        private void Reset_Color()
+        {
+            Color backColor;
+            if (lightModeOn)
+                backColor = Color.FromArgb(209, 209, 209);
+            else
+                backColor = Color.FromArgb(31, 31, 31);
+            this.BackColor = backColor;
         }
 
 
-        private void pictureBox3_MouseHover(object sender, EventArgs e)
+        private void addPost_MouseHover(object sender, EventArgs e)
         {
-            pictureBox3.Image.Dispose();
-            pictureBox3.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Selected Mode\left-half-triangle.png");
+            addPostBtn.Image.Dispose();
+            addPostBtn.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Selected Mode\left-half-triangle.png");
         }
 
-        private void pictureBox3_MouseLeave(object sender, EventArgs e)
+        private void addPost_MouseLeave(object sender, EventArgs e)
         {
-            pictureBox3.Image.Dispose();
-            pictureBox3.Image = Image.FromFile(UI.Return_UI_Location() + @"\left-half-triangle.png");
+            addPostBtn.Image.Dispose();
+            addPostBtn.Image = Image.FromFile(UI.Return_UI_Location() + @"\left-half-triangle.png");
         }
 
-        private void pictureBox3_Click(object sender, EventArgs e)
+        private void addPost_Click(object sender, EventArgs e)
         {
+            panelRef.Dispose();
             AddPost addPost = new AddPost(main.userID, main.userName, lightModeOn) { TopLevel = false, TopMost = true };;
             main.formVirtualizer.Controls.Add(addPost);
             addPost.Show();
-            this.Dispose();
         }
 
-        private void pictureBox2_Click(object sender, EventArgs e)
+        private void addStory_Click(object sender, EventArgs e)
         {
-            this.Dispose();
+            panelRef.Dispose();
+            AddStory addStory = new AddStory(main.userID, main.userName, lightModeOn) { TopLevel = false, TopMost = true };;
+            main.formVirtualizer.Controls.Add(addStory);
+            addStory.Show();
         }
 
-        private void pictureBox2_MouseHover(object sender, EventArgs e)
+        private void addStory_MouseHover(object sender, EventArgs e)
         {
-            pictureBox2.Image.Dispose();
-            pictureBox2.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Selected Mode\right-half-triangle.png");
+            addStoryBtn.Image.Dispose();
+            addStoryBtn.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Selected Mode\right-half-triangle.png");
         }
 
-        private void pictureBox2_MouseLeave(object sender, EventArgs e)
+        private void addStory_MouseLeave(object sender, EventArgs e)
         {
-            pictureBox2.Image.Dispose();
-            pictureBox2.Image = Image.FromFile(UI.Return_UI_Location() + @"\right-half-triangle.png");
+            addStoryBtn.Image.Dispose();
+            addStoryBtn.Image = Image.FromFile(UI.Return_UI_Location() + @"\right-half-triangle.png");
         }
     }
 }

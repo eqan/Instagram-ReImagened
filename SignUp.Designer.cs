@@ -412,10 +412,7 @@
             // circularButton1
             // 
             this.circularButton1.BackColor = System.Drawing.Color.DodgerBlue;
-            this.circularButton1.FlatAppearance.BorderColor = System.Drawing.Color.DodgerBlue;
-            this.circularButton1.FlatAppearance.BorderSize = 2;
-            this.circularButton1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
-            this.circularButton1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue;
+            this.circularButton1.FlatAppearance.BorderSize = 0;
             this.circularButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.circularButton1.ForeColor = System.Drawing.Color.DodgerBlue;
             this.circularButton1.Image = ((System.Drawing.Image)(resources.GetObject("circularButton1.Image")));

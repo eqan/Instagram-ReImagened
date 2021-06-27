@@ -93,6 +93,12 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="DBHandlingUtilities.cs" />
+    <Compile Include="AddStory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddStory.Designer.cs">
+      <DependentUpon>AddStory.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -164,6 +170,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Chat.resx">
       <DependentUpon>Chat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddStory.resx">
+      <DependentUpon>AddStory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>

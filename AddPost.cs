@@ -81,8 +81,7 @@ namespace Instagram
             }
             catch(Exception ex)
             {
-                MessageBox.Show("Image not Uploaded!", "Post Upload Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Console.WriteLine(ex.Message);
+                MessageBox.Show(ex.Message, "Post Upload Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

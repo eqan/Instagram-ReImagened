@@ -27,3 +27,4 @@ E:\Instagram\Instagram\Instagram\obj\Debug\Instagram.ProfilePreview.resources
 E:\Instagram\Instagram\Instagram\obj\Debug\Instagram.AddButton.resources
 E:\Instagram\Instagram\Instagram\obj\Debug\Instagram.AddPost.resources
 E:\Instagram\Instagram\Instagram\obj\Debug\Instagram.csprojAssemblyReference.cache
+E:\Instagram\Instagram\Instagram\obj\Debug\Instagram.AddStory.resources

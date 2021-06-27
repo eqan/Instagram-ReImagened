@@ -11,13 +11,14 @@ namespace Instagram
         Login loginForm;
         bool lightModeOn;
         Main main;
-        public SignUp(bool lightModeOn, Main main)
+        public SignUp(Main main)
         {
             InitializeComponent();
             DBHandler = new DBHandlingUtilities();
             UI = new UIUtilities(this, false);
+            loginForm = new Login(main);
             this.main = main;
-            this.lightModeOn = lightModeOn;
+            this.lightModeOn = main.lightModeOn;
         }
 
         private void signUp()
@@ -65,7 +66,7 @@ namespace Instagram
         private void logIn_Click(object sender, EventArgs e)
         {
             this.Dispose();
-            Login login = new Login(lightModeOn, main);
+            Login login = new Login(main);
             main.formVirtualizer.Controls.Add(login);
             login.Show();
         }
