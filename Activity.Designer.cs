@@ -33,16 +33,16 @@
             // 
             // activityFeed
             // 
-            this.activityFeed.Location = new System.Drawing.Point(137, 1);
+            this.activityFeed.Location = new System.Drawing.Point(54, 0);
             this.activityFeed.Name = "activityFeed";
-            this.activityFeed.Size = new System.Drawing.Size(555, 448);
+            this.activityFeed.Size = new System.Drawing.Size(706, 450);
             this.activityFeed.TabIndex = 0;
             // 
             // Activity
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(789, 450);
+            this.ClientSize = new System.Drawing.Size(759, 450);
             this.Controls.Add(this.activityFeed);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Activity";

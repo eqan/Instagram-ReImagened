@@ -72,8 +72,9 @@ namespace Instagram
                 setStatus(1, false, "Password Incorrect!");
             if (results[0] == 1 && results[1] == 1)
             {
+                string userName = userName_Box.Text;
                 main.form.Dispose();
-                main.Initiate_Main_Form_Window(userName_Box.Text, password_Box.Text);
+                main.Initiate_Main_Form_Window(dbHandler.Return_User_ID(userName).ToString(), userName);
             }
         }
         private void resetEntries()

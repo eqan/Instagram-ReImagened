@@ -47,6 +47,34 @@ namespace Instagram
             }
         }
 
+        public int Return_User_ID(string userName)
+        {
+            int userID = -1;
+            try
+            {
+                if (dbConnection.State == ConnectionState.Closed)
+                {
+                    Console.WriteLine(userName);
+                    dbConnection.Open();
+                    cmd = new SqlCommand("SELECT UserID FROM USERS WHERE UserName = '" + userName + "'", dbConnection);
+                    userID = (int)cmd.ExecuteScalar();
+                    Console.WriteLine("User ID: {0}", userID);
+                    dbConnection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                if (dbConnection.State == ConnectionState.Open)
+                    dbConnection.Close();
+            }
+            return userID;
+        }
+
+
         public int[] Check_UserName_And_Password(string userName, string password)
         {
             int[] results = { 0, 0 };
@@ -195,6 +223,7 @@ namespace Instagram
             Create_Entity(userID, userName, tableName);
             tableName = "Build_User_Activity_Table";
             Create_Entity(userID, userName, tableName);
+            Create_Uniqueness_Constraint(userID, userName, "Activity", "UserID, PostID, ActivityType");
         }
 
         private int Retrieve_Latest_PostID(string userID, string userName)
@@ -504,10 +533,10 @@ namespace Instagram
                     dbConnection.Open();
                     string postID = Retrieve_Latest_PostID(userID, userName).ToString();
                     string tableName = userName + "_" + userID;
-                    string sqlCmd = "CREATE TRIGGER TR_Add_Post_Like_Activity_For_" + tableName + "_" + postID + " ON " + tableName + "_" + postID + "_LikesRecord FOR INSERT AS DECLARE @UserID INT, @UserName VARCHAR(MAX); SELECT @UserID = ins.UserID FROM INSERTED ins; SELECT @UserName = ins.UserName FROM INSERTED ins; INSERT INTO " + tableName + "_Activity ( UserID, UserName, PostID, ActivityType ) VALUES ( @UserID, @UserName, " + postID + ",'Like')";
+                    string sqlCmd = "CREATE TRIGGER TR_Add_Post_Like_Activity_For_" + tableName + "_" + postID + " ON " + tableName + "_" + postID + "_LikesRecord FOR INSERT AS DECLARE @UserID INT, @UserName VARCHAR(MAX); SELECT @UserID = ins.UserID FROM INSERTED ins; SELECT @UserName = ins.UserName FROM INSERTED ins; INSERT INTO " + tableName + "_Activity ( UserID, UserName, PostID, ActivityType ) VALUES ( @UserID, @UserName, " + postID + ",'Liked')";
                     cmd = new SqlCommand(sqlCmd, dbConnection);
                     cmd.ExecuteNonQuery();
-                    sqlCmd = "CREATE TRIGGER TR_Add_Post_BookMark_Activity_For_" + tableName + "_" + postID + " ON " + tableName + "_" + postID + "_BookMarksRecord FOR INSERT AS DECLARE @UserID INT, @UserName VARCHAR(MAX); SELECT @UserID = ins.UserID FROM INSERTED ins; SELECT @UserName = ins.UserName FROM INSERTED ins; INSERT INTO " + tableName + "_Activity ( UserID, UserName, PostID, ActivityType ) VALUES ( @UserID, @UserName, " + postID + ",'BookMark')";
+                    sqlCmd = "CREATE TRIGGER TR_Add_Post_BookMark_Activity_For_" + tableName + "_" + postID + " ON " + tableName + "_" + postID + "_BookMarksRecord FOR INSERT AS DECLARE @UserID INT, @UserName VARCHAR(MAX); SELECT @UserID = ins.UserID FROM INSERTED ins; SELECT @UserName = ins.UserName FROM INSERTED ins; INSERT INTO " + tableName + "_Activity ( UserID, UserName, PostID, ActivityType ) VALUES ( @UserID, @UserName, " + postID + ",'BookMarked')";
                     cmd = new SqlCommand(sqlCmd, dbConnection);
                     cmd.ExecuteNonQuery();
                     dbConnection.Close();
@@ -607,23 +636,45 @@ namespace Instagram
             }
         }
 
-        public Image Retrieve_Image_From_Post(string userID,string userName, string postID)
+        public void Create_Uniqueness_Constraint(string userID, string userName, string tableName, string args)
+        {
+            try
+            {
+                if (dbConnection.State == ConnectionState.Closed)
+                {
+                    dbConnection.Open();
+                    cmd = new SqlCommand("CREATE UNIQUE INDEX UQ_" + userName + "_" + userID + "_" + tableName + " ON " + userName + "_" + userID + "_" + tableName + "( " + args + ");", dbConnection);
+                    cmd.ExecuteNonQuery();
+                    dbConnection.Close();
+                    Console.WriteLine("Add Uniqueness Constraint! {0} {1}", userName, tableName);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                if (dbConnection.State == ConnectionState.Open)
+                    dbConnection.Close();
+            }
+        }
+
+        public Image Retrieve_Image_From_Post(string userID, string userName, string postID)
         {
             Image image = null;
             try
             {
                 if (dbConnection.State == ConnectionState.Closed)
                     dbConnection.Open();
-                string sqlCmd = "SELECT Image FROM "+ userName + "_" + userID + "_PostTable" + " WHERE PostID = @PostID";
+                string sqlCmd = "SELECT Image FROM " + userName + "_" + userID + "_PostTable" + " WHERE PostID = @PostID";
                 cmd = new SqlCommand(sqlCmd, dbConnection);
                 cmd.Parameters.AddWithValue("@PostID", postID);
                 adapt = new SqlDataAdapter(cmd);
                 DataSet ds = new DataSet();
                 adapt.Fill(ds);
                 if (ds.Tables[0].Rows.Count > 0)
-                {
                     image = Convert_Bytes_To_Image((byte[])ds.Tables[0].Rows[0]["Image"]);
-                }
                 if (dbConnection.State == ConnectionState.Open)
                     dbConnection.Close();
             }
@@ -652,18 +703,18 @@ namespace Instagram
                     activityList[i] = new ActivityRow(lightModeOn);
                     activityList[i].profilePictureBox.Bitmap = new Bitmap(Retrieve_Profile_Picture_Using_SQL((((Int32)ds.Tables[0].Rows[i]["UserID"]))));
                     activityList[i].userNameLabel.Text = (string)ds.Tables[0].Rows[i]["UserName"];
-                    activityList[i].postPicture.Image = Retrieve_Image_From_Post(((Int32)ds.Tables[0].Rows[i]["UserID"]).ToString(),((string)ds.Tables[0].Rows[i]["UserName"]).ToString(),((Int32)ds.Tables[0].Rows[i]["PostID"]).ToString() );
-                    activityList[i].activityLabel.Text = "has " + (string)ds.Tables[0].Rows[i]["ActivityType"] + "ed your Post";
+                    activityList[i].postPicture.Image = Retrieve_Image_From_Post(userID, userName, ((Int32)ds.Tables[0].Rows[i]["PostID"]).ToString());
+                    activityList[i].activityLabel.Text = "has " + (string)ds.Tables[0].Rows[i]["ActivityType"] + " your Post";
                     DateTime totalTime = ((DateTime)ds.Tables[0].Rows[i]["TimeLine"]);
                     TimeSpan t = DateTime.Now.Date.Subtract(totalTime.Date);
-                    if (t.TotalDays != 0)
+                    if (t.TotalDays > 0)
                         activityList[i].timeLabel.Text = t.TotalDays.ToString() + " Days Ago";
-                    else if (t.TotalHours != 0)
+                    else if (t.TotalHours > 0)
                         activityList[i].timeLabel.Text = t.TotalHours.ToString() + " Hours Ago";
-                    else if (t.Minutes != 0)
+                    else if (t.TotalMinutes > 0)
                         activityList[i].timeLabel.Text = t.TotalMinutes.ToString() + " Minutes Ago";
                     else
-                        activityList[i].timeLabel.Text = t.Seconds.ToString() + " Seconds Ago";
+                        activityList[i].timeLabel.Text = t.TotalSeconds.ToString() + " Seconds Ago";
                 }
                 if (dbConnection.State == ConnectionState.Open)
                     dbConnection.Close();
@@ -706,7 +757,7 @@ namespace Instagram
                         postList[i].timeLabel.Text = t.TotalDays.ToString() + " Days Ago";
                     else if (t.TotalHours != 0)
                         postList[i].timeLabel.Text = t.TotalHours.ToString() + " Hours Ago";
-                    else if (t.Minutes != 0)
+                    else if (t.TotalMinutes != 0)
                         postList[i].timeLabel.Text = t.TotalMinutes.ToString() + " Minutes Ago";
                     else
                         postList[i].timeLabel.Text = t.Seconds.ToString() + " Seconds Ago";

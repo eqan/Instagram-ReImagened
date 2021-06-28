@@ -39,9 +39,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.BackColor = System.Drawing.Color.White;
             this.label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label1.Location = new System.Drawing.Point(86, 59);
+            this.label1.Location = new System.Drawing.Point(60, 59);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(642, 5);
+            this.label1.Size = new System.Drawing.Size(579, 5);
             this.label1.TabIndex = 21;
             // 
             // searchBox
@@ -53,25 +53,25 @@
             this.searchBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.searchBox.Font = new System.Drawing.Font("CarnacW03-ExtraBold", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.searchBox.ForeColor = System.Drawing.Color.Gray;
-            this.searchBox.Location = new System.Drawing.Point(87, 30);
+            this.searchBox.Location = new System.Drawing.Point(61, 30);
             this.searchBox.Name = "searchBox";
-            this.searchBox.Size = new System.Drawing.Size(641, 32);
+            this.searchBox.Size = new System.Drawing.Size(578, 32);
             this.searchBox.TabIndex = 20;
             this.searchBox.Text = " Type to search";
             this.searchBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // resultFeed
             // 
-            this.resultFeed.Location = new System.Drawing.Point(86, 78);
+            this.resultFeed.Location = new System.Drawing.Point(55, 79);
             this.resultFeed.Name = "resultFeed";
-            this.resultFeed.Size = new System.Drawing.Size(641, 373);
+            this.resultFeed.Size = new System.Drawing.Size(587, 373);
             this.resultFeed.TabIndex = 22;
             // 
             // Search
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(737, 450);
             this.Controls.Add(this.resultFeed);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.searchBox);

@@ -84,10 +84,10 @@
             // activityLabel
             // 
             this.activityLabel.AutoSize = true;
-            this.activityLabel.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.activityLabel.Location = new System.Drawing.Point(137, 36);
+            this.activityLabel.Font = new System.Drawing.Font("Roboto", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.activityLabel.Location = new System.Drawing.Point(123, 37);
             this.activityLabel.Name = "activityLabel";
-            this.activityLabel.Size = new System.Drawing.Size(124, 19);
+            this.activityLabel.Size = new System.Drawing.Size(115, 18);
             this.activityLabel.TabIndex = 56;
             this.activityLabel.Text = "Activity Mesage";
             // 
