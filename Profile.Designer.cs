@@ -90,6 +90,7 @@
             // 
             // postFeed
             // 
+            this.postFeed.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.postFeed.HideSelection = false;
             this.postFeed.Location = new System.Drawing.Point(-1, 216);
             this.postFeed.Name = "postFeed";

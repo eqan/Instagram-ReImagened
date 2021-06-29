@@ -63,9 +63,19 @@ namespace Instagram
             List<string> profileInformation = dbHandler.Return_Profile_Information(main.userID, main.userName);
             profilePictureBox.Bitmap = new Bitmap(dbHandler.Retrieve_Profile_Picture_Using_SQL(Int32.Parse(main.userID)));
             userNameLabel.Text = main.userName;
-            followingCountLabel.Text = profileInformation[0];
-            followersCountLabel.Text = profileInformation[1];
-            postCountLabel.Text = profileInformation[2];
+            try
+            {
+                followingCountLabel.Text = profileInformation[0];
+                followersCountLabel.Text = profileInformation[1];
+                postCountLabel.Text = profileInformation[2];
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                followingCountLabel.Text = "0";
+                followersCountLabel.Text = "0"; 
+                postCountLabel.Text = "0";
+            }
             realUserNameLabel.Text = profileInformation[3];
             taglineBox.Text = profileInformation[4];
         }

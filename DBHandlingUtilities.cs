@@ -219,6 +219,8 @@ namespace Instagram
             Create_Entity(userID, userName, tableName);
             tableName = "Build_User_Followers_Table";
             Create_Entity(userID, userName, tableName);
+            tableName = "Build_User_Following_Table";
+            Create_Entity(userID, userName, tableName);
             tableName = "Build_User_Posts_Table";
             Create_Entity(userID, userName, tableName);
             tableName = "Build_User_Activity_Table";
@@ -558,6 +560,7 @@ namespace Instagram
 
         public bool Add_User(string userName, string realUserName, string userPassword, string tagLine = null)
         {
+            bool decision = false;
             try
             {
                 if (dbConnection.State == ConnectionState.Closed)
@@ -565,12 +568,11 @@ namespace Instagram
                     dbConnection.Open();
                     cmd = new SqlCommand("Add_User", dbConnection);
                     cmd.CommandType = CommandType.StoredProcedure;
-                    if (fileDirectory != null)
+                    if (fileDirectory == null)
                     {
-                        cmd.Parameters.AddWithValue("@Picture", Get_Binary_Of_File());
+                        fileDirectory = Environment.CurrentDirectory + @"\Assets\Avatar.png";
                     }
-                    else
-                        cmd.Parameters.AddWithValue("@Picture", null);
+                    cmd.Parameters.AddWithValue("@Picture", Get_Binary_Of_File());
                     cmd.Parameters.AddWithValue("@UserName", userName);
                     cmd.Parameters.AddWithValue("@RealUserName", realUserName);
                     cmd.Parameters.AddWithValue("@UserPassword", userPassword);
@@ -578,19 +580,20 @@ namespace Instagram
                     cmd.ExecuteNonQuery();
                     dbConnection.Close();
                     Console.WriteLine("{0} Added!", userName);
+                    decision = true;
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return false;
+                decision = false;
             }
             finally
             {
                 if (dbConnection.State == ConnectionState.Open)
                     dbConnection.Close();
             }
-            return true;
+            return decision;
         }
 
 

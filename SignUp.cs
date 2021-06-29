@@ -6,7 +6,7 @@ namespace Instagram
 {
     public partial class SignUp : Form
     {
-        DBHandlingUtilities DBHandler;
+        DBHandlingUtilities dbHandler;
         UIUtilities UI;
         bool lightModeOn;
         Main main;
@@ -15,7 +15,7 @@ namespace Instagram
             InitializeComponent();
             this.main = main;
             this.lightModeOn = main.lightModeOn;
-            DBHandler = new DBHandlingUtilities();
+            dbHandler = new DBHandlingUtilities();
             UI = new UIUtilities(lightModeOn);
             Configure_Theme();
         }
@@ -41,11 +41,11 @@ namespace Instagram
             confirmPasswordLabel.ForeColor = textColor;
             realUserNameLabel.ForeColor = textColor;
             userName_Box.ForeColor = textColor;
-            password_Box.ForeColor = textColor;
-            userName_Box.BackColor = backColor;
-            password_Box.BackColor = backColor;
             realUserName_Box.ForeColor = textColor;
+            userName_Box.BackColor = backColor;
+            realUserName_Box.BackColor = backColor;
             confirmPassword_Box.ForeColor = textColor;
+            password_Box.ForeColor = textColor;
             tagLineLabel.ForeColor = textColor;
             instagramLogo.BackColor = backColor;
             statusPassword.BackColor = backColor;
@@ -55,8 +55,8 @@ namespace Instagram
             statusPassword.ForeColor = textColor;
             statusID.ForeColor = textColor;
             realUserNameLabel.BackColor = backColor;
-            realUserName_Box.BackColor = backColor;
             confirmPassword_Box.BackColor = backColor;
+            password_Box.BackColor = backColor;
             tagLineLabel.BackColor = backColor;
             tagLine_Box.BackColor = backColor;
             tagLine_Box.ForeColor = textColor;
@@ -81,12 +81,13 @@ namespace Instagram
             if (pass == confirmPass)
             {
                 setStatus(2, true, "");
-                if (DBHandler.Add_User(userName, realUserName, pass, tagLine))
+                if (dbHandler.Add_User(userName, realUserName, pass, tagLine))
                 {
+                    dbHandler.Create_User_Entities(dbHandler.Return_User_ID(userName).ToString(), userName);
                     Console.WriteLine("User added Successfully!");
                     setStatus(0, true, "");
                     main.form.Dispose();
-                    main.form = new Login(main);
+                    main.form = new Login(main) { TopLevel = false, TopMost = true};
                 }
                 else
                     setStatus(0, false, "Account Already Present!");
@@ -98,16 +99,16 @@ namespace Instagram
         private void resetEntries()
         {
             userName_Box.Text = "";
+            confirmPassword_Box.Text = "";
             realUserName_Box.Text = "";
             password_Box.Text = "";
-            confirmPassword_Box.Text = "";
             tagLine_Box.Text = "";
             profileBox.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Avatar.png");
         }
         private void logIn_Click(object sender, EventArgs e)
         {
             main.form.Dispose();
-            main.form  = new Login(main) { TopLevel = false, TopMost = true };
+            main.form = new Login(main) { TopLevel = false, TopMost = true };
         }
         private void setStatus(int statusNumber, bool setStatus, string message)
         {
@@ -158,6 +159,11 @@ namespace Instagram
         private bool checkUserName(string ID)
         {
             int countNumberOfCharacters = 0, countNumberOfIntegers = 0;
+            if ((ID[0] < 65 || ID[0] > 90) && (ID[0] < 97 || ID[0] > 122))
+            {
+                setStatus(0, false, "1st character should be an alphabet!");
+                return false;
+            }
             for (int i = 0; i < ID.Length; i++)
             {
                 if (ID[i] == ' ')
@@ -243,8 +249,8 @@ namespace Instagram
 
         private void circularButton1_Click(object sender, EventArgs e)
         {
-            DBHandler.Get_Picture();
-            profileBox.ImageLocation = DBHandler.fileDirectory;
+            dbHandler.Get_Picture();
+            profileBox.ImageLocation = dbHandler.fileDirectory;
         }
     }
 }

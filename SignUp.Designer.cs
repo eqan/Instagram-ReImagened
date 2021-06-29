@@ -40,14 +40,14 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.instagramLogo = new System.Windows.Forms.PictureBox();
-            this.confirmPassword_Box = new System.Windows.Forms.TextBox();
-            this.confirmPasswordLabel = new System.Windows.Forms.Label();
             this.password_Box = new System.Windows.Forms.TextBox();
+            this.confirmPasswordLabel = new System.Windows.Forms.Label();
+            this.realUserName_Box = new System.Windows.Forms.TextBox();
             this.passwordLabel = new System.Windows.Forms.Label();
             this.userName_Box = new System.Windows.Forms.TextBox();
             this.userNameLabel = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.realUserName_Box = new System.Windows.Forms.TextBox();
+            this.confirmPassword_Box = new System.Windows.Forms.TextBox();
             this.realUserNameLabel = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.tagLine_Box = new System.Windows.Forms.TextBox();
@@ -181,20 +181,20 @@
             this.instagramLogo.TabIndex = 44;
             this.instagramLogo.TabStop = false;
             // 
-            // confirmPassword_Box
+            // password_Box
             // 
-            this.confirmPassword_Box.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.password_Box.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.confirmPassword_Box.BackColor = System.Drawing.Color.Black;
-            this.confirmPassword_Box.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.confirmPassword_Box.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.confirmPassword_Box.ForeColor = System.Drawing.Color.White;
-            this.confirmPassword_Box.Location = new System.Drawing.Point(272, 253);
-            this.confirmPassword_Box.Name = "confirmPassword_Box";
-            this.confirmPassword_Box.Size = new System.Drawing.Size(285, 15);
-            this.confirmPassword_Box.TabIndex = 43;
-            this.confirmPassword_Box.UseSystemPasswordChar = true;
+            this.password_Box.BackColor = System.Drawing.Color.Black;
+            this.password_Box.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.password_Box.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.password_Box.ForeColor = System.Drawing.Color.White;
+            this.password_Box.Location = new System.Drawing.Point(272, 211);
+            this.password_Box.Name = "password_Box";
+            this.password_Box.Size = new System.Drawing.Size(285, 15);
+            this.password_Box.TabIndex = 43;
+            this.password_Box.UseSystemPasswordChar = true;
             // 
             // confirmPasswordLabel
             // 
@@ -209,20 +209,19 @@
             this.confirmPasswordLabel.TabIndex = 42;
             this.confirmPasswordLabel.Text = "Confirm Password:";
             // 
-            // password_Box
+            // realUserName_Box
             // 
-            this.password_Box.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.realUserName_Box.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.password_Box.BackColor = System.Drawing.Color.Black;
-            this.password_Box.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.password_Box.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.password_Box.ForeColor = System.Drawing.Color.White;
-            this.password_Box.Location = new System.Drawing.Point(272, 211);
-            this.password_Box.Name = "password_Box";
-            this.password_Box.Size = new System.Drawing.Size(285, 15);
-            this.password_Box.TabIndex = 39;
-            this.password_Box.UseSystemPasswordChar = true;
+            this.realUserName_Box.BackColor = System.Drawing.Color.Black;
+            this.realUserName_Box.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.realUserName_Box.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.realUserName_Box.ForeColor = System.Drawing.Color.White;
+            this.realUserName_Box.Location = new System.Drawing.Point(272, 158);
+            this.realUserName_Box.Name = "realUserName_Box";
+            this.realUserName_Box.Size = new System.Drawing.Size(285, 15);
+            this.realUserName_Box.TabIndex = 39;
             // 
             // passwordLabel
             // 
@@ -276,19 +275,20 @@
             this.label5.Size = new System.Drawing.Size(285, 3);
             this.label5.TabIndex = 57;
             // 
-            // realUserName_Box
+            // confirmPassword_Box
             // 
-            this.realUserName_Box.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.confirmPassword_Box.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.realUserName_Box.BackColor = System.Drawing.Color.Black;
-            this.realUserName_Box.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.realUserName_Box.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.realUserName_Box.ForeColor = System.Drawing.Color.White;
-            this.realUserName_Box.Location = new System.Drawing.Point(272, 158);
-            this.realUserName_Box.Name = "realUserName_Box";
-            this.realUserName_Box.Size = new System.Drawing.Size(285, 15);
-            this.realUserName_Box.TabIndex = 56;
+            this.confirmPassword_Box.BackColor = System.Drawing.Color.Black;
+            this.confirmPassword_Box.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.confirmPassword_Box.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.confirmPassword_Box.ForeColor = System.Drawing.Color.White;
+            this.confirmPassword_Box.Location = new System.Drawing.Point(272, 254);
+            this.confirmPassword_Box.Name = "confirmPassword_Box";
+            this.confirmPassword_Box.Size = new System.Drawing.Size(285, 15);
+            this.confirmPassword_Box.TabIndex = 56;
+            this.confirmPassword_Box.UseSystemPasswordChar = true;
             // 
             // realUserNameLabel
             // 
@@ -415,7 +415,7 @@
             this.Controls.Add(this.tagLine_Box);
             this.Controls.Add(this.tagLineLabel);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.realUserName_Box);
+            this.Controls.Add(this.confirmPassword_Box);
             this.Controls.Add(this.realUserNameLabel);
             this.Controls.Add(this.statusConfirmPassword);
             this.Controls.Add(this.statusPassword);
@@ -427,9 +427,9 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.instagramLogo);
-            this.Controls.Add(this.confirmPassword_Box);
-            this.Controls.Add(this.confirmPasswordLabel);
             this.Controls.Add(this.password_Box);
+            this.Controls.Add(this.confirmPasswordLabel);
+            this.Controls.Add(this.realUserName_Box);
             this.Controls.Add(this.passwordLabel);
             this.Controls.Add(this.userName_Box);
             this.Controls.Add(this.userNameLabel);
@@ -460,14 +460,14 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox instagramLogo;
-        private System.Windows.Forms.TextBox confirmPassword_Box;
-        private System.Windows.Forms.Label confirmPasswordLabel;
         private System.Windows.Forms.TextBox password_Box;
+        private System.Windows.Forms.Label confirmPasswordLabel;
+        private System.Windows.Forms.TextBox realUserName_Box;
         private System.Windows.Forms.Label passwordLabel;
         private System.Windows.Forms.TextBox userName_Box;
         private System.Windows.Forms.Label userNameLabel;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox realUserName_Box;
+        private System.Windows.Forms.TextBox confirmPassword_Box;
         private System.Windows.Forms.Label realUserNameLabel;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox tagLine_Box;
