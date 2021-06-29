@@ -246,10 +246,5 @@ namespace Instagram
             DBHandler.Get_Picture();
             profileBox.ImageLocation = DBHandler.fileDirectory;
         }
-
-        private void SignUp_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

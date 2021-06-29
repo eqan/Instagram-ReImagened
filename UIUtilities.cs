@@ -1,6 +1,7 @@
 ﻿using System.Windows.Forms;
 using System;
 using System.Drawing;
+using System.Runtime.InteropServices;
 
 namespace Instagram
 {
@@ -24,7 +25,7 @@ namespace Instagram
             lightModeOn = formLightModeOn;
         }
 
-        public UIUtilities(Form f,bool formLightModeOn)
+        public UIUtilities(Form f, bool formLightModeOn)
         {
             formWidth = f.Width;
             formHeight = f.Height;
@@ -247,6 +248,30 @@ namespace Instagram
         public Panel Get_Panel()
         {
             return sidePanel;
+        }
+        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+        private static extern IntPtr CreateRoundRectRgn
+       (
+           int nLeftRect,     // x-coordinate of upper-left corner
+           int nTopRect,      // y-coordinate of upper-left corner
+           int nRightRect,    // x-coordinate of lower-right corner
+           int nBottomRect,   // y-coordinate of lower-right corner
+           int nWidthEllipse, // height of ellipse
+           int nHeightEllipse // width of ellipse
+       );
+
+        public void Create_Rounded_Corners()
+        {
+            mainForm.FormBorderStyle = FormBorderStyle.None;
+            mainForm.Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, mainForm.Width, mainForm.Height, 20, 20));
+        }
+
+        public void Dispose_UI_Components()
+        {
+            sidePanel.Dispose();
+            btn_Close.Dispose();
+            btn_Maximize.Dispose();
+            btn_Minimize.Dispose();
         }
     }
 }

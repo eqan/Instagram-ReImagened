@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="pictureBox2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="addStoryBtn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAnQAAAGGCAYAAADy2xxAAAAABGdBTUEAALGPC/xhBQAAIgRJREFUeF7t
         3cGV48yVJlDZ02OGjOhxoceDHg9kgRzoMaAN6NnLAO211l5rTUU1mZPF+khG4AFgALjfOXch/ZWPIAjE
@@ -269,7 +269,7 @@
         f2kpM6uZdFPRAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="pictureBox3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="addPostBtn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAnQAAAGGCAYAAADy2xxAAAAABGdBTUEAALGPC/xhBQAAH+JJREFUeF7t
         3cG148yRJlDZ02OGjOhxoceDHg9kgRzoMaAN6NnLAO211l7rnsoS3xsW6yOZiQDABHC/c+5K/wuCIJAR

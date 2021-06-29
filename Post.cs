@@ -47,6 +47,7 @@ namespace Instagram
             locationLabel.ForeColor = textColor;
             likeLabel.ForeColor = textColor;
             postDescriptionBox.Cursor = Cursors.Arrow;
+            menuBtn.Image = Image.FromFile(UI.Return_UI_Location() + "more.png");
             likeBtn.Image = Image.FromFile(UI.Return_UI_Location() + "heart.png");
             bookMarkedBtn.Image = Image.FromFile(UI.Return_UI_Location() + "bookmark.png");
             topBar.BackColor = barColor;
@@ -81,6 +82,18 @@ namespace Instagram
         {
             bookMarkedBtn.Image.Dispose();
             bookMarkedBtn.Image = Image.FromFile(UI.Return_UI_Location() + "bookmark.png");
+        }
+
+        private void menuBtn_MouseHover(object sender, EventArgs e)
+        {
+            menuBtn.Image.Dispose();
+            menuBtn.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Selected Mode\more.png");
+        }
+
+        private void menuBtn_MouseLeave(object sender, EventArgs e)
+        {
+            menuBtn.Image.Dispose();
+            menuBtn.Image = Image.FromFile(UI.Return_UI_Location() + "more.png");
         }
 
         private void bookMarkedBtn_Click(object sender, EventArgs e)

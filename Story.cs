@@ -6,24 +6,22 @@ namespace Instagram
 {
     public partial class Story : Form
     {
-        bool lightModeOn = false;
         UIUtilities UI;
         DBHandlingUtilities dbHandler;
         Image[] storyList;
         int storyCount = 0;
         string tableName;
-        Form form;
-        public Story(string tableName, Image profilePicture, bool lightModeOn, Form form)
+        Main main;
+        public Story(string tableName, Image profilePicture, Main form)
         {
             InitializeComponent();
-            this.lightModeOn = lightModeOn;
-            this.form = form;
+            this.main = form;
             Initial_Setting_Initialzier(tableName, profilePicture);
         }
 
         private void Initial_Setting_Initialzier(string tableName, Image profilePicture)
         {
-            UI = new UIUtilities(lightModeOn);
+            UI = new UIUtilities(main.lightModeOn);
             Configure_Theme();
             profileBox.Bitmap = (Bitmap)profilePicture;
             this.tableName = tableName;
@@ -36,32 +34,14 @@ namespace Instagram
         private void Configure_Theme()
         {
             Color backColor;
-            if (lightModeOn)
+            if (main.lightModeOn)
                 backColor = Color.FromArgb(255, 255, 255);
             else
                 backColor = Color.FromArgb(0, 0, 0);
             this.BackColor = backColor;
             storyBox.BackColor = backColor;
-            Initialize_Buttons(backColor);
-        }
-
-        private void Initialize_Buttons(Color backColor)
-        {
-            int[] btnSize = { 50, 50};
-            PictureBox nextStory = UI.Create_Button("next", btnSize, new int[] { this.Width - btnSize[0] - 10, this.Height / 2 - 10 }, backColor, lightModeOn);
-            nextStory.MouseClick += new MouseEventHandler((o, a) =>
-            {
-                incrementStories();
-            }
-            );
-            PictureBox backStory = UI.Create_Button("back", btnSize, new int[] { 0 + 10, this.Height / 2 - 10 }, backColor, lightModeOn);
-            backStory.MouseClick += new MouseEventHandler((o, a) =>
-            {
-                decrementStories();
-            }
-            );
-            Controls.Add(nextStory);
-            Controls.Add(backStory);
+            nextBtn.Image = Image.FromFile(UI.Return_UI_Location() + "next.png");
+            previousBtn.Image = Image.FromFile(UI.Return_UI_Location() + "back.png");
         }
 
         private void Load_Images()
@@ -87,7 +67,7 @@ namespace Instagram
             }
             else
             {
-                form.Show();
+                main.Show();
                 this.Dispose();
             }
         }
@@ -100,7 +80,7 @@ namespace Instagram
             }
             else
             {
-                form.Show();
+                main.Show();
                 this.Dispose();
             }
         }
@@ -117,5 +97,38 @@ namespace Instagram
             }
         }
 
+        private void nextBtn_Click(object sender, EventArgs e)
+        {
+            incrementStories();
+        }
+
+        private void previousBtn_Click(object sender, EventArgs e)
+        {
+            decrementStories();
+        }
+
+        private void previousBtn_MouseHover(object sender, EventArgs e)
+        {
+            previousBtn.Image.Dispose();
+            previousBtn.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Selected Mode\back.png");
+        }
+
+        private void previousBtn_MouseLeave(object sender, EventArgs e)
+        {
+            previousBtn.Image.Dispose();
+            previousBtn.Image = Image.FromFile(UI.Return_UI_Location() + "back.png");
+        }
+
+        private void nextBtn_MouseHover(object sender, EventArgs e)
+        {
+            nextBtn.Image.Dispose();
+            nextBtn.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Selected Mode\next.png");
+        }
+
+        private void nextBtn_MouseLeave(object sender, EventArgs e)
+        {
+            nextBtn.Image.Dispose();
+            nextBtn.Image = Image.FromFile(UI.Return_UI_Location() + "next.png");
+        }
     }
 }

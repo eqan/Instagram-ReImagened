@@ -34,16 +34,20 @@
             this.loadingIndicator = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.profileBox = new Instagram.CircularPictureBox();
+            this.nextBtn = new System.Windows.Forms.PictureBox();
+            this.previousBtn = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.storyBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.profileBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nextBtn)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.previousBtn)).BeginInit();
             this.SuspendLayout();
             // 
             // storyBox
             // 
             this.storyBox.BackColor = System.Drawing.Color.Black;
-            this.storyBox.Location = new System.Drawing.Point(66, 86);
+            this.storyBox.Location = new System.Drawing.Point(81, 86);
             this.storyBox.Name = "storyBox";
-            this.storyBox.Size = new System.Drawing.Size(623, 285);
+            this.storyBox.Size = new System.Drawing.Size(587, 285);
             this.storyBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.storyBox.TabIndex = 0;
             this.storyBox.TabStop = false;
@@ -80,12 +84,40 @@
             this.profileBox.TabIndex = 76;
             this.profileBox.TabStop = false;
             // 
+            // nextBtn
+            // 
+            this.nextBtn.Image = ((System.Drawing.Image)(resources.GetObject("nextBtn.Image")));
+            this.nextBtn.Location = new System.Drawing.Point(674, 242);
+            this.nextBtn.Name = "nextBtn";
+            this.nextBtn.Size = new System.Drawing.Size(60, 50);
+            this.nextBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.nextBtn.TabIndex = 77;
+            this.nextBtn.TabStop = false;
+            this.nextBtn.Click += new System.EventHandler(this.nextBtn_Click);
+            this.nextBtn.MouseLeave += new System.EventHandler(this.nextBtn_MouseLeave);
+            this.nextBtn.MouseHover += new System.EventHandler(this.nextBtn_MouseHover);
+            // 
+            // previousBtn
+            // 
+            this.previousBtn.Image = ((System.Drawing.Image)(resources.GetObject("previousBtn.Image")));
+            this.previousBtn.Location = new System.Drawing.Point(8, 242);
+            this.previousBtn.Name = "previousBtn";
+            this.previousBtn.Size = new System.Drawing.Size(60, 50);
+            this.previousBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.previousBtn.TabIndex = 78;
+            this.previousBtn.TabStop = false;
+            this.previousBtn.Click += new System.EventHandler(this.previousBtn_Click);
+            this.previousBtn.MouseLeave += new System.EventHandler(this.previousBtn_MouseLeave);
+            this.previousBtn.MouseHover += new System.EventHandler(this.previousBtn_MouseHover);
+            // 
             // Story
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(742, 426);
+            this.Controls.Add(this.previousBtn);
+            this.Controls.Add(this.nextBtn);
             this.Controls.Add(this.profileBox);
             this.Controls.Add(this.loadingIndicator);
             this.Controls.Add(this.storyBox);
@@ -95,6 +127,8 @@
             this.Load += new System.EventHandler(this.story_Load);
             ((System.ComponentModel.ISupportInitialize)(this.storyBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.profileBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nextBtn)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.previousBtn)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -105,5 +139,7 @@
         private System.Windows.Forms.Label loadingIndicator;
         private System.Windows.Forms.Timer timer1;
         private CircularPictureBox profileBox;
+        private System.Windows.Forms.PictureBox nextBtn;
+        private System.Windows.Forms.PictureBox previousBtn;
     }
 }

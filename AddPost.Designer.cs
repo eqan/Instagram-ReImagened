@@ -38,8 +38,8 @@
             this.postDescritpionBox = new System.Windows.Forms.TextBox();
             this.postDescritpionLabel = new System.Windows.Forms.Label();
             this.nextBtn = new System.Windows.Forms.PictureBox();
-            this.uploadPictureBtn = new Instagram.CircularButton();
             this.profilePictureBox = new Instagram.CircularPictureBox();
+            this.customButton1 = new Instagram.CustomButton();
             ((System.ComponentModel.ISupportInitialize)(this.postPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nextBtn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.profilePictureBox)).BeginInit();
@@ -59,9 +59,9 @@
             // 
             this.postPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.postPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("postPictureBox.Image")));
-            this.postPictureBox.Location = new System.Drawing.Point(110, 91);
+            this.postPictureBox.Location = new System.Drawing.Point(110, 60);
             this.postPictureBox.Name = "postPictureBox";
-            this.postPictureBox.Size = new System.Drawing.Size(549, 213);
+            this.postPictureBox.Size = new System.Drawing.Size(549, 232);
             this.postPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.postPictureBox.TabIndex = 67;
             this.postPictureBox.TabStop = false;
@@ -157,23 +157,6 @@
             this.nextBtn.MouseLeave += new System.EventHandler(this.nextBtn_MouseLeave);
             this.nextBtn.MouseHover += new System.EventHandler(this.pictureBox1_MouseHover);
             // 
-            // uploadPictureBtn
-            // 
-            this.uploadPictureBtn.BackColor = System.Drawing.Color.DodgerBlue;
-            this.uploadPictureBtn.FlatAppearance.BorderColor = System.Drawing.Color.DodgerBlue;
-            this.uploadPictureBtn.FlatAppearance.BorderSize = 2;
-            this.uploadPictureBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
-            this.uploadPictureBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue;
-            this.uploadPictureBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.uploadPictureBtn.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.uploadPictureBtn.Image = ((System.Drawing.Image)(resources.GetObject("uploadPictureBtn.Image")));
-            this.uploadPictureBtn.Location = new System.Drawing.Point(586, 245);
-            this.uploadPictureBtn.Name = "uploadPictureBtn";
-            this.uploadPictureBtn.Size = new System.Drawing.Size(54, 49);
-            this.uploadPictureBtn.TabIndex = 68;
-            this.uploadPictureBtn.UseVisualStyleBackColor = false;
-            this.uploadPictureBtn.Click += new System.EventHandler(this.uploadPictureBtn_Click);
-            // 
             // profilePictureBox
             // 
             this.profilePictureBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
@@ -191,13 +174,32 @@
             this.profilePictureBox.TabIndex = 9;
             this.profilePictureBox.TabStop = false;
             // 
+            // customButton1
+            // 
+            this.customButton1.BackColor = System.Drawing.Color.DodgerBlue;
+            this.customButton1.BackgroundColor = System.Drawing.Color.DodgerBlue;
+            this.customButton1.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.customButton1.BorderRadius = 26;
+            this.customButton1.BorderSize = 0;
+            this.customButton1.FlatAppearance.BorderSize = 0;
+            this.customButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.customButton1.ForeColor = System.Drawing.Color.White;
+            this.customButton1.Image = ((System.Drawing.Image)(resources.GetObject("customButton1.Image")));
+            this.customButton1.Location = new System.Drawing.Point(665, 240);
+            this.customButton1.Name = "customButton1";
+            this.customButton1.Size = new System.Drawing.Size(62, 52);
+            this.customButton1.TabIndex = 76;
+            this.customButton1.TextColor = System.Drawing.Color.White;
+            this.customButton1.UseVisualStyleBackColor = false;
+            this.customButton1.Click += new System.EventHandler(this.uploadPictureBtn_Click);
+            // 
             // AddPost
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(753, 450);
+            this.Controls.Add(this.customButton1);
             this.Controls.Add(this.nextBtn);
-            this.Controls.Add(this.uploadPictureBtn);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.locationBox);
             this.Controls.Add(this.locationLabel);
@@ -221,7 +223,6 @@
         #endregion
         public System.Windows.Forms.Label userNameLabel;
         public CircularPictureBox profilePictureBox;
-        private CircularButton uploadPictureBtn;
         private System.Windows.Forms.PictureBox postPictureBox;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox locationBox;
@@ -230,5 +231,6 @@
         private System.Windows.Forms.TextBox postDescritpionBox;
         private System.Windows.Forms.Label postDescritpionLabel;
         private System.Windows.Forms.PictureBox nextBtn;
+        private CustomButton customButton1;
     }
 }

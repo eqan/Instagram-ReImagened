@@ -30,8 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddStory));
             this.storyBox = new System.Windows.Forms.PictureBox();
-            this.uploadBtn = new Instagram.CircularButton();
-            this.albumBtn = new Instagram.CircularButton();
+            this.uploadBtn = new Instagram.CustomButton();
+            this.albumBtn = new Instagram.CustomButton();
             ((System.ComponentModel.ISupportInitialize)(this.storyBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -48,26 +48,38 @@
             // uploadBtn
             // 
             this.uploadBtn.BackColor = System.Drawing.Color.DodgerBlue;
+            this.uploadBtn.BackgroundColor = System.Drawing.Color.DodgerBlue;
+            this.uploadBtn.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.uploadBtn.BorderRadius = 35;
+            this.uploadBtn.BorderSize = 0;
             this.uploadBtn.FlatAppearance.BorderSize = 0;
             this.uploadBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.uploadBtn.ForeColor = System.Drawing.Color.White;
             this.uploadBtn.Image = ((System.Drawing.Image)(resources.GetObject("uploadBtn.Image")));
-            this.uploadBtn.Location = new System.Drawing.Point(370, 331);
+            this.uploadBtn.Location = new System.Drawing.Point(364, 331);
             this.uploadBtn.Name = "uploadBtn";
-            this.uploadBtn.Size = new System.Drawing.Size(72, 75);
-            this.uploadBtn.TabIndex = 2;
+            this.uploadBtn.Size = new System.Drawing.Size(77, 75);
+            this.uploadBtn.TabIndex = 3;
+            this.uploadBtn.TextColor = System.Drawing.Color.White;
             this.uploadBtn.UseVisualStyleBackColor = false;
             this.uploadBtn.Click += new System.EventHandler(this.upload_Click);
             // 
             // albumBtn
             // 
             this.albumBtn.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.albumBtn.BackgroundColor = System.Drawing.SystemColors.ControlLight;
+            this.albumBtn.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.albumBtn.BorderRadius = 26;
+            this.albumBtn.BorderSize = 0;
             this.albumBtn.FlatAppearance.BorderSize = 0;
             this.albumBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.albumBtn.ForeColor = System.Drawing.Color.White;
             this.albumBtn.Image = ((System.Drawing.Image)(resources.GetObject("albumBtn.Image")));
-            this.albumBtn.Location = new System.Drawing.Point(291, 350);
+            this.albumBtn.Location = new System.Drawing.Point(301, 350);
             this.albumBtn.Name = "albumBtn";
-            this.albumBtn.Size = new System.Drawing.Size(55, 56);
-            this.albumBtn.TabIndex = 1;
+            this.albumBtn.Size = new System.Drawing.Size(57, 56);
+            this.albumBtn.TabIndex = 4;
+            this.albumBtn.TextColor = System.Drawing.Color.White;
             this.albumBtn.UseVisualStyleBackColor = false;
             this.albumBtn.Click += new System.EventHandler(this.album_Click);
             // 
@@ -76,8 +88,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(717, 430);
-            this.Controls.Add(this.uploadBtn);
             this.Controls.Add(this.albumBtn);
+            this.Controls.Add(this.uploadBtn);
             this.Controls.Add(this.storyBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "AddStory";
@@ -91,7 +103,7 @@
         #endregion
 
         private System.Windows.Forms.PictureBox storyBox;
-        private CircularButton albumBtn;
-        private CircularButton uploadBtn;
+        private CustomButton uploadBtn;
+        private CustomButton albumBtn;
     }
 }

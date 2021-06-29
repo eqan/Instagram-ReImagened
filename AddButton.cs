@@ -6,16 +6,14 @@ namespace Instagram
 {
     public partial class AddButton : Form
     {
-        bool lightModeOn = false;
         UIUtilities UI;
         Main main;
         Panel panelRef;
         public AddButton(Main main)
         {
             InitializeComponent();
-            this.lightModeOn = main.lightModeOn;
-            UI = new UIUtilities(lightModeOn);
             this.main = main;
+            UI = new UIUtilities(main.lightModeOn);
             Configure_Theme();
         }
 
@@ -27,7 +25,7 @@ namespace Instagram
         private void Configure_Theme()
         {
             Color backColor;
-            if (lightModeOn)
+            if (main.lightModeOn)
                 backColor = Color.FromArgb(209, 209, 209);
             else
                 backColor = Color.FromArgb(31, 31, 31);
@@ -39,7 +37,7 @@ namespace Instagram
         private void Reset_Color()
         {
             Color backColor;
-            if (lightModeOn)
+            if (main.lightModeOn)
                 backColor = Color.FromArgb(209, 209, 209);
             else
                 backColor = Color.FromArgb(31, 31, 31);
@@ -61,18 +59,24 @@ namespace Instagram
 
         private void addPost_Click(object sender, EventArgs e)
         {
-            panelRef.Dispose();
-            AddPost addPost = new AddPost(main.userID, main.userName, lightModeOn) { TopLevel = false, TopMost = true };;
-            main.formVirtualizer.Controls.Add(addPost);
-            addPost.Show();
+            if(main.form != null)
+            {
+                main.form.Dispose();
+                panelRef.Dispose();
+                main.form = new AddPost(main.userID, main.userName, main.lightModeOn) { TopLevel = false, TopMost = true };;
+                main.form.Show();
+            }
         }
 
         private void addStory_Click(object sender, EventArgs e)
         {
-            panelRef.Dispose();
-            AddStory addStory = new AddStory(main.userID, main.userName, lightModeOn) { TopLevel = false, TopMost = true };;
-            main.formVirtualizer.Controls.Add(addStory);
-            addStory.Show();
+            if(main.form != null)
+            {
+                main.form.Dispose();
+                panelRef.Dispose();
+                main.form = new AddStory(main.userID, main.userName, main.lightModeOn) { TopLevel = false, TopMost = true };;
+                main.form.Show();
+            }
         }
 
         private void addStory_MouseHover(object sender, EventArgs e)

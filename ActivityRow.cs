@@ -35,7 +35,5 @@ namespace Instagram
             activityLabel.ForeColor = textColor;
             timeLabel.ForeColor = textColor;
         }
-
-
     }
 }

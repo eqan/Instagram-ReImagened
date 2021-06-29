@@ -86,9 +86,6 @@
     <Compile Include="Chat.Designer.cs">
       <DependentUpon>Chat.cs</DependentUpon>
     </Compile>
-    <Compile Include="CircularButton.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="CircularPanel.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -96,6 +93,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CircularRadioButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomButton.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="DBHandlingUtilities.cs" />

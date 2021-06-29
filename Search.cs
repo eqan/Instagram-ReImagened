@@ -7,11 +7,12 @@ namespace Instagram
     {
         ProfilePreview[] searchResults;
         DBHandlingUtilities dbHandler;
-        bool lightModeOn = false;
-        public Search()
+        bool lightModeOn;
+        public Search(bool lightModeOn)
         {
             InitializeComponent();
             dbHandler = new DBHandlingUtilities();
+            this.lightModeOn = lightModeOn;
             Configure_Theme();
         }
 

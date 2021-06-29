@@ -135,7 +135,7 @@ namespace Instagram
                 var item = storyListView.SelectedItems[0];
                 Image img = listViewImageList.Images[item.ImageIndex];
                 this.Hide();
-                Story story = new Story(storyListView.SelectedItems[0].Tag.ToString(), img, false, main){ TopLevel = false, TopMost = true };;
+                Story story = new Story(storyListView.SelectedItems[0].Tag.ToString(), img, main){ TopLevel = false, TopMost = true };;
                 main.formVirtualizer.Controls.Add(story);
                 story.Show();
             }

@@ -42,8 +42,6 @@
             this.instagramLogo = new System.Windows.Forms.PictureBox();
             this.confirmPassword_Box = new System.Windows.Forms.TextBox();
             this.confirmPasswordLabel = new System.Windows.Forms.Label();
-            this.loginBtn = new System.Windows.Forms.Button();
-            this.signUpBtn = new System.Windows.Forms.Button();
             this.password_Box = new System.Windows.Forms.TextBox();
             this.passwordLabel = new System.Windows.Forms.Label();
             this.userName_Box = new System.Windows.Forms.TextBox();
@@ -54,7 +52,9 @@
             this.label8 = new System.Windows.Forms.Label();
             this.tagLine_Box = new System.Windows.Forms.TextBox();
             this.tagLineLabel = new System.Windows.Forms.Label();
-            this.circularButton1 = new Instagram.CircularButton();
+            this.uploadBtn = new Instagram.CustomButton();
+            this.customButton1 = new Instagram.CustomButton();
+            this.customButton2 = new Instagram.CustomButton();
             ((System.ComponentModel.ISupportInitialize)(this.profileBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusSymbolConfirmPassword)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusSymbolPassword)).BeginInit();
@@ -209,38 +209,6 @@
             this.confirmPasswordLabel.TabIndex = 42;
             this.confirmPasswordLabel.Text = "Confirm Password:";
             // 
-            // loginBtn
-            // 
-            this.loginBtn.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.loginBtn.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.loginBtn.FlatAppearance.BorderSize = 0;
-            this.loginBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.loginBtn.Font = new System.Drawing.Font("XXII DONT-MESS-WITH-VIKINGS", 17.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.loginBtn.ForeColor = System.Drawing.Color.White;
-            this.loginBtn.Location = new System.Drawing.Point(414, 344);
-            this.loginBtn.Name = "loginBtn";
-            this.loginBtn.Size = new System.Drawing.Size(122, 48);
-            this.loginBtn.TabIndex = 41;
-            this.loginBtn.Text = "LOGIN";
-            this.loginBtn.UseVisualStyleBackColor = false;
-            this.loginBtn.Click += new System.EventHandler(this.logIn_Click);
-            // 
-            // signUpBtn
-            // 
-            this.signUpBtn.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.signUpBtn.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.signUpBtn.FlatAppearance.BorderSize = 0;
-            this.signUpBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.signUpBtn.Font = new System.Drawing.Font("XXII DONT-MESS-WITH-VIKINGS", 17.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.signUpBtn.ForeColor = System.Drawing.Color.White;
-            this.signUpBtn.Location = new System.Drawing.Point(286, 344);
-            this.signUpBtn.Name = "signUpBtn";
-            this.signUpBtn.Size = new System.Drawing.Size(122, 48);
-            this.signUpBtn.TabIndex = 40;
-            this.signUpBtn.Text = "SIGNUP";
-            this.signUpBtn.UseVisualStyleBackColor = false;
-            this.signUpBtn.Click += new System.EventHandler(this.signUp_Click);
-            // 
             // password_Box
             // 
             this.password_Box.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -375,19 +343,64 @@
             this.tagLineLabel.TabIndex = 60;
             this.tagLineLabel.Text = "Tag Line:";
             // 
-            // circularButton1
+            // uploadBtn
             // 
-            this.circularButton1.BackColor = System.Drawing.Color.DodgerBlue;
-            this.circularButton1.FlatAppearance.BorderSize = 0;
-            this.circularButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.circularButton1.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.circularButton1.Image = ((System.Drawing.Image)(resources.GetObject("circularButton1.Image")));
-            this.circularButton1.Location = new System.Drawing.Point(705, 303);
-            this.circularButton1.Name = "circularButton1";
-            this.circularButton1.Size = new System.Drawing.Size(54, 49);
-            this.circularButton1.TabIndex = 66;
-            this.circularButton1.UseVisualStyleBackColor = false;
-            this.circularButton1.Click += new System.EventHandler(this.circularButton1_Click);
+            this.uploadBtn.BackColor = System.Drawing.Color.DodgerBlue;
+            this.uploadBtn.BackgroundColor = System.Drawing.Color.DodgerBlue;
+            this.uploadBtn.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.uploadBtn.BorderRadius = 25;
+            this.uploadBtn.BorderSize = 0;
+            this.uploadBtn.FlatAppearance.BorderSize = 0;
+            this.uploadBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.uploadBtn.ForeColor = System.Drawing.Color.White;
+            this.uploadBtn.Image = ((System.Drawing.Image)(resources.GetObject("uploadBtn.Image")));
+            this.uploadBtn.Location = new System.Drawing.Point(695, 296);
+            this.uploadBtn.Name = "uploadBtn";
+            this.uploadBtn.Size = new System.Drawing.Size(58, 55);
+            this.uploadBtn.TabIndex = 91;
+            this.uploadBtn.TextColor = System.Drawing.Color.White;
+            this.uploadBtn.UseVisualStyleBackColor = false;
+            this.uploadBtn.Click += new System.EventHandler(this.circularButton1_Click);
+            // 
+            // customButton1
+            // 
+            this.customButton1.BackColor = System.Drawing.Color.DodgerBlue;
+            this.customButton1.BackgroundColor = System.Drawing.Color.DodgerBlue;
+            this.customButton1.BorderColor = System.Drawing.Color.DodgerBlue;
+            this.customButton1.BorderRadius = 10;
+            this.customButton1.BorderSize = 0;
+            this.customButton1.FlatAppearance.BorderSize = 0;
+            this.customButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.customButton1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customButton1.ForeColor = System.Drawing.Color.White;
+            this.customButton1.Location = new System.Drawing.Point(290, 344);
+            this.customButton1.Name = "customButton1";
+            this.customButton1.Size = new System.Drawing.Size(118, 48);
+            this.customButton1.TabIndex = 90;
+            this.customButton1.Text = "Sign Up";
+            this.customButton1.TextColor = System.Drawing.Color.White;
+            this.customButton1.UseVisualStyleBackColor = false;
+            this.customButton1.Click += new System.EventHandler(this.signUp_Click);
+            // 
+            // customButton2
+            // 
+            this.customButton2.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.customButton2.BackgroundColor = System.Drawing.Color.DeepSkyBlue;
+            this.customButton2.BorderColor = System.Drawing.Color.DodgerBlue;
+            this.customButton2.BorderRadius = 10;
+            this.customButton2.BorderSize = 0;
+            this.customButton2.FlatAppearance.BorderSize = 0;
+            this.customButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.customButton2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customButton2.ForeColor = System.Drawing.Color.White;
+            this.customButton2.Location = new System.Drawing.Point(414, 344);
+            this.customButton2.Name = "customButton2";
+            this.customButton2.Size = new System.Drawing.Size(118, 48);
+            this.customButton2.TabIndex = 89;
+            this.customButton2.Text = "Login";
+            this.customButton2.TextColor = System.Drawing.Color.White;
+            this.customButton2.UseVisualStyleBackColor = false;
+            this.customButton2.Click += new System.EventHandler(this.logIn_Click);
             // 
             // SignUp
             // 
@@ -395,7 +408,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(796, 414);
-            this.Controls.Add(this.circularButton1);
+            this.Controls.Add(this.uploadBtn);
+            this.Controls.Add(this.customButton1);
+            this.Controls.Add(this.customButton2);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.tagLine_Box);
             this.Controls.Add(this.tagLineLabel);
@@ -414,8 +429,6 @@
             this.Controls.Add(this.instagramLogo);
             this.Controls.Add(this.confirmPassword_Box);
             this.Controls.Add(this.confirmPasswordLabel);
-            this.Controls.Add(this.loginBtn);
-            this.Controls.Add(this.signUpBtn);
             this.Controls.Add(this.password_Box);
             this.Controls.Add(this.passwordLabel);
             this.Controls.Add(this.userName_Box);
@@ -424,7 +437,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "SignUp";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.SignUp_Load);
+            this.Click += new System.EventHandler(this.circularButton1_Click);
             ((System.ComponentModel.ISupportInitialize)(this.profileBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusSymbolConfirmPassword)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusSymbolPassword)).EndInit();
@@ -449,8 +462,6 @@
         private System.Windows.Forms.PictureBox instagramLogo;
         private System.Windows.Forms.TextBox confirmPassword_Box;
         private System.Windows.Forms.Label confirmPasswordLabel;
-        private System.Windows.Forms.Button loginBtn;
-        private System.Windows.Forms.Button signUpBtn;
         private System.Windows.Forms.TextBox password_Box;
         private System.Windows.Forms.Label passwordLabel;
         private System.Windows.Forms.TextBox userName_Box;
@@ -461,6 +472,8 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox tagLine_Box;
         private System.Windows.Forms.Label tagLineLabel;
-        private CircularButton circularButton1;
+        private CustomButton customButton1;
+        private CustomButton customButton2;
+        private CustomButton uploadBtn;
     }
 }

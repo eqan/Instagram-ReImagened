@@ -89,7 +89,7 @@ namespace Instagram
                     param1 = new SqlParameter("@UserName", SqlDbType.VarChar);
                     param1.Value = userName;
                     cmd.Parameters.Add(param1);
-                    results[0] = (Int32)cmd.ExecuteScalar();
+                    results[0] = (int)cmd.ExecuteScalar();
                     Console.WriteLine("Result User: {0}", results[0].ToString());
                     dbConnection.Close();
                     if (results[0] == 1)
@@ -497,14 +497,18 @@ namespace Instagram
             return image;
         }
 
-        public Image[] Retrieve_All_Pictures(string tableName)
+        public Image[] Retrieve_All_Pictures(string tableName, string columnNameForIndex = null)
         {
             Image[] image = null;
             try
             {
                 if (dbConnection.State == ConnectionState.Closed)
                     dbConnection.Open();
-                string sqlCmd = "SELECT Image FROM " + tableName;
+                string sqlCmd;
+                if (columnNameForIndex != null)
+                    sqlCmd = "SELECT Image, " + columnNameForIndex + " FROM " + tableName;
+                else
+                    sqlCmd = "SELECT Image FROM " + tableName;
                 cmd = new SqlCommand(sqlCmd, dbConnection);
                 adapt = new SqlDataAdapter(cmd);
                 DataSet ds = new DataSet();
@@ -513,6 +517,8 @@ namespace Instagram
                 for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                 {
                     image[i] = Convert_Bytes_To_Image((byte[])ds.Tables[0].Rows[i]["Image"]);
+                    if (columnNameForIndex != null)
+                        image[i].Tag = ((int)ds.Tables[0].Rows[i][columnNameForIndex]).ToString();
                 }
                 if (dbConnection.State == ConnectionState.Open)
                     dbConnection.Close();
@@ -685,6 +691,73 @@ namespace Instagram
             return image;
         }
 
+        public Post Return_Post(string userID, string userName, bool lightModeOn, string postID)
+        {
+            Post post = null;
+            try
+            {
+                if (dbConnection.State == ConnectionState.Closed)
+                    dbConnection.Open();
+                string sqlCmd = "SELECT PostID,PostDesc, Location, Image, TimeLine FROM " + userName + "_" + userID + "_PostTable" + " WHERE PostID = @PostID";
+                cmd = new SqlCommand(sqlCmd, dbConnection);
+                cmd.Parameters.AddWithValue("@PostID", postID);
+                adapt = new SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                adapt.Fill(ds);
+                post = new Post(userID, userName, lightModeOn);
+                post.TopLevel = false;
+                post.TopMost = true;
+                post.followingID = userID;
+                post.userNameLabel.Text = userName;
+                Bitmap profilePicture = new Bitmap(Retrieve_Profile_Picture_Using_SQL(Int32.Parse(userID)));
+                post.profilePictureBox.Bitmap = profilePicture;
+                post.postID = postID;
+                post.likeLabel.Text = Return_Total_Likes(userID, userName, postID).ToString() + " Likes";
+                post.postPictureBox.Image = Convert_Bytes_To_Image((byte[])ds.Tables[0].Rows[0]["Image"]);
+                post.postDescriptionBox.Text = ((string)ds.Tables[0].Rows[0]["PostDesc"]);
+                post.locationLabel.Text = ((string)ds.Tables[0].Rows[0]["Location"]);
+                DateTime totalTime = ((DateTime)ds.Tables[0].Rows[0]["TimeLine"]);
+                TimeSpan t = DateTime.Now.Date.Subtract(totalTime.Date);
+                if (t.TotalDays != 0)
+                    post.timeLabel.Text = t.TotalDays.ToString() + " Days Ago";
+                else if (t.TotalHours != 0)
+                    post.timeLabel.Text = t.TotalHours.ToString() + " Hours Ago";
+                else if (t.TotalMinutes != 0)
+                    post.timeLabel.Text = t.TotalMinutes.ToString() + " Minutes Ago";
+                else
+                    post.timeLabel.Text = t.Seconds.ToString() + " Seconds Ago";
+                if (Is_Post_Liked(post.followingID, post.userNameLabel.Text, userName, post.postID))
+                {
+                    post.likeBtn.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Selected Mode\heart-selected.png");
+                    //postList[i].MouseHover += new EventHandler((o, a) => postList[i].likeBtn.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Selected Mode\heart-selected.png"));
+                    //postList[i].MouseLeave += new EventHandler((o, a) => postList[i].likeBtn.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Selected Mode\heart-selected.png"));
+                }
+                else
+                {
+                    if (lightModeOn)
+                        post.likeBtn.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Light Mode\UI Icons\heart.png");
+                    else
+                        post.likeBtn.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Dark Mode\UI Icons\heart.png");
+                }
+                if (Is_Post_BookMarked(post.followingID, post.userNameLabel.Text, userName, post.postID))
+                    post.bookMarkedBtn.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Selected Mode\bookmark.png");
+                else
+                {
+                    if (lightModeOn)
+                        post.bookMarkedBtn.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Light Mode\UI Icons\bookmark.png");
+                    else
+                        post.bookMarkedBtn.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Dark Mode\UI Icons\bookmark.png");
+                }
+                if (dbConnection.State == ConnectionState.Open)
+                    dbConnection.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return post;
+        }
+
         public ActivityRow[] Generate_Activity(string userID, string userName, bool lightModeOn)
         {
             ActivityRow[] activityList = null;
@@ -726,6 +799,58 @@ namespace Instagram
             return activityList;
         }
 
+        private Post[] Return_Posts_From_DataSet(string userID, string userName, bool lightModeOn, DataSet ds)
+        {
+            Post[] postList = null;
+            postList = new Post[ds.Tables[0].Rows.Count];
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                postList[i] = new Post(userID, userName, lightModeOn);
+                Bitmap profilePicture = new Bitmap(Retrieve_Profile_Picture_Using_SQL((((Int32)ds.Tables[0].Rows[i]["UserID"]))));
+                postList[i].profilePictureBox.Bitmap = profilePicture;
+                postList[i].userNameLabel.Text = ((string)ds.Tables[0].Rows[i]["UserName"]);
+                postList[i].followingID = (((Int32)ds.Tables[0].Rows[i]["UserID"]).ToString());
+                postList[i].postID = (((Int32)ds.Tables[0].Rows[i]["PostID"]).ToString());
+                postList[i].likeLabel.Text = Return_Total_Likes(postList[i].followingID, postList[i].userNameLabel.Text, postList[i].postID).ToString() + " Likes";
+                postList[i].postPictureBox.Image = Convert_Bytes_To_Image((byte[])ds.Tables[0].Rows[i]["Image"]);
+                postList[i].postDescriptionBox.Text = ((string)ds.Tables[0].Rows[i]["PostDesc"]);
+                postList[i].locationLabel.Text = ((string)ds.Tables[0].Rows[i]["Location"]);
+                DateTime totalTime = ((DateTime)ds.Tables[0].Rows[i]["TimeLine"]);
+                TimeSpan t = DateTime.Now.Date.Subtract(totalTime.Date);
+                if (t.TotalDays != 0)
+                    postList[i].timeLabel.Text = t.TotalDays.ToString() + " Days Ago";
+                else if (t.TotalHours != 0)
+                    postList[i].timeLabel.Text = t.TotalHours.ToString() + " Hours Ago";
+                else if (t.TotalMinutes != 0)
+                    postList[i].timeLabel.Text = t.TotalMinutes.ToString() + " Minutes Ago";
+                else
+                    postList[i].timeLabel.Text = t.Seconds.ToString() + " Seconds Ago";
+                if (Is_Post_Liked(postList[i].followingID, postList[i].userNameLabel.Text, userName, postList[i].postID))
+                {
+                    postList[i].likeBtn.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Selected Mode\heart-selected.png");
+                    //postList[i].MouseHover += new EventHandler((o, a) => postList[i].likeBtn.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Selected Mode\heart-selected.png"));
+                    //postList[i].MouseLeave += new EventHandler((o, a) => postList[i].likeBtn.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Selected Mode\heart-selected.png"));
+                }
+                else
+                {
+                    if (lightModeOn)
+                        postList[i].likeBtn.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Light Mode\UI Icons\heart.png");
+                    else
+                        postList[i].likeBtn.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Dark Mode\UI Icons\heart.png");
+                }
+                if (Is_Post_BookMarked(postList[i].followingID, postList[i].userNameLabel.Text, userName, postList[i].postID))
+                    postList[i].bookMarkedBtn.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Selected Mode\bookmark.png");
+                else
+                {
+                    if (lightModeOn)
+                        postList[i].bookMarkedBtn.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Light Mode\UI Icons\bookmark.png");
+                    else
+                        postList[i].bookMarkedBtn.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Dark Mode\UI Icons\bookmark.png");
+                }
+            }
+            return postList;
+        }
+
         public Post[] Generate_Posts(string userID, string userName, bool lightModeOn)
         {
             Post[] postList = null;
@@ -738,52 +863,7 @@ namespace Instagram
                 adapt = new SqlDataAdapter(cmd);
                 DataSet ds = new DataSet();
                 adapt.Fill(ds);
-                postList = new Post[ds.Tables[0].Rows.Count];
-                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-                {
-                    postList[i] = new Post(userID, userName, lightModeOn);
-                    Bitmap profilePicture = new Bitmap(Retrieve_Profile_Picture_Using_SQL((((Int32)ds.Tables[0].Rows[i]["UserID"]))));
-                    postList[i].profilePictureBox.Bitmap = profilePicture;
-                    postList[i].userNameLabel.Text = ((string)ds.Tables[0].Rows[i]["UserName"]);
-                    postList[i].followingID = (((Int32)ds.Tables[0].Rows[i]["UserID"]).ToString());
-                    postList[i].postID = (((Int32)ds.Tables[0].Rows[i]["PostID"]).ToString());
-                    postList[i].likeLabel.Text = Return_Total_Likes(postList[i].followingID, postList[i].userNameLabel.Text, postList[i].postID).ToString() + " Likes";
-                    postList[i].postPictureBox.Image = Convert_Bytes_To_Image((byte[])ds.Tables[0].Rows[i]["Image"]);
-                    postList[i].postDescriptionBox.Text = ((string)ds.Tables[0].Rows[i]["PostDesc"]);
-                    postList[i].locationLabel.Text = ((string)ds.Tables[0].Rows[i]["Location"]);
-                    DateTime totalTime = ((DateTime)ds.Tables[0].Rows[i]["TimeLine"]);
-                    TimeSpan t = DateTime.Now.Date.Subtract(totalTime.Date);
-                    if (t.TotalDays != 0)
-                        postList[i].timeLabel.Text = t.TotalDays.ToString() + " Days Ago";
-                    else if (t.TotalHours != 0)
-                        postList[i].timeLabel.Text = t.TotalHours.ToString() + " Hours Ago";
-                    else if (t.TotalMinutes != 0)
-                        postList[i].timeLabel.Text = t.TotalMinutes.ToString() + " Minutes Ago";
-                    else
-                        postList[i].timeLabel.Text = t.Seconds.ToString() + " Seconds Ago";
-                    if (Is_Post_Liked(postList[i].followingID, postList[i].userNameLabel.Text, userName, postList[i].postID))
-                    {
-                        postList[i].likeBtn.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Selected Mode\heart-selected.png");
-                        //postList[i].MouseHover += new EventHandler((o, a) => postList[i].likeBtn.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Selected Mode\heart-selected.png"));
-                        //postList[i].MouseLeave += new EventHandler((o, a) => postList[i].likeBtn.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Selected Mode\heart-selected.png"));
-                    }
-                    else
-                    {
-                        if (lightModeOn)
-                            postList[i].likeBtn.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Light Mode\UI Icons\heart.png");
-                        else
-                            postList[i].likeBtn.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Dark Mode\UI Icons\heart.png");
-                    }
-                    if (Is_Post_BookMarked(postList[i].followingID, postList[i].userNameLabel.Text, userName, postList[i].postID))
-                        postList[i].bookMarkedBtn.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Selected Mode\bookmark.png");
-                    else
-                    {
-                        if (lightModeOn)
-                            postList[i].bookMarkedBtn.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Light Mode\UI Icons\bookmark.png");
-                        else
-                            postList[i].bookMarkedBtn.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Dark Mode\UI Icons\bookmark.png");
-                    }
-                }
+                postList = Return_Posts_From_DataSet(userID, userName, lightModeOn, ds);
                 if (dbConnection.State == ConnectionState.Open)
                     dbConnection.Close();
             }
@@ -888,6 +968,46 @@ namespace Instagram
                     dbConnection.Close();
             }
             return searchList;
+        }
+
+        public List<string> Return_Profile_Information(string userID, string userName)
+        {
+            List<string> information = new List<string>();
+            try
+            {
+                if (dbConnection.State == ConnectionState.Closed)
+                {
+                    dbConnection.Open();
+                    string tableName = userName + "_" + userID + "_";
+                    string sqlCommand = "SELECT COUNT(*) FROM " + tableName + "FollowingTable";
+                    cmd = new SqlCommand(sqlCommand, dbConnection);
+                    information.Add(((Int32)cmd.ExecuteScalar()).ToString());
+                    sqlCommand = "SELECT COUNT(*) FROM " + tableName + "FollowersTable";
+                    cmd = new SqlCommand(sqlCommand, dbConnection);
+                    information.Add(((Int32)cmd.ExecuteScalar()).ToString());
+                    sqlCommand = "SELECT COUNT(*) FROM " + tableName + "PostTable";
+                    cmd = new SqlCommand(sqlCommand, dbConnection);
+                    information.Add(((Int32)cmd.ExecuteScalar()).ToString());
+                    sqlCommand = "SELECT RealUserName, TagLine FROM USERS WHERE UserID = " + userID;
+                    cmd = new SqlCommand(sqlCommand, dbConnection);
+                    adapt = new SqlDataAdapter(cmd);
+                    DataSet ds = new DataSet();
+                    adapt.Fill(ds);
+                    information.Add((string)ds.Tables[0].Rows[0]["RealUserName"]);
+                    information.Add((string)ds.Tables[0].Rows[0]["TagLine"]);
+                    dbConnection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                if (dbConnection.State == ConnectionState.Open)
+                    dbConnection.Close();
+            }
+            return information;
         }
 
         public int Return_Total_Likes(string followingID, string followingName, string postID)

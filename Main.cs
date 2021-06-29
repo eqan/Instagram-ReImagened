@@ -8,10 +8,11 @@ namespace Instagram
     public partial class Main : Form
     {
         UIUtilities UI;
+        Panel addStoryPostButtonPanel = null;
         public bool lightModeOn = false;
         public Form form;
         int time = 0;
-        public string userName = "Eqan", userID = "3" ;
+        public string userName = "Eqan", userID = "3";
         public Main()
         {
             InitializeComponent();
@@ -23,6 +24,19 @@ namespace Instagram
             formVirtualizer.SendToBack();
             axMoviePlayer1.BringToFront();
         }
+
+        public void Configure_Theme()
+        {
+            if (lightModeOn)
+                this.BackColor = Color.FromArgb(242, 242, 242);
+            else
+                this.BackColor = Color.FromArgb(43, 43, 43);
+            UI.Dispose_UI_Components();
+            UI = new UIUtilities(this, lightModeOn);
+            Initialize_GUI_Components();
+            Initialize_Top_Left_Buttons();
+        }
+
         private void Initialize_GUI_Components()
         {
             // Form virtualizer
@@ -122,6 +136,7 @@ namespace Instagram
             Dispose_Intro_Screen();
             this.Size = new Size(800, 450);
             UI = new UIUtilities(this, lightModeOn);
+            UI.Create_Rounded_Corners();
             Initialize_Form_Virtualizer_For_SignUP();
             form = new Login(this) { TopLevel = false, TopMost = true };
         }
@@ -141,6 +156,14 @@ namespace Instagram
             UI.MouseDown(handle, sender, e);
         }
 
+        private void Check_Form_Disposed()
+        {
+            if (form != null)
+                form.Dispose();
+            if (addStoryPostButtonPanel != null)
+                addStoryPostButtonPanel.Dispose();
+        }
+
 
         public void Initialize_Form(int option)
         {
@@ -149,36 +172,43 @@ namespace Instagram
                 backColor = Color.FromArgb(242, 242, 242);
             else
                 backColor = Color.FromArgb(43, 43, 43);
-            form.Dispose();
+            Check_Form_Disposed();
             bool executes = true;
             switch (option)
             {
                 case 0:
+                    Check_Form_Disposed();
                     form = new Home(this) { TopLevel = false, TopMost = true };
                     break;
                 case 1:
+                    Check_Form_Disposed();
                     form = new Chat() { TopLevel = false, TopMost = true };
                     break;
                 case 2:
-                    form = new Search() { TopLevel = false, TopMost = true };
+                    Check_Form_Disposed();
+                    form = new Search(lightModeOn) { TopLevel = false, TopMost = true };
                     break;
                 case 3:
                     {
+                        Check_Form_Disposed();
                         AddButton addBtn = new AddButton(this) { TopLevel = false, TopMost = true };
-                        Panel panel = UI.Create_Panel(new int[] { addBtn.Width, addBtn.Height }, new int[] { this.Height / 2 - 160, (int)Math.Round(45 * 4.5, MidpointRounding.AwayFromZero) }, Color.Transparent );
-                        addBtn.Add_Panel_Reference(panel);
-                        this.Controls.Add(panel);
-                        panel.Controls.Add(addBtn);
+                        addStoryPostButtonPanel = UI.Create_Panel(new int[] { addBtn.Width, addBtn.Height }, new int[] { this.Height / 2 - 160, (int)Math.Round(45 * 4.5, MidpointRounding.AwayFromZero) }, Color.Transparent);
+                        addBtn.Add_Panel_Reference(addStoryPostButtonPanel);
+                        this.Controls.Add(addStoryPostButtonPanel);
+                        addStoryPostButtonPanel.Controls.Add(addBtn);
                         addBtn.Show();
-                        panel.BringToFront();
+                        addStoryPostButtonPanel.BringToFront();
                         form = new Home(this) { TopLevel = false, TopMost = true };
                         break;
                     }
                 case 4:
+                    Check_Form_Disposed();
                     form = new Activity(this) { TopLevel = false, TopMost = true };
                     break;
                 case 5:
-                    form = new Profile() { TopLevel = false, TopMost = true };
+                    if (form != null)
+                        form.Dispose();
+                    form = new Profile(this) { TopLevel = false, TopMost = true };
                     break;
                 default:
                     executes = false;

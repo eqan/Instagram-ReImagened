@@ -34,14 +34,14 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.instagramLogo = new System.Windows.Forms.PictureBox();
-            this.signUpBtn = new System.Windows.Forms.Button();
-            this.loginBtn = new System.Windows.Forms.Button();
             this.password_Box = new System.Windows.Forms.TextBox();
             this.passwordLabel = new System.Windows.Forms.Label();
             this.userName_Box = new System.Windows.Forms.TextBox();
             this.userNameLabel = new System.Windows.Forms.Label();
             this.statusPassword = new System.Windows.Forms.Label();
             this.statusID = new System.Windows.Forms.Label();
+            this.loginBtn = new Instagram.CustomButton();
+            this.signUpBtn = new Instagram.CustomButton();
             ((System.ComponentModel.ISupportInitialize)(this.statusSymbolPassword)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusSymbolID)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.instagramLogo)).BeginInit();
@@ -100,38 +100,6 @@
             this.instagramLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.instagramLogo.TabIndex = 73;
             this.instagramLogo.TabStop = false;
-            // 
-            // signUpBtn
-            // 
-            this.signUpBtn.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.signUpBtn.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.signUpBtn.FlatAppearance.BorderSize = 0;
-            this.signUpBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.signUpBtn.Font = new System.Drawing.Font("XXII DONT-MESS-WITH-VIKINGS", 17.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.signUpBtn.ForeColor = System.Drawing.Color.White;
-            this.signUpBtn.Location = new System.Drawing.Point(427, 305);
-            this.signUpBtn.Name = "signUpBtn";
-            this.signUpBtn.Size = new System.Drawing.Size(122, 48);
-            this.signUpBtn.TabIndex = 70;
-            this.signUpBtn.Text = "SignUP";
-            this.signUpBtn.UseVisualStyleBackColor = false;
-            this.signUpBtn.Click += new System.EventHandler(this.signUp_Click);
-            // 
-            // loginBtn
-            // 
-            this.loginBtn.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.loginBtn.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.loginBtn.FlatAppearance.BorderSize = 0;
-            this.loginBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.loginBtn.Font = new System.Drawing.Font("XXII DONT-MESS-WITH-VIKINGS", 17.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.loginBtn.ForeColor = System.Drawing.Color.White;
-            this.loginBtn.Location = new System.Drawing.Point(299, 305);
-            this.loginBtn.Name = "loginBtn";
-            this.loginBtn.Size = new System.Drawing.Size(122, 48);
-            this.loginBtn.TabIndex = 69;
-            this.loginBtn.Text = "Login";
-            this.loginBtn.UseVisualStyleBackColor = false;
-            this.loginBtn.Click += new System.EventHandler(this.login_Click);
             // 
             // password_Box
             // 
@@ -212,12 +180,54 @@
             this.statusID.Size = new System.Drawing.Size(0, 14);
             this.statusID.TabIndex = 85;
             // 
+            // loginBtn
+            // 
+            this.loginBtn.BackColor = System.Drawing.Color.DodgerBlue;
+            this.loginBtn.BackgroundColor = System.Drawing.Color.DodgerBlue;
+            this.loginBtn.BorderColor = System.Drawing.Color.DodgerBlue;
+            this.loginBtn.BorderRadius = 10;
+            this.loginBtn.BorderSize = 0;
+            this.loginBtn.FlatAppearance.BorderSize = 0;
+            this.loginBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.loginBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.loginBtn.ForeColor = System.Drawing.Color.White;
+            this.loginBtn.Location = new System.Drawing.Point(303, 305);
+            this.loginBtn.Name = "loginBtn";
+            this.loginBtn.Size = new System.Drawing.Size(118, 48);
+            this.loginBtn.TabIndex = 87;
+            this.loginBtn.Text = "Login";
+            this.loginBtn.TextColor = System.Drawing.Color.White;
+            this.loginBtn.UseVisualStyleBackColor = false;
+            this.loginBtn.Click += new System.EventHandler(this.login_Click);
+            // 
+            // signUpBtn
+            // 
+            this.signUpBtn.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.signUpBtn.BackgroundColor = System.Drawing.Color.DeepSkyBlue;
+            this.signUpBtn.BorderColor = System.Drawing.Color.DodgerBlue;
+            this.signUpBtn.BorderRadius = 10;
+            this.signUpBtn.BorderSize = 0;
+            this.signUpBtn.FlatAppearance.BorderSize = 0;
+            this.signUpBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.signUpBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.signUpBtn.ForeColor = System.Drawing.Color.White;
+            this.signUpBtn.Location = new System.Drawing.Point(427, 305);
+            this.signUpBtn.Name = "signUpBtn";
+            this.signUpBtn.Size = new System.Drawing.Size(118, 48);
+            this.signUpBtn.TabIndex = 88;
+            this.signUpBtn.Text = "Sign Up";
+            this.signUpBtn.TextColor = System.Drawing.Color.White;
+            this.signUpBtn.UseVisualStyleBackColor = false;
+            this.signUpBtn.Click += new System.EventHandler(this.signUp_Click);
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(786, 457);
+            this.Controls.Add(this.signUpBtn);
+            this.Controls.Add(this.loginBtn);
             this.Controls.Add(this.statusPassword);
             this.Controls.Add(this.statusID);
             this.Controls.Add(this.statusSymbolPassword);
@@ -225,8 +235,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.instagramLogo);
-            this.Controls.Add(this.signUpBtn);
-            this.Controls.Add(this.loginBtn);
             this.Controls.Add(this.password_Box);
             this.Controls.Add(this.passwordLabel);
             this.Controls.Add(this.userName_Box);
@@ -248,13 +256,13 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox instagramLogo;
-        private System.Windows.Forms.Button signUpBtn;
-        private System.Windows.Forms.Button loginBtn;
         private System.Windows.Forms.TextBox password_Box;
         private System.Windows.Forms.Label passwordLabel;
         private System.Windows.Forms.TextBox userName_Box;
         private System.Windows.Forms.Label userNameLabel;
         private System.Windows.Forms.Label statusPassword;
         private System.Windows.Forms.Label statusID;
+        private CustomButton loginBtn;
+        private CustomButton signUpBtn;
     }
 }
