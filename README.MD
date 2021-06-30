@@ -7,9 +7,9 @@
 
 ![Instagram Main Page](/ScreenShots/1.png)
 
-| Search Engine         | Add Post/Story         | History   |
-|:-------------:|:-------------:|:-------------:|
-|![](/ScreenShots/2.png)|![](/ScreenShots/3.png)|![](/ScreenShots/5.png)|
+| Search Engine         | Add Post/Story         |
+|:-------------:|:-------------:|
+|![](/ScreenShots/2.png)|![](/ScreenShots/3.png)|
 
 | Profile View         | Light/Dark Mode         | User Activity   |
 |:-------------:|:-------------:|:-------------:|
