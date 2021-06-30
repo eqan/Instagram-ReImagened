@@ -3,7 +3,7 @@
 
 #### Documentation is still incomplete
 
-#### _Note: This Project Is Solely Made For Educational Purposes & Is Entirely Self Made, None Of This Has RelationShip Of Any Kind With Instagram Or Any other social media application
+#### _Note: This Project Is Solely Made For Educational Purposes & Is Entirely Self Made, None Of This Has RelationShip Of Any Kind With Instagram Or Any other social media application_
 
 ![Instagram Main Page](/ScreenShots/1.png)
 
@@ -45,6 +45,6 @@
 > 4. Debug This Project :)
 > ## General Usage
 > 1. Download This Repo
-> 2. Go to the Neflix directory & then follow this path
+> 2. Go to the Instagram directory & then follow this path
 > _Instagram\bin\Debug_
 > 3. Run the Instagram.exe
