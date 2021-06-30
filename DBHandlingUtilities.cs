@@ -499,7 +499,7 @@ namespace Instagram
             return image;
         }
 
-        public Image[] Retrieve_All_Pictures(string tableName, string columnNameForIndex = null)
+        public Image[] Retrieve_All_Pictures(string tableName, string columnNameForIndex = null, string orderBy = null)
         {
             Image[] image = null;
             try
@@ -508,7 +508,7 @@ namespace Instagram
                     dbConnection.Open();
                 string sqlCmd;
                 if (columnNameForIndex != null)
-                    sqlCmd = "SELECT Image, " + columnNameForIndex + " FROM " + tableName;
+                    sqlCmd = "SELECT Image, " + columnNameForIndex + " FROM " + tableName + " " + orderBy;
                 else
                     sqlCmd = "SELECT Image FROM " + tableName;
                 cmd = new SqlCommand(sqlCmd, dbConnection);

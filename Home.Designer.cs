@@ -35,9 +35,9 @@
             // feedPanel
             // 
             this.feedPanel.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.feedPanel.Location = new System.Drawing.Point(37, 75);
+            this.feedPanel.Location = new System.Drawing.Point(-2, 75);
             this.feedPanel.Name = "feedPanel";
-            this.feedPanel.Size = new System.Drawing.Size(698, 376);
+            this.feedPanel.Size = new System.Drawing.Size(726, 376);
             this.feedPanel.TabIndex = 0;
             // 
             // storyListView
@@ -51,7 +51,7 @@
             this.storyListView.HideSelection = false;
             this.storyListView.Location = new System.Drawing.Point(-2, 0);
             this.storyListView.Name = "storyListView";
-            this.storyListView.Size = new System.Drawing.Size(801, 78);
+            this.storyListView.Size = new System.Drawing.Size(726, 78);
             this.storyListView.TabIndex = 2;
             this.storyListView.UseCompatibleStateImageBehavior = false;
             this.storyListView.AfterLabelEdit += new System.Windows.Forms.LabelEditEventHandler(this.listView1_AfterLabelEdit);
@@ -62,7 +62,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(722, 450);
             this.Controls.Add(this.storyListView);
             this.Controls.Add(this.feedPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

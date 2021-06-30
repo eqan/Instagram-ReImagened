@@ -83,7 +83,7 @@ namespace Instagram
         private void Add_All_Posts_ThumbNail(string userID, string userName)
         {
             listViewImageList.ImageSize = new Size(150, 150);
-            Image[] images = dbHandler.Retrieve_All_Pictures((userName + "_" + userID + "_PostTable"), "PostID");
+            Image[] images = dbHandler.Retrieve_All_Pictures((userName + "_" + userID + "_PostTable"), "PostID", "ORDER BY TimeLine DESC");
             for (int i = 0; i < images.Length; i++)
             {
                 try
