@@ -1,8 +1,7 @@
 # Instagram-ReImagened
-### A social media platform that utilizes SQL in a decentralized way
+### A social media platform that utilizes SQL
 
-The purpose for this project was to explore the potential limitations of SQL that allows GraphQL to be a more prominent option in the realm of social media and
-utilizing SQL for the first time in a real-world project rather than just for scripting purposes.
+The purpose for this project was to explore the potential limitations of REST API that allows GraphQL to be a more prominent option in the realm of social media and for personal purposes utilized SQL for the first time in a real-world project rather than just for scripting purposes.
 
 #### _Note: This Project Is Solely Made For Educational Purposes & Is Entirely Self Made, None Of This Has RelationShip Of Any Kind With Instagram Or Any other social media application_
 
