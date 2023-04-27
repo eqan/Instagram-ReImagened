@@ -160,10 +160,8 @@ namespace Instagram
 
         private void Check_Form_Disposed()
         {
-            if (form != null)
-                form.Dispose();
-            //if (addStoryPostButtonPanel != null)
-            //    addStoryPostButtonPanel.Dispose();
+            form?.Dispose();
+            addStoryPostButtonPanel?.Dispose();
         }
 
 
@@ -222,8 +220,18 @@ namespace Instagram
 
         private void formVirtualizer_Paint(object sender, PaintEventArgs e)
         {
-            formVirtualizer.Controls.Add(form);
-            form.Show();
+            try
+            {
+                formVirtualizer.Controls.Add(form);
+                form.Show();
+            }
+            catch(Exception error)
+            {
+                form = new Home(this) { TopLevel = false, TopMost = true };
+                formVirtualizer.Controls.Add(form);
+                form.Show();
+                Console.Write(error.ToString());
+            }
         }
 
         private void axMoviePlayer1_MouseDownEvent(object sender, AxMOVIEPLAYERLib._DMoviePlayerEvents_MouseDownEvent e)

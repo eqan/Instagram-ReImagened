@@ -246,7 +246,7 @@ namespace Instagram
                 {
                     dbConnection.Open();
                     int postID = Retrieve_Latest_PostID(userID, userName);
-                    cmd = new SqlCommand("CREATE TABLE " + userName + "_" + userID + "_" + postID.ToString() + "_LikesRecord ( ID INT IDENTITY(1,1) PRIMARY KEY,UserID INT UNIQUE, UserName VARCHAR(MAX))", dbConnection);
+                    cmd = new SqlCommand("CREATE TABLE " + userName + "_" + userID + "_" + postID.ToString() + "_LikesRecord ( ID INT IDENTITY(1,1) PRIMARY KEY, UserID INT NOT NULL, UserName VARCHAR(MAX), FOREIGN KEY (UserID) REFERENCES Users(UserID))", dbConnection);
                     cmd.ExecuteNonQuery();
                     Console.WriteLine("Like Record created for post {0} User {1}", postID, userName);
                     dbConnection.Close();
