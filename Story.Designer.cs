@@ -45,9 +45,10 @@
             // storyBox
             // 
             this.storyBox.BackColor = System.Drawing.Color.Black;
-            this.storyBox.Location = new System.Drawing.Point(81, 86);
+            this.storyBox.Location = new System.Drawing.Point(108, 106);
+            this.storyBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.storyBox.Name = "storyBox";
-            this.storyBox.Size = new System.Drawing.Size(587, 285);
+            this.storyBox.Size = new System.Drawing.Size(783, 351);
             this.storyBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.storyBox.TabIndex = 0;
             this.storyBox.TabStop = false;
@@ -58,9 +59,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.loadingIndicator.BackColor = System.Drawing.Color.DodgerBlue;
             this.loadingIndicator.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.loadingIndicator.Location = new System.Drawing.Point(1, 422);
+            this.loadingIndicator.Location = new System.Drawing.Point(1, 519);
+            this.loadingIndicator.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.loadingIndicator.Name = "loadingIndicator";
-            this.loadingIndicator.Size = new System.Drawing.Size(0, 3);
+            this.loadingIndicator.Size = new System.Drawing.Size(0, 4);
             this.loadingIndicator.TabIndex = 75;
             // 
             // timer1
@@ -77,9 +79,10 @@
             this.profileBox.ErrorImage = null;
             this.profileBox.Image = null;
             this.profileBox.InitialImage = null;
-            this.profileBox.Location = new System.Drawing.Point(12, 12);
+            this.profileBox.Location = new System.Drawing.Point(16, 15);
+            this.profileBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.profileBox.Name = "profileBox";
-            this.profileBox.Size = new System.Drawing.Size(56, 54);
+            this.profileBox.Size = new System.Drawing.Size(75, 66);
             this.profileBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.profileBox.TabIndex = 76;
             this.profileBox.TabStop = false;
@@ -87,9 +90,10 @@
             // nextBtn
             // 
             this.nextBtn.Image = ((System.Drawing.Image)(resources.GetObject("nextBtn.Image")));
-            this.nextBtn.Location = new System.Drawing.Point(674, 242);
+            this.nextBtn.Location = new System.Drawing.Point(899, 298);
+            this.nextBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.nextBtn.Name = "nextBtn";
-            this.nextBtn.Size = new System.Drawing.Size(60, 50);
+            this.nextBtn.Size = new System.Drawing.Size(80, 62);
             this.nextBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.nextBtn.TabIndex = 77;
             this.nextBtn.TabStop = false;
@@ -100,9 +104,10 @@
             // previousBtn
             // 
             this.previousBtn.Image = ((System.Drawing.Image)(resources.GetObject("previousBtn.Image")));
-            this.previousBtn.Location = new System.Drawing.Point(8, 242);
+            this.previousBtn.Location = new System.Drawing.Point(11, 298);
+            this.previousBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.previousBtn.Name = "previousBtn";
-            this.previousBtn.Size = new System.Drawing.Size(60, 50);
+            this.previousBtn.Size = new System.Drawing.Size(80, 62);
             this.previousBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.previousBtn.TabIndex = 78;
             this.previousBtn.TabStop = false;
@@ -112,16 +117,17 @@
             // 
             // Story
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(742, 426);
+            this.ClientSize = new System.Drawing.Size(989, 524);
             this.Controls.Add(this.previousBtn);
             this.Controls.Add(this.nextBtn);
             this.Controls.Add(this.profileBox);
             this.Controls.Add(this.loadingIndicator);
             this.Controls.Add(this.storyBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Story";
             this.Text = "Story";
             this.Load += new System.EventHandler(this.story_Load);

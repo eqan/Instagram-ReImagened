@@ -23,7 +23,7 @@ namespace Instagram
 
         public void Initialize_Information()
         {
-            dbConnection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB; AttachDbFilename= E:\Instagram\Instagram\Instagram\InstagramDB.mdf; Integrated Security=True; Connect Timeout=30");
+            dbConnection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB; AttachDbFilename= C:\Users\eqana\OneDrive\Desktop\Instagram-ReImagened\InstagramDB.mdf; Integrated Security=True; Connect Timeout=10000");
         }
 
         public void Get_Picture()
@@ -33,7 +33,7 @@ namespace Instagram
                 using (OpenFileDialog openFileDialog = new OpenFileDialog())
                 {
                     openFileDialog.InitialDirectory = System.Windows.Forms.Application.StartupPath;
-                    openFileDialog.Filter = "BMP|*.bmp|GIF|*.gif|JPG|*.jpg;*.jpeg|PNG|*.png|TIFF|*.tif;*.tiff";
+                    openFileDialog.Filter = "Image Files (*.bmp;*.gif;*.jpg;*.jpeg;*.png;*.tif;*.tiff)|*.bmp;*.gif;*.jpg;*.jpeg;*.png;*.tif;*.tiff";
                     openFileDialog.RestoreDirectory = true;
                     if (openFileDialog.ShowDialog() == DialogResult.OK)
                     {

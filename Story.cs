@@ -17,6 +17,7 @@ namespace Instagram
             InitializeComponent();
             this.main = form;
             Initial_Setting_Initialzier(tableName, profilePicture);
+            loadingIndicator.Width = 0;
         }
 
         private void Initial_Setting_Initialzier(string tableName, Image profilePicture)
@@ -64,6 +65,8 @@ namespace Instagram
             {
                 storyCount++;
                 storyBox.Image = storyList[storyCount];
+                loadingIndicator.Width = 0;
+                timer1.Interval = 100;
             }
             else
             {
@@ -87,14 +90,10 @@ namespace Instagram
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (loadingIndicator.Width != this.Width)
+            if(this.Width > loadingIndicator.Width)
                 loadingIndicator.Width += 8;
             else
-            {
                 incrementStories();
-                loadingIndicator.Dispose();
-                timer1.Dispose();
-            }
         }
 
         private void nextBtn_Click(object sender, EventArgs e)

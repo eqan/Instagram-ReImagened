@@ -162,8 +162,8 @@ namespace Instagram
         {
             if (form != null)
                 form.Dispose();
-            if (addStoryPostButtonPanel != null)
-                addStoryPostButtonPanel.Dispose();
+            //if (addStoryPostButtonPanel != null)
+            //    addStoryPostButtonPanel.Dispose();
         }
 
 
