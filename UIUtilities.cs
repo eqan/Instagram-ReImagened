@@ -15,10 +15,11 @@ namespace Instagram
         public static extern bool ReleaseCapture();
         public PictureBox btn_Close, btn_Minimize, btn_Maximize;
         public Panel sidePanel;
-        bool lightModeOn, isMaximized;
-        int formWidth, formHeight;
-        private Main mainForm;
-        private Form formRef;
+        private readonly bool lightModeOn;
+        private bool isMaximized;
+        private readonly int formWidth, formHeight;
+        private readonly Main mainForm;
+        private readonly Form formRef;
 
         public UIUtilities(bool formLightModeOn)
         {

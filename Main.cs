@@ -186,7 +186,7 @@ namespace Instagram
                     break;
                 case 2:
                     Check_Form_Disposed();
-                    form = new Search(lightModeOn) { TopLevel = false, TopMost = true };
+                    form = new Search(this) { TopLevel = false, TopMost = true };
                     break;
                 case 3:
                     {

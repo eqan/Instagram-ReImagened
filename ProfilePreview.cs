@@ -7,10 +7,15 @@ namespace Instagram
     public partial class ProfilePreview : Form
     {
         bool lightModeOn;
-        public ProfilePreview(bool lightModeOn)
+        Main main;
+        public string userId;
+        DBHandlingUtilities dbHandler;
+        public ProfilePreview(Main main)
         {
             InitializeComponent();
-            this.lightModeOn = lightModeOn;
+            this.dbHandler = new DBHandlingUtilities();
+            this.lightModeOn = main.lightModeOn;
+            this.main = main;
             Configure_Theme();
         }
         private void Configure_Theme()
@@ -36,22 +41,24 @@ namespace Instagram
 
         private void SearchResult_Load(object sender, EventArgs e)
         {
-
         }
 
         private void realUserNameLabel_Click(object sender, EventArgs e)
         {
-
+            main.form.Dispose();
+            main.form = new Profile(main, true, this.userId, this.realUserNameLabel.Text) { TopLevel = false, TopMost = true };;
         }
 
         private void userNameLabel_Click(object sender, EventArgs e)
         {
-
+            main.form.Dispose();
+            main.form = new Profile(main, true, this.userId, this.realUserNameLabel.Text) { TopLevel = false, TopMost = true };;
         }
 
         private void profilePictureBox_Click(object sender, EventArgs e)
         {
-
+            main.form.Dispose();
+            main.form = new Profile(main, true, this.userId, this.realUserNameLabel.Text) { TopLevel = false, TopMost = true };;
         }
     }
 }

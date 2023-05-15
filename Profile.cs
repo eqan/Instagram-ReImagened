@@ -14,15 +14,42 @@ namespace Instagram
         UIUtilities UI;
         string ImageNewName = "";
         Main main;
-        public Profile(Main main)
+        string externalUserId, externalUserName;
+        public Profile(Main main, bool isExternalProfile = false, string _userId = null, string _userName = null)
         {
             InitializeComponent();
-            userNameLabel.Text = main.userName;
             dbHandler = new DBHandlingUtilities();
             this.main = main;
+            if(isExternalProfile)
+            {
+                this.externalUserId = _userId;
+                this.externalUserName = _userName;
+                this.themeBtn.Visible = false;
+                Change_Button_According_To_Data(dbHandler.Return_Following_Count(main.userID, main.userName, _userId));
+            }
+            else
+            {
+                this.externalUserId = main.userID;
+                this.externalUserName = main.userName;
+            }
+            userNameLabel.Text = this.externalUserId;
             Configure_Theme();
-            Retrieve_Profile_Information();
-            Add_All_Posts_ThumbNail(main.userID, main.userName);
+            Retrieve_Profile_Information(this.externalUserId, this.externalUserName);
+            Add_All_Posts_ThumbNail(this.externalUserId, this.externalUserName);
+        }
+
+        private void Change_Button_According_To_Data(int count)
+        {
+                if(count > 0)
+                {
+                    this.editProfileBtn.Text = "Following";
+                    this.editProfileBtn.BackgroundColor = Color.DodgerBlue;
+                }
+                else
+                {
+                    this.editProfileBtn.Text = "Follow";
+                    this.editProfileBtn.BackgroundColor = Color.DarkBlue;
+                }
         }
 
         private void Configure_Theme()
@@ -58,9 +85,10 @@ namespace Instagram
         }
 
 
-        public void Retrieve_Profile_Information()
+        public void Retrieve_Profile_Information(string userId, string userName)
         {
-            List<string> profileInformation = dbHandler.Return_Profile_Information(main.userID, main.userName);
+            Console.WriteLine(userId+ " " + userName); 
+            List<string> profileInformation = dbHandler.Return_Profile_Information(userId, userName);
             profilePictureBox.Bitmap = new Bitmap(dbHandler.Retrieve_Profile_Picture_Using_SQL(Int32.Parse(main.userID)));
             userNameLabel.Text = main.userName;
             try
@@ -76,31 +104,50 @@ namespace Instagram
                 followersCountLabel.Text = "0"; 
                 postCountLabel.Text = "0";
             }
-            realUserNameLabel.Text = profileInformation[3];
-            taglineBox.Text = profileInformation[4];
+            try
+            {
+                realUserNameLabel.Text = profileInformation[3];
+                taglineBox.Text = profileInformation[4];
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                realUserNameLabel.Text = "";
+                taglineBox.Text = "";
+            }
         }
 
         private void Add_All_Posts_ThumbNail(string userID, string userName)
         {
             listViewImageList.ImageSize = new Size(150, 150);
             Image[] images = dbHandler.Retrieve_All_Pictures((userName + "_" + userID + "_PostTable"), "PostID", "ORDER BY TimeLine DESC");
-            for (int i = 0; i < images.Length; i++)
+            if(images != null && images.Length > 0)
             {
                 try
                 {
-                    listViewImageList.Images.Add(images[i]);
-                    postFeed.Items.Add(new ListViewItem
+                    for (int i = 0; i < images.Length; i++)
                     {
-                        ImageIndex = listViewItemsCount,
-                        Tag = images[i].Tag.ToString()
-                    }); ; ; ; ; ; ;
-                    listViewItemsCount++;
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
+                        try
+                        {
+                            listViewImageList.Images.Add(images[i]);
+                            postFeed.Items.Add(new ListViewItem
+                            {
+                                ImageIndex = listViewItemsCount,
+                                Tag = images[i].Tag.ToString()
+                            }); ; ; ; ; ; ;
+                            listViewItemsCount++;
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                        }
 
+                    }
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine(ex.Message); 
+                }
             }
             postFeed.LargeImageList = listViewImageList;
         }
@@ -108,6 +155,17 @@ namespace Instagram
         private void editProfile_Click(object sender, EventArgs e)
         {
 
+            bool result = dbHandler.Return_True_If_Removed_From_Following_Otherwise_False_If_Added(main.userID, main.userName,this.externalUserId, this.externalUserName);
+            if(result)
+            {
+                this.editProfileBtn.Text = "Follow";
+                this.editProfileBtn.BackgroundColor = Color.DodgerBlue;
+            }
+            else
+            {
+                this.editProfileBtn.Text = "Following";
+                this.editProfileBtn.BackgroundColor = Color.DarkBlue;
+            }
         }
 
         private void customButton1_Click(object sender, EventArgs e)

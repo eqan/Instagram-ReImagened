@@ -55,9 +55,10 @@
             this.userNameLabel.AutoSize = true;
             this.userNameLabel.Font = new System.Drawing.Font("Roboto", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userNameLabel.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.userNameLabel.Location = new System.Drawing.Point(110, 20);
+            this.userNameLabel.Location = new System.Drawing.Point(147, 25);
+            this.userNameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.userNameLabel.Name = "userNameLabel";
-            this.userNameLabel.Size = new System.Drawing.Size(70, 25);
+            this.userNameLabel.Size = new System.Drawing.Size(88, 33);
             this.userNameLabel.TabIndex = 51;
             this.userNameLabel.Text = "label1";
             // 
@@ -65,9 +66,10 @@
             // 
             this.realUserNameLabel.AutoSize = true;
             this.realUserNameLabel.Font = new System.Drawing.Font("Roboto", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.realUserNameLabel.Location = new System.Drawing.Point(112, 52);
+            this.realUserNameLabel.Location = new System.Drawing.Point(149, 64);
+            this.realUserNameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.realUserNameLabel.Name = "realUserNameLabel";
-            this.realUserNameLabel.Size = new System.Drawing.Size(48, 18);
+            this.realUserNameLabel.Size = new System.Drawing.Size(62, 23);
             this.realUserNameLabel.TabIndex = 52;
             this.realUserNameLabel.Text = "label2";
             // 
@@ -75,9 +77,10 @@
             // 
             this.postFeed.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.postFeed.HideSelection = false;
-            this.postFeed.Location = new System.Drawing.Point(20, 216);
+            this.postFeed.Location = new System.Drawing.Point(27, 266);
+            this.postFeed.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.postFeed.Name = "postFeed";
-            this.postFeed.Size = new System.Drawing.Size(697, 233);
+            this.postFeed.Size = new System.Drawing.Size(929, 287);
             this.postFeed.TabIndex = 53;
             this.postFeed.UseCompatibleStateImageBehavior = false;
             this.postFeed.AfterLabelEdit += new System.Windows.Forms.LabelEditEventHandler(this.listView1_AfterLabelEdit);
@@ -88,9 +91,10 @@
             this.postIndicatorLabel.AutoSize = true;
             this.postIndicatorLabel.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.postIndicatorLabel.ForeColor = System.Drawing.Color.Black;
-            this.postIndicatorLabel.Location = new System.Drawing.Point(292, 48);
+            this.postIndicatorLabel.Location = new System.Drawing.Point(389, 59);
+            this.postIndicatorLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.postIndicatorLabel.Name = "postIndicatorLabel";
-            this.postIndicatorLabel.Size = new System.Drawing.Size(49, 19);
+            this.postIndicatorLabel.Size = new System.Drawing.Size(61, 24);
             this.postIndicatorLabel.TabIndex = 54;
             this.postIndicatorLabel.Text = "Posts";
             // 
@@ -98,9 +102,10 @@
             // 
             this.postCountLabel.AutoSize = true;
             this.postCountLabel.Font = new System.Drawing.Font("Roboto", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.postCountLabel.Location = new System.Drawing.Point(304, 22);
+            this.postCountLabel.Location = new System.Drawing.Point(405, 27);
+            this.postCountLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.postCountLabel.Name = "postCountLabel";
-            this.postCountLabel.Size = new System.Drawing.Size(24, 25);
+            this.postCountLabel.Size = new System.Drawing.Size(30, 33);
             this.postCountLabel.TabIndex = 55;
             this.postCountLabel.Text = "0";
             // 
@@ -108,9 +113,10 @@
             // 
             this.followersCountLabel.AutoSize = true;
             this.followersCountLabel.Font = new System.Drawing.Font("Roboto", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.followersCountLabel.Location = new System.Drawing.Point(446, 23);
+            this.followersCountLabel.Location = new System.Drawing.Point(595, 28);
+            this.followersCountLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.followersCountLabel.Name = "followersCountLabel";
-            this.followersCountLabel.Size = new System.Drawing.Size(24, 25);
+            this.followersCountLabel.Size = new System.Drawing.Size(30, 33);
             this.followersCountLabel.TabIndex = 57;
             this.followersCountLabel.Text = "0";
             // 
@@ -119,9 +125,10 @@
             this.followersIndicatorLabel.AutoSize = true;
             this.followersIndicatorLabel.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.followersIndicatorLabel.ForeColor = System.Drawing.Color.Black;
-            this.followersIndicatorLabel.Location = new System.Drawing.Point(422, 48);
+            this.followersIndicatorLabel.Location = new System.Drawing.Point(563, 59);
+            this.followersIndicatorLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.followersIndicatorLabel.Name = "followersIndicatorLabel";
-            this.followersIndicatorLabel.Size = new System.Drawing.Size(79, 19);
+            this.followersIndicatorLabel.Size = new System.Drawing.Size(96, 24);
             this.followersIndicatorLabel.TabIndex = 56;
             this.followersIndicatorLabel.Text = "Followers";
             // 
@@ -129,9 +136,10 @@
             // 
             this.followingCountLabel.AutoSize = true;
             this.followingCountLabel.Font = new System.Drawing.Font("Roboto", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.followingCountLabel.Location = new System.Drawing.Point(590, 22);
+            this.followingCountLabel.Location = new System.Drawing.Point(787, 27);
+            this.followingCountLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.followingCountLabel.Name = "followingCountLabel";
-            this.followingCountLabel.Size = new System.Drawing.Size(24, 25);
+            this.followingCountLabel.Size = new System.Drawing.Size(30, 33);
             this.followingCountLabel.TabIndex = 59;
             this.followingCountLabel.Text = "0";
             // 
@@ -140,9 +148,10 @@
             this.followingIndicatorLabel.AutoSize = true;
             this.followingIndicatorLabel.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.followingIndicatorLabel.ForeColor = System.Drawing.Color.Black;
-            this.followingIndicatorLabel.Location = new System.Drawing.Point(559, 48);
+            this.followingIndicatorLabel.Location = new System.Drawing.Point(745, 59);
+            this.followingIndicatorLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.followingIndicatorLabel.Name = "followingIndicatorLabel";
-            this.followingIndicatorLabel.Size = new System.Drawing.Size(78, 19);
+            this.followingIndicatorLabel.Size = new System.Drawing.Size(95, 24);
             this.followingIndicatorLabel.TabIndex = 58;
             this.followingIndicatorLabel.Text = "Following";
             // 
@@ -151,9 +160,10 @@
             this.taglineBox.BackColor = System.Drawing.SystemColors.Control;
             this.taglineBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.taglineBox.Font = new System.Drawing.Font("Roboto", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.taglineBox.Location = new System.Drawing.Point(115, 119);
+            this.taglineBox.Location = new System.Drawing.Point(153, 146);
+            this.taglineBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.taglineBox.Name = "taglineBox";
-            this.taglineBox.Size = new System.Drawing.Size(520, 42);
+            this.taglineBox.Size = new System.Drawing.Size(693, 52);
             this.taglineBox.TabIndex = 60;
             this.taglineBox.Text = "Something would written here";
             // 
@@ -162,18 +172,20 @@
             this.flowLayoutPanel1.Controls.Add(this.gridViewBtn);
             this.flowLayoutPanel1.Controls.Add(this.streamViewBtn);
             this.flowLayoutPanel1.Controls.Add(this.bookMarkBtn);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(20, 167);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(27, 206);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(705, 42);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(940, 52);
             this.flowLayoutPanel1.TabIndex = 63;
             // 
             // gridViewBtn
             // 
             this.gridViewBtn.FlatAppearance.BorderSize = 0;
             this.gridViewBtn.Image = ((System.Drawing.Image)(resources.GetObject("gridViewBtn.Image")));
-            this.gridViewBtn.Location = new System.Drawing.Point(3, 3);
+            this.gridViewBtn.Location = new System.Drawing.Point(4, 4);
+            this.gridViewBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gridViewBtn.Name = "gridViewBtn";
-            this.gridViewBtn.Size = new System.Drawing.Size(245, 39);
+            this.gridViewBtn.Size = new System.Drawing.Size(327, 48);
             this.gridViewBtn.TabIndex = 0;
             this.gridViewBtn.UseVisualStyleBackColor = true;
             // 
@@ -181,9 +193,10 @@
             // 
             this.streamViewBtn.FlatAppearance.BorderSize = 0;
             this.streamViewBtn.Image = ((System.Drawing.Image)(resources.GetObject("streamViewBtn.Image")));
-            this.streamViewBtn.Location = new System.Drawing.Point(254, 3);
+            this.streamViewBtn.Location = new System.Drawing.Point(339, 4);
+            this.streamViewBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.streamViewBtn.Name = "streamViewBtn";
-            this.streamViewBtn.Size = new System.Drawing.Size(250, 39);
+            this.streamViewBtn.Size = new System.Drawing.Size(333, 48);
             this.streamViewBtn.TabIndex = 1;
             this.streamViewBtn.UseVisualStyleBackColor = true;
             // 
@@ -191,9 +204,10 @@
             // 
             this.bookMarkBtn.FlatAppearance.BorderSize = 0;
             this.bookMarkBtn.Image = ((System.Drawing.Image)(resources.GetObject("bookMarkBtn.Image")));
-            this.bookMarkBtn.Location = new System.Drawing.Point(510, 3);
+            this.bookMarkBtn.Location = new System.Drawing.Point(680, 4);
+            this.bookMarkBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.bookMarkBtn.Name = "bookMarkBtn";
-            this.bookMarkBtn.Size = new System.Drawing.Size(187, 39);
+            this.bookMarkBtn.Size = new System.Drawing.Size(249, 48);
             this.bookMarkBtn.TabIndex = 2;
             this.bookMarkBtn.UseVisualStyleBackColor = true;
             // 
@@ -210,9 +224,10 @@
             this.themeBtn.ForeColor = System.Drawing.Color.White;
             this.themeBtn.Image = ((System.Drawing.Image)(resources.GetObject("themeBtn.Image")));
             this.themeBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.themeBtn.Location = new System.Drawing.Point(296, 73);
+            this.themeBtn.Location = new System.Drawing.Point(395, 90);
+            this.themeBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.themeBtn.Name = "themeBtn";
-            this.themeBtn.Size = new System.Drawing.Size(124, 40);
+            this.themeBtn.Size = new System.Drawing.Size(165, 49);
             this.themeBtn.TabIndex = 62;
             this.themeBtn.Text = "Dark Mode";
             this.themeBtn.TextColor = System.Drawing.Color.White;
@@ -230,9 +245,10 @@
             this.editProfileBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.editProfileBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.editProfileBtn.ForeColor = System.Drawing.Color.White;
-            this.editProfileBtn.Location = new System.Drawing.Point(426, 73);
+            this.editProfileBtn.Location = new System.Drawing.Point(568, 90);
+            this.editProfileBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.editProfileBtn.Name = "editProfileBtn";
-            this.editProfileBtn.Size = new System.Drawing.Size(211, 40);
+            this.editProfileBtn.Size = new System.Drawing.Size(281, 49);
             this.editProfileBtn.TabIndex = 61;
             this.editProfileBtn.Text = "Edit Profile";
             this.editProfileBtn.TextColor = System.Drawing.Color.White;
@@ -249,18 +265,19 @@
             this.profilePictureBox.ErrorImage = null;
             this.profilePictureBox.Image = null;
             this.profilePictureBox.InitialImage = null;
-            this.profilePictureBox.Location = new System.Drawing.Point(20, 12);
+            this.profilePictureBox.Location = new System.Drawing.Point(27, 15);
+            this.profilePictureBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.profilePictureBox.Name = "profilePictureBox";
-            this.profilePictureBox.Size = new System.Drawing.Size(80, 80);
+            this.profilePictureBox.Size = new System.Drawing.Size(107, 98);
             this.profilePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.profilePictureBox.TabIndex = 0;
             this.profilePictureBox.TabStop = false;
             // 
             // Profile
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(737, 450);
+            this.ClientSize = new System.Drawing.Size(983, 554);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.themeBtn);
             this.Controls.Add(this.editProfileBtn);
@@ -276,6 +293,7 @@
             this.Controls.Add(this.userNameLabel);
             this.Controls.Add(this.profilePictureBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Profile";
             this.Text = "Profile";
             this.flowLayoutPanel1.ResumeLayout(false);

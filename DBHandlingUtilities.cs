@@ -937,7 +937,7 @@ namespace Instagram
             return decision;
         }
 
-        public ProfilePreview[] Return_Search_Results(string input, bool lightModeOn)
+        public ProfilePreview[] Return_Search_Results(string input, Main main)
         {
             ProfilePreview[] searchList = null;
             try
@@ -953,10 +953,11 @@ namespace Instagram
                     searchList = new ProfilePreview[ds.Tables[0].Rows.Count];
                     for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                     {
-                        searchList[i] = new ProfilePreview(lightModeOn);
+                        searchList[i] = new ProfilePreview(main);
                         searchList[i].profilePictureBox.Bitmap = new Bitmap(Retrieve_Profile_Picture_Using_SQL((Int32)ds.Tables[0].Rows[i]["UserID"]));
                         searchList[i].userNameLabel.Text = ((string)ds.Tables[0].Rows[i]["UserName"]);
                         searchList[i].realUserNameLabel.Text = ((string)ds.Tables[0].Rows[i]["RealUserName"]);
+                        searchList[i].userId = ((int)ds.Tables[0].Rows[i]["UserID"]).ToString();
                     }
                     dbConnection.Close();
                 }
@@ -973,6 +974,71 @@ namespace Instagram
             return searchList;
         }
 
+        public int Return_Following_Count(string userID, string userName, string followingId)
+        {
+            try
+            {
+                if (dbConnection.State == ConnectionState.Closed)
+                {
+                    dbConnection.Open();
+                    string tableName = userName + "_" + userID + "_";
+                    string sqlCommand = "SELECT COUNT(*) FROM " + tableName + "FollowingTable where UserID = " + followingId;
+                    cmd = new SqlCommand(sqlCommand, dbConnection);
+                    dbConnection.Close();
+                    return ((Int32)cmd.ExecuteScalar());
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                if (dbConnection.State == ConnectionState.Open)
+                    dbConnection.Close();
+            }
+            return 0;
+        }
+
+
+        public bool Return_True_If_Removed_From_Following_Otherwise_False_If_Added(string userID, string userName, string followingId, string followingName = null)
+        {
+            try
+            {
+                if (dbConnection.State == ConnectionState.Closed)
+                {
+                    dbConnection.Open();
+                    string tableName = userName + "_" + userID + "_";
+                    string sqlCommand = "SELECT COUNT(*) FROM " + tableName + "FollowingTable where UserID = " + followingId;
+                    cmd = new SqlCommand(sqlCommand, dbConnection);
+                    if ((Int32)cmd.ExecuteScalar() > 0)
+                    {
+                        sqlCommand = "DELETE FROM " + tableName + "FollowingTable where UserID = " + followingId;
+                        cmd = new SqlCommand(sqlCommand, dbConnection);
+                        cmd.ExecuteNonQuery();
+                        return true;
+                    }
+                    else if (followingName != null)
+                    {
+                        this.Add_Following(userID, userName, followingId, followingName);
+                        cmd = new SqlCommand(sqlCommand, dbConnection);
+                        cmd.ExecuteNonQuery();
+                        return false;
+                    }
+                    dbConnection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                if (dbConnection.State == ConnectionState.Open)
+                    dbConnection.Close();
+            }
+            return false;
+        }
         public List<string> Return_Profile_Information(string userID, string userName)
         {
             List<string> information = new List<string>();
