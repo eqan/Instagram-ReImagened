@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Collections.Generic;
 using System.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using System.Drawing.Imaging;
 
 namespace Instagram
 {
@@ -492,6 +493,7 @@ namespace Instagram
             ImageData = br.ReadBytes((int)fs.Length);
             br.Close();
             fs.Close();
+            Console.WriteLine("I'm here" + ImageData.ToString());
             return ImageData;
         }
 
@@ -582,7 +584,7 @@ namespace Instagram
         }
 
 
-        public bool Add_User(string userName, string realUserName, string userPassword, string tagLine = null)
+        public bool Add_User(string userName, string realUserName, string userPassword, string imageLocation = null, string tagLine = null)
         {
             bool decision = false;
             try
@@ -592,9 +594,9 @@ namespace Instagram
                     dbConnection.Open();
                     cmd = new SqlCommand("Add_User", dbConnection);
                     cmd.CommandType = CommandType.StoredProcedure;
-                    if (fileDirectory == null)
+                    if (imageLocation == null)
                     {
-                        fileDirectory = Environment.CurrentDirectory + @"\Assets\Avatar.png";
+                        imageLocation = Environment.CurrentDirectory + @"\Assets\Avatar.png";
                     }
                     cmd.Parameters.AddWithValue("@Picture", Get_Binary_Of_File());
                     cmd.Parameters.AddWithValue("@UserName", userName);

@@ -81,7 +81,7 @@ namespace Instagram
             if (pass == confirmPass)
             {
                 setStatus(2, true, "");
-                if (dbHandler.Add_User(userName, realUserName, pass, tagLine))
+                if (dbHandler.Add_User(userName, realUserName, pass, profileBox.ImageLocation, tagLine))
                 {
                     dbHandler.Create_User_Entities(dbHandler.Return_User_ID(userName).ToString(), userName);
                     Console.WriteLine("User added Successfully!");
