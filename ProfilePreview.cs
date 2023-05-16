@@ -8,7 +8,7 @@ namespace Instagram
     {
         bool lightModeOn;
         Main main;
-        public string userId;
+        public string userId, userName, realUserName;
         DBHandlingUtilities dbHandler;
         public ProfilePreview(Main main)
         {
@@ -46,19 +46,19 @@ namespace Instagram
         private void realUserNameLabel_Click(object sender, EventArgs e)
         {
             main.form.Dispose();
-            main.form = new Profile(main, true, this.userId, this.realUserNameLabel.Text) { TopLevel = false, TopMost = true };;
+            main.form = new Profile(main, true, this.userId, this.userName) { TopLevel = false, TopMost = true };;
         }
 
         private void userNameLabel_Click(object sender, EventArgs e)
         {
             main.form.Dispose();
-            main.form = new Profile(main, true, this.userId, this.realUserNameLabel.Text) { TopLevel = false, TopMost = true };;
+            main.form = new Profile(main, true, this.userId, this.userName) { TopLevel = false, TopMost = true };;
         }
 
         private void profilePictureBox_Click(object sender, EventArgs e)
         {
             main.form.Dispose();
-            main.form = new Profile(main, true, this.userId, this.realUserNameLabel.Text) { TopLevel = false, TopMost = true };;
+            main.form = new Profile(main, true, this.userId, this.userName) { TopLevel = false, TopMost = true };;
         }
     }
 }

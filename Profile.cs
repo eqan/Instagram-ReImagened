@@ -25,7 +25,7 @@ namespace Instagram
                 this.externalUserId = _userId;
                 this.externalUserName = _userName;
                 this.themeBtn.Visible = false;
-                Change_Button_According_To_Data(dbHandler.Return_Following_Count(main.userID, main.userName, _userId));
+                Change_Button_According_To_Data(dbHandler.Check_If_User_Followed_Or_Not(main.userID, main.userName, _userId));
             }
             else
             {
@@ -38,17 +38,27 @@ namespace Instagram
             Add_All_Posts_ThumbNail(this.externalUserId, this.externalUserName);
         }
 
-        private void Change_Button_According_To_Data(int count)
+        private void Change_Button_According_To_Data(bool isFollowed, bool isChangeOnRunTime = false)
         {
-                if(count > 0)
+                if(isFollowed)
                 {
                     this.editProfileBtn.Text = "Following";
                     this.editProfileBtn.BackgroundColor = Color.DodgerBlue;
+                    if (isChangeOnRunTime)
+                    {
+                        this.followersCountLabel.Text = (Int32.Parse(this.followersCountLabel.Text)+1).ToString();
+                    }
                 }
                 else
                 {
                     this.editProfileBtn.Text = "Follow";
                     this.editProfileBtn.BackgroundColor = Color.DarkBlue;
+                    dbHandler.Truncate_Temporary_Post_Table();
+                    dbHandler.Create_View_For_Following_Posts(main.userID, main.userName);
+                    if (isChangeOnRunTime)
+                    {
+                        this.followersCountLabel.Text = (Int32.Parse(this.followersCountLabel.Text)-1).ToString();
+                    }
                 }
         }
 
@@ -155,17 +165,8 @@ namespace Instagram
         private void editProfile_Click(object sender, EventArgs e)
         {
 
-            bool result = dbHandler.Return_True_If_Removed_From_Following_Otherwise_False_If_Added(main.userID, main.userName,this.externalUserId, this.externalUserName);
-            if(result)
-            {
-                this.editProfileBtn.Text = "Follow";
-                this.editProfileBtn.BackgroundColor = Color.DodgerBlue;
-            }
-            else
-            {
-                this.editProfileBtn.Text = "Following";
-                this.editProfileBtn.BackgroundColor = Color.DarkBlue;
-            }
+            bool result = dbHandler.Return_True_If_Added_To_Following_Otherwise_False_If_Removed(main.userID, main.userName,this.externalUserId, this.externalUserName);
+            Change_Button_According_To_Data(result, true);
         }
 
         private void customButton1_Click(object sender, EventArgs e)

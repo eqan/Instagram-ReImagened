@@ -382,28 +382,24 @@ namespace Instagram
 
         public void Add_Following(string userID, string userName, string followingID, string followingName)
         {
+            if (dbConnection.State == ConnectionState.Closed)
+                dbConnection.Open();
             try
             {
-                if (dbConnection.State == ConnectionState.Closed)
-                {
-                    dbConnection.Open();
-                    cmd = new SqlCommand("INSERT INTO " + userName + "_" + userID + "_FollowingTable (UserID, UserName) VALUES(@FollowingID, @FollowingName)", dbConnection);
-                    cmd.Parameters.AddWithValue("@FollowingID", Int32.Parse(followingID));
-                    cmd.Parameters.AddWithValue("@FollowingName", followingName);
-                    cmd.ExecuteNonQuery();
-                    dbConnection.Close();
-                    Console.WriteLine("{0} As Follower Added!", userName);
-                }
+                cmd = new SqlCommand("INSERT INTO " + userName + "_" + userID + "_FollowingTable (UserID, UserName) VALUES(@FollowingID, @FollowingName)", dbConnection);
+                Console.WriteLine("User Id" + userID + userName + followingID + followingName);
+                cmd.Parameters.AddWithValue("@FollowingID", Int32.Parse(followingID));
+                cmd.Parameters.AddWithValue("@FollowingName", followingName);
+                cmd.ExecuteNonQuery();
+                dbConnection.Close();
+                Console.WriteLine("{0} As Follower Added!", userName);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-            finally
-            {
-                if (dbConnection.State == ConnectionState.Open)
-                    dbConnection.Close();
-            }
+            if (dbConnection.State == ConnectionState.Open)
+                dbConnection.Close();
         }
 
         public List<string[]> Import_Data_Using_SQL(string userID, string userName, string tableName)
@@ -958,6 +954,8 @@ namespace Instagram
                         searchList[i].userNameLabel.Text = ((string)ds.Tables[0].Rows[i]["UserName"]);
                         searchList[i].realUserNameLabel.Text = ((string)ds.Tables[0].Rows[i]["RealUserName"]);
                         searchList[i].userId = ((int)ds.Tables[0].Rows[i]["UserID"]).ToString();
+                        searchList[i].userName = ((string)ds.Tables[0].Rows[i]["UserName"]);
+                        searchList[i].realUserName = ((string)ds.Tables[0].Rows[i]["RealUserName"]);
                     }
                     dbConnection.Close();
                 }
@@ -974,69 +972,60 @@ namespace Instagram
             return searchList;
         }
 
-        public int Return_Following_Count(string userID, string userName, string followingId)
+        public bool Check_If_User_Followed_Or_Not(string userID, string userName, string followingId)
         {
+            if (dbConnection.State == ConnectionState.Closed)
+                dbConnection.Open();
             try
             {
-                if (dbConnection.State == ConnectionState.Closed)
-                {
-                    dbConnection.Open();
-                    string tableName = userName + "_" + userID + "_";
-                    string sqlCommand = "SELECT COUNT(*) FROM " + tableName + "FollowingTable where UserID = " + followingId;
-                    cmd = new SqlCommand(sqlCommand, dbConnection);
-                    dbConnection.Close();
-                    return ((Int32)cmd.ExecuteScalar());
-                }
+                string tableName = userName + "_" + userID + "_";
+                string sqlCommand = "SELECT COUNT(*) FROM " + tableName + "FollowingTable where UserID = " + followingId;
+                cmd = new SqlCommand(sqlCommand, dbConnection);
+                int count = ((Int32)cmd.ExecuteScalar());
+                Console.WriteLine("This is the data" + count);
+                dbConnection.Close();
+                return count > 0;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-            finally
-            {
-                if (dbConnection.State == ConnectionState.Open)
-                    dbConnection.Close();
-            }
-            return 0;
+            if (dbConnection.State == ConnectionState.Open)
+                dbConnection.Close();
+            return false;
         }
 
 
-        public bool Return_True_If_Removed_From_Following_Otherwise_False_If_Added(string userID, string userName, string followingId, string followingName = null)
+        public bool Return_True_If_Added_To_Following_Otherwise_False_If_Removed(string userID, string userName, string followingId, string followingName = null)
         {
+            if (dbConnection.State == ConnectionState.Closed)
+                dbConnection.Open();
             try
             {
-                if (dbConnection.State == ConnectionState.Closed)
+                string tableName = userName + "_" + userID + "_";
+                bool checkOperation = Check_If_User_Followed_Or_Not(userID, userName, followingId);
+                Console.WriteLine("This is the state:" + checkOperation);
+                if (checkOperation)
                 {
                     dbConnection.Open();
-                    string tableName = userName + "_" + userID + "_";
-                    string sqlCommand = "SELECT COUNT(*) FROM " + tableName + "FollowingTable where UserID = " + followingId;
+                    string sqlCommand = "DELETE FROM " + tableName + "FollowingTable where UserID = " + followingId;
                     cmd = new SqlCommand(sqlCommand, dbConnection);
-                    if ((Int32)cmd.ExecuteScalar() > 0)
-                    {
-                        sqlCommand = "DELETE FROM " + tableName + "FollowingTable where UserID = " + followingId;
-                        cmd = new SqlCommand(sqlCommand, dbConnection);
-                        cmd.ExecuteNonQuery();
-                        return true;
-                    }
-                    else if (followingName != null)
-                    {
-                        this.Add_Following(userID, userName, followingId, followingName);
-                        cmd = new SqlCommand(sqlCommand, dbConnection);
-                        cmd.ExecuteNonQuery();
-                        return false;
-                    }
+                    cmd.ExecuteNonQuery();
                     dbConnection.Close();
+                    return false;
+                }
+                else
+                {
+                    this.Add_Following(userID, userName, followingId, followingName);
+                    return true;
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-            finally
-            {
-                if (dbConnection.State == ConnectionState.Open)
-                    dbConnection.Close();
-            }
+            if (dbConnection.State == ConnectionState.Open)
+                dbConnection.Close();
             return false;
         }
         public List<string> Return_Profile_Information(string userID, string userName)
