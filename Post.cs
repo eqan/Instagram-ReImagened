@@ -93,22 +93,36 @@ namespace Instagram
 
         private void menuBtn_MouseLeave(object sender, EventArgs e)
         {
-            menuBtn.Image.Dispose();
-            menuBtn.Image = Image.FromFile(UI.Return_UI_Location() + "more.png");
+            if(userID == main?.userID)
+            {
+                menuBtn.Image.Dispose();
+                menuBtn.Image = Image.FromFile(UI.Return_UI_Location() + "more.png");
+            }
+            else
+            {
+                this.menuBtn.Dispose();
+            }
         }
 
         private void menuBtn_Click(object sender, EventArgs e)
         {
-            ConfirmationDialog dialog = new ConfirmationDialog(false, "delete this post?");
-            DialogResult result = dialog.ShowDialog();
-
-            if (result == DialogResult.OK)
+            if(userID == main?.userID)
             {
-                // Remove post from db
-                // Refresh the main page
-                dbHandler.Remove_Post(userID, userName, postID);
-                this.main.form.Dispose();
-                this.main.form = new Home(main) { TopLevel = false, TopMost = true };
+                ConfirmationDialog dialog = new ConfirmationDialog(false, "delete this post?");
+                DialogResult result = dialog.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+                    // Remove post from db
+                    // Refresh the main page
+                    dbHandler.Remove_Post(userID, userName, postID);
+                    this.main.form.Dispose();
+                    this.main.form = new Home(main) { TopLevel = false, TopMost = true };
+                }
+            }
+            else
+            {
+                this.menuBtn.Dispose();
             }
         }
 

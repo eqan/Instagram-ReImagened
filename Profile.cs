@@ -207,7 +207,7 @@ namespace Instagram
                 var item = postFeed.SelectedItems[0];
                 string postID = item.Tag.ToString();
                 main.form.Dispose();
-                main.form = dbHandler.Return_Post(main.userID, main.userName, main.lightModeOn, postID, main);
+                main.form = dbHandler.Return_Post(externalUserId, externalUserName, main.lightModeOn, postID, main);
             }
         }
     }

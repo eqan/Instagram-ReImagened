@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.Collections.Generic;
 using System.Linq;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace Instagram
 {
@@ -251,6 +252,8 @@ namespace Instagram
             tableName = "Build_User_Activity_Table";
             Create_Entity(userID, userName, tableName);
             Create_Uniqueness_Constraint(userID, userName, "Activity", "UserID, PostID, ActivityType");
+            Create_Relationship_With_Self(userID, userName);
+
         }
 
         private int Retrieve_Latest_PostID(string userID, string userName)
@@ -307,6 +310,12 @@ namespace Instagram
                 dbConnection.Close();
         }
 
+        public void Create_Relationship_With_Self(string userID, string userName)
+        {
+            Add_Follower(userID, userName, userID, userName);
+            Add_Following(userID, userName, userID, userName);
+        }
+
         public void Create_Entity(string userID, string userName, string procedureName)
         {
             try
@@ -333,15 +342,15 @@ namespace Instagram
 
         public void Truncate_Temporary_Post_Table()
         {
+            if (dbConnection.State == ConnectionState.Closed)
+            {
+                dbConnection.Open();
+            }
             try
             {
-                if (dbConnection.State == ConnectionState.Closed)
-                {
-                    dbConnection.Open();
-                    cmd = new SqlCommand("TRUNCATE TABLE TemporaryTable_For_All_Posts", dbConnection);
-                    cmd.ExecuteNonQuery();
-                    dbConnection.Close();
-                }
+                cmd = new SqlCommand("TRUNCATE TABLE TemporaryTable_For_All_Posts", dbConnection);
+                cmd.ExecuteNonQuery();
+                dbConnection.Close();
             }
             catch (Exception ex)
             {
@@ -354,22 +363,16 @@ namespace Instagram
 
         public void Create_View_For_Following_Posts(string userID, string userName)
         {
+            if (dbConnection.State == ConnectionState.Closed)
+            {
+                dbConnection.Open();
+            }
             try
             {
-                if (dbConnection.State == ConnectionState.Closed)
-                {
-                    dbConnection.Open();
-                    string tableName = "TemporaryTable_For_All_Posts";
-                    cmd = new SqlCommand("SELECT ( CASE WHEN EXISTS(SELECT NULL FROM " + tableName + " )THEN 1 ELSE 0 END ) AS isEmpty", dbConnection);
-                    int result = (Int32)cmd.ExecuteScalar();
-                    if (result == 1)
-                        cmd = new SqlCommand("SELECT " + userID + "AS UserID, '" + userName + "' AS UserName, PostID, PostDesc, Location, Image, Video, TimeLine  INTO " + tableName + "  FROM " + userName + "_" + userID + "_PostTable", dbConnection);
-                    else
-                        cmd = new SqlCommand("INSERT INTO " + tableName + " SELECT " + userID + "AS UserID, '" + userName + "' AS UserName, PostID, PostDesc, Location, Image, Video, TimeLine FROM " + userName + "_" + userID + "_PostTable", dbConnection);
-                    Console.WriteLine(result);
-                    cmd.ExecuteNonQuery();
-                    dbConnection.Close();
-                }
+                string tableName = "TemporaryTable_For_All_Posts";
+                cmd = new SqlCommand("INSERT INTO " + tableName + " SELECT " + userID + "AS UserID, '" + userName + "' AS UserName, PostID, PostDesc, Location, Image, Video, TimeLine FROM " + userName + "_" + userID + "_PostTable", dbConnection);
+                cmd.ExecuteNonQuery();
+                dbConnection.Close();
             }
             catch (Exception ex)
             {
