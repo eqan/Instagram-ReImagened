@@ -6,8 +6,6 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.Collections.Generic;
 using System.Linq;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
-using System.Drawing.Imaging;
 
 namespace Instagram
 {
@@ -620,8 +618,45 @@ namespace Instagram
             return decision;
         }
 
+        public bool Update_User(string userID, string userName, string realUserName, string userPassword, string imageLocation = null, string tagLine = null)
+        {
+            bool decision = false;
+            try
+            {
+                if (dbConnection.State == ConnectionState.Closed)
+                {
+                    dbConnection.Open();
+                    cmd = new SqlCommand("UPDATE USERS SET UserName = @UserName, UserPassword = @UserPassword, RealUserName = @RealUserName, ProfilePicture =  @ProfilePicture, TagLine = @TagLine where UserID = @UserID", dbConnection);
+                    if (imageLocation == null)
+                    {
+                        imageLocation = Environment.CurrentDirectory + @"\Assets\Avatar.png";
+                    }
+                    cmd.Parameters.AddWithValue("@UserID", userID);
+                    cmd.Parameters.AddWithValue("@UserName", userName);
+                    cmd.Parameters.AddWithValue("@RealUserName", realUserName);
+                    cmd.Parameters.AddWithValue("@UserPassword", userPassword);
+                    cmd.Parameters.AddWithValue("@Tagline", tagLine);
+                    cmd.Parameters.AddWithValue("@ProfilePicture", Get_Binary_Of_File());
+                    cmd.ExecuteNonQuery();
+                    dbConnection.Close();
+                    Console.WriteLine("{0} Added!", userName);
+                    decision = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                decision = false;
+            }
+            finally
+            {
+                if (dbConnection.State == ConnectionState.Open)
+                    dbConnection.Close();
+            }
+            return decision;
+        }
 
-        public void Add_Like(string userID, string userName, string followingID, string followingName, string postID)
+        public bool Add_Like(string userID, string userName, string followingID, string followingName, string postID)
         {
             try
             {
@@ -643,9 +678,10 @@ namespace Instagram
                 if (dbConnection.State == ConnectionState.Open)
                     dbConnection.Close();
             }
+            return false;
         }
 
-        public void Add_BookMark(string userID, string userName, string followingID, string followingName, string postID)
+        public bool Add_BookMark(string userID, string userName, string followingID, string followingName, string postID)
         {
             try
             {
@@ -654,10 +690,9 @@ namespace Instagram
                     dbConnection.Open();
                     cmd = new SqlCommand("INSERT INTO " + followingName + "_" + followingID + "_" + postID + "_BookMarksRecord (UserID, UserName) VALUES ( " + userID + ", '" + userName + "' )", dbConnection);
                     int done = cmd.ExecuteNonQuery();
-                    Console.WriteLine(done);
-                    Console.WriteLine(done);
                     dbConnection.Close();
                     Console.WriteLine("BookMark Added! for {0} to {1}", userName, followingName);
+                    return done > 0;
                 }
             }
             catch (Exception ex)
@@ -669,6 +704,7 @@ namespace Instagram
                 if (dbConnection.State == ConnectionState.Open)
                     dbConnection.Close();
             }
+            return false;
         }
 
         public void Create_Uniqueness_Constraint(string userID, string userName, string tableName, string args)

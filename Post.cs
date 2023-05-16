@@ -58,31 +58,43 @@ namespace Instagram
 
         private void likeBtn_MouseHover(object sender, EventArgs e)
         {
-            likeBtn.Image.Dispose();
-            likeBtn.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Selected Mode\heart.png");
+            //likeBtn.Image.Dispose();
+            //likeBtn.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Selected Mode\heart.png");
         }
 
         private void likeBtn_MouseLeave(object sender, EventArgs e)
         {
-            likeBtn.Image.Dispose();
-            likeBtn.Image = Image.FromFile(UI.Return_UI_Location() + "heart.png");
+            //likeBtn.Image.Dispose();
+            //likeBtn.Image = Image.FromFile(UI.Return_UI_Location() + "heart.png");
         }
 
         private void likeBtn_Click(object sender, EventArgs e)
         {
-            dbHandler.Add_Like(userID, userName, followingID, userNameLabel.Text, postID);
+            bool result = dbHandler.Add_Like(userID, userName, followingID, userNameLabel.Text, postID);
+            if(result)
+            {
+                Console.WriteLine("Reached here");
+                likeLabel.Text = (Int32.Parse(likeLabel.Text) + 1).ToString() + " Likes";
+                likeBtn.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Selected Mode\heart.png");
+            }
+            else
+            {
+                Console.WriteLine("Reached here");
+                likeLabel.Text = (Int32.Parse(likeLabel.Text) - 1).ToString() + " Likes";
+                likeBtn.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Selected Mode\heart.png");
+            }
         }
 
         private void bookMarkedBtn_MouseHover(object sender, EventArgs e)
         {
-            bookMarkedBtn.Image.Dispose();
-            bookMarkedBtn.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Selected Mode\bookmark.png");
+            //bookMarkedBtn.Image.Dispose();
+            //bookMarkedBtn.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Selected Mode\bookmark.png");
         }
 
         private void bookMarkedBtn_MouseLeave(object sender, EventArgs e)
         {
-            bookMarkedBtn.Image.Dispose();
-            bookMarkedBtn.Image = Image.FromFile(UI.Return_UI_Location() + "bookmark.png");
+            //bookMarkedBtn.Image.Dispose();
+            //bookMarkedBtn.Image = Image.FromFile(UI.Return_UI_Location() + "bookmark.png");
         }
 
         private void menuBtn_MouseHover(object sender, EventArgs e)
@@ -135,7 +147,7 @@ namespace Instagram
 
         private void bookMarkedBtn_Click(object sender, EventArgs e)
         {
-            dbHandler.Add_BookMark(userID, userName, followingID, userNameLabel.Text, postID);
+            bool result = dbHandler.Add_BookMark(userID, userName, followingID, userNameLabel.Text, postID);
         }
 
         private void userNameLabel_Click(object sender, EventArgs e)

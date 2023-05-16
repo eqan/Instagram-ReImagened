@@ -171,6 +171,11 @@ namespace Instagram
                 bool result = dbHandler.Return_True_If_Added_To_Following_Otherwise_False_If_Removed(main.userID, main.userName, this.externalUserId, this.externalUserName);
                 Change_Button_According_To_Data(result, true);
             }
+            else
+            {
+                this.main.form.Dispose();
+                this.main.form = new SignUp(this.main, this.main.userID, this.userNameLabel.Text, this.realUserNameLabel.Text, this.taglineBox.Text, this.profilePictureBox.ImageLocation) { TopLevel = false, TopMost = true};
+            }
         }
 
         private void customButton1_Click(object sender, EventArgs e)

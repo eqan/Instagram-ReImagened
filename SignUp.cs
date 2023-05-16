@@ -10,6 +10,7 @@ namespace Instagram
         UIUtilities UI;
         bool lightModeOn;
         Main main;
+        string userID = null;
         public SignUp(Main main)
         {
             InitializeComponent();
@@ -18,6 +19,23 @@ namespace Instagram
             dbHandler = new DBHandlingUtilities();
             UI = new UIUtilities(lightModeOn);
             Configure_Theme();
+        }
+        public SignUp(Main main, string userId, string userName, string realUserName, string tagLine, string imageLocation)
+        {
+            InitializeComponent();
+            this.main = main;
+            this.lightModeOn = main.lightModeOn;
+            dbHandler = new DBHandlingUtilities();
+            UI = new UIUtilities(lightModeOn);
+            Configure_Theme();
+            Console.WriteLine(userId + userName);
+            this.userID = userId;
+            this.loginBtn.Dispose();
+            this.signUpBtn.Text = "Update";
+            this.userName_Box.Text = userName;
+            this.realUserName_Box.Text = realUserName;
+            this.tagLine_Box.Text = tagLine;
+            this.profileBox.Text = imageLocation;
         }
 
         private void Configure_Theme()
@@ -81,7 +99,15 @@ namespace Instagram
             if (pass == confirmPass)
             {
                 setStatus(2, true, "");
-                if (dbHandler.Add_User(userName, realUserName, pass, profileBox.ImageLocation, tagLine))
+                if(userID != null)
+                {
+                    dbHandler.Update_User(userID, userName, realUserName, pass, profileBox.ImageLocation, tagLine);
+                    Console.WriteLine("User updated Successfully!");
+                    setStatus(0, true, "");
+                    main.form.Dispose();
+                    main.form = new Profile(main) { TopLevel = false, TopMost = true};
+                }
+                else if (dbHandler.Add_User(userName, realUserName, pass, profileBox.ImageLocation, tagLine))
                 {
                     dbHandler.Create_User_Entities(dbHandler.Return_User_ID(userName).ToString(), userName);
                     Console.WriteLine("User added Successfully!");
