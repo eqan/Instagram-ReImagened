@@ -57,7 +57,7 @@ namespace Instagram
             usersList = dbHandler.Import_Data_Using_SQL(userID, userName, "FollowingTable");
             dbHandler.Truncate_Temporary_Post_Table();
             Generate_Posts_And_Stories(usersList);
-            postList = dbHandler.Generate_Posts(userID, userName, lightModeOn);
+            postList = dbHandler.Generate_Posts(userID, userName, lightModeOn, main);
             Display_Posts();
         }
 

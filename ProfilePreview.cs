@@ -46,19 +46,28 @@ namespace Instagram
         private void realUserNameLabel_Click(object sender, EventArgs e)
         {
             main.form.Dispose();
-            main.form = new Profile(main, true, this.userId, this.userName) { TopLevel = false, TopMost = true };;
+            if (this.userId == main.userID)
+                main.form = new Profile(main) { TopLevel = false, TopMost = true };
+            else
+                main.form = new Profile(main, true, this.userId, this.userName) { TopLevel = false, TopMost = true };
         }
 
         private void userNameLabel_Click(object sender, EventArgs e)
         {
             main.form.Dispose();
-            main.form = new Profile(main, true, this.userId, this.userName) { TopLevel = false, TopMost = true };;
+            if (this.userId == main.userID)
+                main.form = new Profile(main) { TopLevel = false, TopMost = true };
+            else
+                main.form = new Profile(main, true, this.userId, this.userName) { TopLevel = false, TopMost = true }; ;
         }
 
         private void profilePictureBox_Click(object sender, EventArgs e)
         {
             main.form.Dispose();
-            main.form = new Profile(main, true, this.userId, this.userName) { TopLevel = false, TopMost = true };;
+            if (this.userId == main.userID)
+                main.form = new Profile(main) { TopLevel = false, TopMost = true };
+            else
+                main.form = new Profile(main, true, this.userId, this.userName) { TopLevel = false, TopMost = true }; ;
         }
     }
 }

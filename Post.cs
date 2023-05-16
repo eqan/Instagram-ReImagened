@@ -13,6 +13,7 @@ namespace Instagram
         UIUtilities UI;
         DBHandlingUtilities dbHandler;
         public string postID, followingID, userID, userName;
+        public Main main;
         public Post(string userID, string userName, bool lightModeOn)
         {
             InitializeComponent();
@@ -38,7 +39,7 @@ namespace Instagram
                 backColor = Color.FromArgb(43, 43, 43);
                 textColor = Color.FromArgb(255, 255, 255);
                 barColor = Color.FromArgb(31, 31, 31);
-            }    
+            }
             this.BackColor = backColor;
             postDescriptionBox.BackColor = backColor;
             userNameLabel.ForeColor = textColor;
@@ -94,6 +95,21 @@ namespace Instagram
         {
             menuBtn.Image.Dispose();
             menuBtn.Image = Image.FromFile(UI.Return_UI_Location() + "more.png");
+        }
+
+        private void menuBtn_Click(object sender, EventArgs e)
+        {
+            ConfirmationDialog dialog = new ConfirmationDialog(false, "delete this post?");
+            DialogResult result = dialog.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                // Remove post from db
+                // Refresh the main page
+                dbHandler.Remove_Post(userID, userName, postID);
+                this.main.form.Dispose();
+                this.main.form = new Home(main) { TopLevel = false, TopMost = true };
+            }
         }
 
         private void bookMarkedBtn_Click(object sender, EventArgs e)

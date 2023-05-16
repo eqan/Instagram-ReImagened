@@ -31,6 +31,11 @@ E:\Instagram\Instagram\Instagram\obj\Debug\Instagram.ActivityRow.resources
 E:\Instagram\Instagram\Instagram\obj\Debug\Instagram.csprojAssemblyReference.cache
 C:\Users\eqana\OneDrive\Desktop\Instagram-ReImagened\bin\Debug\InstagramDB.mdf
 C:\Users\eqana\OneDrive\Desktop\Instagram-ReImagened\bin\Debug\InstagramDB_log.ldf
+C:\Users\eqana\OneDrive\Desktop\Instagram-ReImagened\bin\Debug\Instagram.exe.config
+C:\Users\eqana\OneDrive\Desktop\Instagram-ReImagened\bin\Debug\Instagram.exe
+C:\Users\eqana\OneDrive\Desktop\Instagram-ReImagened\bin\Debug\Instagram.pdb
+C:\Users\eqana\OneDrive\Desktop\Instagram-ReImagened\bin\Debug\Interop.MOVIEPLAYERLib.dll
+C:\Users\eqana\OneDrive\Desktop\Instagram-ReImagened\bin\Debug\AxInterop.MOVIEPLAYERLib.dll
 C:\Users\eqana\OneDrive\Desktop\Instagram-ReImagened\obj\Debug\Instagram.csproj.AssemblyReference.cache
 C:\Users\eqana\OneDrive\Desktop\Instagram-ReImagened\obj\Debug\Instagram.csproj.SuggestedBindingRedirects.cache
 C:\Users\eqana\OneDrive\Desktop\Instagram-ReImagened\obj\Debug\Interop.MOVIEPLAYERLib.dll
@@ -41,6 +46,7 @@ C:\Users\eqana\OneDrive\Desktop\Instagram-ReImagened\obj\Debug\Instagram.Activit
 C:\Users\eqana\OneDrive\Desktop\Instagram-ReImagened\obj\Debug\Instagram.AddPost.resources
 C:\Users\eqana\OneDrive\Desktop\Instagram-ReImagened\obj\Debug\Instagram.Chat.resources
 C:\Users\eqana\OneDrive\Desktop\Instagram-ReImagened\obj\Debug\Instagram.AddStory.resources
+C:\Users\eqana\OneDrive\Desktop\Instagram-ReImagened\obj\Debug\Instagram.ConfirmationDialog.resources
 C:\Users\eqana\OneDrive\Desktop\Instagram-ReImagened\obj\Debug\Instagram.Login.resources
 C:\Users\eqana\OneDrive\Desktop\Instagram-ReImagened\obj\Debug\Instagram.Post.resources
 C:\Users\eqana\OneDrive\Desktop\Instagram-ReImagened\obj\Debug\Instagram.Home.resources
@@ -56,8 +62,3 @@ C:\Users\eqana\OneDrive\Desktop\Instagram-ReImagened\obj\Debug\Instagram.csproj.
 C:\Users\eqana\OneDrive\Desktop\Instagram-ReImagened\obj\Debug\Instagram.csproj.CoreCompileInputs.cache
 C:\Users\eqana\OneDrive\Desktop\Instagram-ReImagened\obj\Debug\Instagram.exe
 C:\Users\eqana\OneDrive\Desktop\Instagram-ReImagened\obj\Debug\Instagram.pdb
-C:\Users\eqana\OneDrive\Desktop\Instagram-ReImagened\bin\Debug\Instagram.exe.config
-C:\Users\eqana\OneDrive\Desktop\Instagram-ReImagened\bin\Debug\Instagram.exe
-C:\Users\eqana\OneDrive\Desktop\Instagram-ReImagened\bin\Debug\Instagram.pdb
-C:\Users\eqana\OneDrive\Desktop\Instagram-ReImagened\bin\Debug\Interop.MOVIEPLAYERLib.dll
-C:\Users\eqana\OneDrive\Desktop\Instagram-ReImagened\bin\Debug\AxInterop.MOVIEPLAYERLib.dll

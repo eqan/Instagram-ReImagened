@@ -153,6 +153,31 @@ namespace Instagram
             }
 
         }
+        public void Remove_Post(string userID, string userName, string postId)
+        {
+            try
+            {
+                if (dbConnection.State == ConnectionState.Closed)
+                {
+                    dbConnection.Open();
+                    cmd = new SqlCommand("DELETE FROM  " + userName + "_" + userID + "_PostTable WHERE PostID = @postId", dbConnection);
+                    cmd.Parameters.AddWithValue("@postId", postId);
+                    cmd.ExecuteNonQuery();
+                    dbConnection.Close();
+                    Console.WriteLine("Post Removed", userName);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                if (dbConnection.State == ConnectionState.Open)
+                    dbConnection.Close();
+            }
+
+        }
         public void Add_Story(string userID, string userName)
         {
             try
@@ -246,7 +271,7 @@ namespace Instagram
                 {
                     dbConnection.Open();
                     int postID = Retrieve_Latest_PostID(userID, userName);
-                    cmd = new SqlCommand("CREATE TABLE " + userName + "_" + userID + "_" + postID.ToString() + "_LikesRecord ( ID INT IDENTITY(1,1) PRIMARY KEY, UserID INT NOT NULL, UserName VARCHAR(MAX), FOREIGN KEY (UserID) REFERENCES Users(UserID))", dbConnection);
+                    cmd = new SqlCommand("CREATE TABLE " + userName + "_" + userID + "_" + postID.ToString() + "_LikesRecord ( ID INT IDENTITY(1,1) PRIMARY KEY, UserID INT UNIQUE NOT NULL, UserName VARCHAR(MAX), FOREIGN KEY (UserID) REFERENCES Users(UserID))", dbConnection);
                     cmd.ExecuteNonQuery();
                     Console.WriteLine("Like Record created for post {0} User {1}", postID, userName);
                     dbConnection.Close();
@@ -268,7 +293,7 @@ namespace Instagram
                 {
                     dbConnection.Open();
                     int postID = Retrieve_Latest_PostID(userID, userName);
-                    cmd = new SqlCommand("CREATE TABLE " + userName + "_" + userID + "_" + postID.ToString() + "_BookMarksRecord ( ID INT IDENTITY(1,1) PRIMARY KEY,UserID INT UNIQUE, UserName VARCHAR(MAX))", dbConnection);
+                    cmd = new SqlCommand("CREATE TABLE " + userName + "_" + userID + "_" + postID.ToString() + "_BookMarksRecord ( ID INT IDENTITY(1,1) PRIMARY KEY,UserID INT UNIQUE NOT NULL, UserName VARCHAR(MAX))", dbConnection);
                     cmd.ExecuteNonQuery();
                     Console.WriteLine("BookMarks Record created for post {0} User {1}", postID, userName);
                     dbConnection.Close();
@@ -690,7 +715,7 @@ namespace Instagram
             return image;
         }
 
-        public Post Return_Post(string userID, string userName, bool lightModeOn, string postID)
+        public Post Return_Post(string userID, string userName, bool lightModeOn, string postID, Main main)
         {
             Post post = null;
             try
@@ -715,6 +740,11 @@ namespace Instagram
                 post.postPictureBox.Image = Convert_Bytes_To_Image((byte[])ds.Tables[0].Rows[0]["Image"]);
                 post.postDescriptionBox.Text = ((string)ds.Tables[0].Rows[0]["PostDesc"]);
                 post.locationLabel.Text = ((string)ds.Tables[0].Rows[0]["Location"]);
+                post.main = main;
+                if (userID != main.userID)
+                {
+                    post.menuBtn.Dispose();
+                }
                 DateTime totalTime = ((DateTime)ds.Tables[0].Rows[0]["TimeLine"]);
                 TimeSpan t = DateTime.Now.Date.Subtract(totalTime.Date);
                 if (t.TotalDays != 0)
@@ -798,7 +828,7 @@ namespace Instagram
             return activityList;
         }
 
-        private Post[] Return_Posts_From_DataSet(string userID, string userName, bool lightModeOn, DataSet ds)
+        private Post[] Return_Posts_From_DataSet(string userID, string userName, bool lightModeOn, Main main, DataSet ds)
         {
             Post[] postList = null;
             postList = new Post[ds.Tables[0].Rows.Count];
@@ -814,6 +844,11 @@ namespace Instagram
                 postList[i].postPictureBox.Image = Convert_Bytes_To_Image((byte[])ds.Tables[0].Rows[i]["Image"]);
                 postList[i].postDescriptionBox.Text = ((string)ds.Tables[0].Rows[i]["PostDesc"]);
                 postList[i].locationLabel.Text = ((string)ds.Tables[0].Rows[i]["Location"]);
+                postList[i].main = main;
+                if (userID != main.userID)
+                {
+                    postList[i].menuBtn.Dispose();
+                }
                 DateTime totalTime = ((DateTime)ds.Tables[0].Rows[i]["TimeLine"]);
                 TimeSpan t = DateTime.Now.Date.Subtract(totalTime.Date);
                 if (t.TotalDays != 0)
@@ -850,7 +885,7 @@ namespace Instagram
             return postList;
         }
 
-        public Post[] Generate_Posts(string userID, string userName, bool lightModeOn)
+        public Post[] Generate_Posts(string userID, string userName, bool lightModeOn, Main main)
         {
             Post[] postList = null;
             try
@@ -862,7 +897,7 @@ namespace Instagram
                 adapt = new SqlDataAdapter(cmd);
                 DataSet ds = new DataSet();
                 adapt.Fill(ds);
-                postList = Return_Posts_From_DataSet(userID, userName, lightModeOn, ds);
+                postList = Return_Posts_From_DataSet(userID, userName, lightModeOn, main, ds);
                 if (dbConnection.State == ConnectionState.Open)
                     dbConnection.Close();
             }

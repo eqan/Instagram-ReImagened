@@ -95,6 +95,12 @@
     <Compile Include="CircularRadioButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ConfirmationDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConfirmationDialog.designer.cs">
+      <DependentUpon>ConfirmationDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="CustomButton.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -104,6 +110,9 @@
     </Compile>
     <Compile Include="AddStory.Designer.cs">
       <DependentUpon>AddStory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DraggableForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
@@ -182,6 +191,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddStory.resx">
       <DependentUpon>AddStory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConfirmationDialog.resx">
+      <DependentUpon>ConfirmationDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>

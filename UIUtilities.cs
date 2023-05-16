@@ -79,15 +79,23 @@ namespace Instagram
             btn_Close.MouseLeave += new EventHandler((o, a) => btn_Close.BackColor = backColor);
             btn_Maximize.MouseClick += new MouseEventHandler((o, a) =>
             {
-                if (!isMaximized)
+                try
                 {
-                    formRef.WindowState = FormWindowState.Maximized;
-                    isMaximized = true;
+                    if (!isMaximized)
+                    {
+                        formRef.WindowState = FormWindowState.Maximized;
+                        isMaximized = true;
+                    }
+                    else
+                    {
+                        formRef.WindowState = FormWindowState.Normal;
+                        isMaximized = false;
+                    }
+
                 }
-                else
+                catch (Exception ex)
                 {
-                    formRef.WindowState = FormWindowState.Normal;
-                    isMaximized = false;
+                    Console.WriteLine(ex.Message);
                 }
             }
             );
