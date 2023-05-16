@@ -87,8 +87,15 @@ namespace Instagram
 
         private void menuBtn_MouseHover(object sender, EventArgs e)
         {
-            menuBtn.Image.Dispose();
-            menuBtn.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Selected Mode\more.png");
+            if (userID == main?.userID)
+            {
+                menuBtn.Image.Dispose();
+                menuBtn.Image = Image.FromFile(Environment.CurrentDirectory + @"\Assets\Selected Mode\more.png");
+            }
+            else
+            {
+                this.menuBtn.Dispose();
+            }
         }
 
         private void menuBtn_MouseLeave(object sender, EventArgs e)

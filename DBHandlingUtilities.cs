@@ -244,8 +244,6 @@ namespace Instagram
             Create_Entity(userID, userName, tableName);
             tableName = "Build_User_Stories_Table";
             Create_Entity(userID, userName, tableName);
-            tableName = "Build_User_Followers_Table";
-            Create_Entity(userID, userName, tableName);
             tableName = "Build_User_Following_Table";
             Create_Entity(userID, userName, tableName);
             tableName = "Build_User_Posts_Table";
@@ -655,7 +653,9 @@ namespace Instagram
                 {
                     dbConnection.Open();
                     cmd = new SqlCommand("INSERT INTO " + followingName + "_" + followingID + "_" + postID + "_BookMarksRecord (UserID, UserName) VALUES ( " + userID + ", '" + userName + "' )", dbConnection);
-                    cmd.ExecuteNonQuery();
+                    int done = cmd.ExecuteNonQuery();
+                    Console.WriteLine(done);
+                    Console.WriteLine(done);
                     dbConnection.Close();
                     Console.WriteLine("BookMark Added! for {0} to {1}", userName, followingName);
                 }
@@ -850,9 +850,11 @@ namespace Instagram
                 postList[i].postDescriptionBox.Text = ((string)ds.Tables[0].Rows[i]["PostDesc"]);
                 postList[i].locationLabel.Text = ((string)ds.Tables[0].Rows[i]["Location"]);
                 postList[i].main = main;
-                if (userID != main.userID)
+                //if (userID != main.userID || userName != main.userName)
                 {
+                    postList[i].menuBtn.Visible = false;
                     postList[i].menuBtn.Dispose();
+                    Console.WriteLine("I'm here");
                 }
                 DateTime totalTime = ((DateTime)ds.Tables[0].Rows[i]["TimeLine"]);
                 TimeSpan t = DateTime.Now.Date.Subtract(totalTime.Date);
