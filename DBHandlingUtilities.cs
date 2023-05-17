@@ -23,7 +23,11 @@ namespace Instagram
 
         public void Initialize_Information()
         {
-            dbConnection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB; AttachDbFilename= C:\Users\eqana\OneDrive\Desktop\Instagram-ReImagened\InstagramDB.mdf; Integrated Security=True; Connect Timeout=10000");
+            string databaseFileName = "InstagramDB.mdf";
+            string path = AppDomain.CurrentDomain.BaseDirectory;
+            string connectionString = $@"Data Source=(LocalDB)\MSSQLLocalDB; AttachDbFilename={path}{databaseFileName}; Integrated Security=True; Connect Timeout=10000";
+
+            dbConnection = new SqlConnection(connectionString);
         }
 
         public void Get_Picture()
